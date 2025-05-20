@@ -1,0 +1,7 @@
+ (attempt to) automatically complete the directory name.
+
+ The following function keys are available in Browser Go To Directory
+ mode:
+
+^G     (F1)      Display this help text
+^C               Cancel the current function
