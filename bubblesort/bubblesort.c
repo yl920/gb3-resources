@@ -11,7 +11,7 @@ int main(void) {
 
   const int bsort_input_len = 0x426;
 
-  volatile unsigned int *gDebugLedsMemoryMappedRegister = (unsigned int *)0x2000;
+  volatile unsigned int *gDebugLedsMemoryMappedRegister = (unsigned int *)0x0800FF00;
 
   int i;
   int maxindex = bsort_input_len - 1;
@@ -26,6 +26,7 @@ int main(void) {
         bsort_input[i + 1] ^= bsort_input[i];
         bsort_input[i] ^= bsort_input[i + 1];
       }
+	     
     }
 
     maxindex--;
