@@ -45,10 +45,36 @@
 
 
 
-module adder(input1, input2, out);
-	input [31:0]	input1;
-	input [31:0]	input2;
-	output [31:0]	out;
+module adder(
+	input clk,
+        input rst,
+        input [31:0]    input1,
+        input [31:0]    input2,
+        output [31:0]   out
+);
+	
+    // Stage 1: lower 16 bits
+    reg [15:0] sum_low;
+    reg        carry_mid;
+    always @(posedge clk or posedge rst) begin
+        if (rst) begin
+            sum_low   <= 0;
+            carry_mid <= 0;
+        end else begin
+            {carry_mid, sum_low} <= input1[15:0] + input2[15:0];
+        end
+    end
 
-	assign		out = input1 + input2;
+    // Stage 2: upper 16 bits
+    reg [15:0] sum_high;
+    always @(posedge clk or posedge rst) begin
+        if (rst) begin
+            sum_high <= 0;
+        end else begin
+            sum_high <= input1[31:16] + input2[31:16] + carry_mid;
+        end
+    end
+
+    assign out = {sum_high, sum_low};
+
 endmodule

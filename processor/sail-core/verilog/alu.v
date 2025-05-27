@@ -61,11 +61,8 @@ module alu(ALUctl, A, B, ALUOut, Branch_Enable);
 	output reg [31:0]	ALUOut;
 	output reg		Branch_Enable;
 	wire [31:0] add_result;
-	wire [31:0] B_neg = ~B + 1;
-	wire [31:0] sub_result;
 
 	adder add_unit(.input1(A), .input2(B), .out(add_result));
-	adder sub_unit(.input1(A), .input2(B_neg), .out(sub_result));
 	/*
 	 *	This uses Yosys's support for nonzero initial values:
 	 *
@@ -100,7 +97,7 @@ module alu(ALUctl, A, B, ALUOut, Branch_Enable);
 			/*
 			 *	SUBTRACT (the fields also matches all branches)
 			 */
-			`kSAIL_MICROARCHITECTURE_ALUCTL_3to0_SUB:	ALUOut = sub_result;
+			`kSAIL_MICROARCHITECTURE_ALUCTL_3to0_SUB:	ALUOut = A - B;
 
 			/*
 			 *	SLT (the fields also matches all the other SLT variants)
