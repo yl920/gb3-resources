@@ -1,4 +1,4 @@
-DESIGN = hardware
+DESIGN = hardwareblink
 GB3_ROOT = /gb3-resources
 all: $(DESIGN)
 
