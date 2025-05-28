@@ -51,11 +51,14 @@ module cpu(
 			data_mem_WrData,
 			data_mem_memwrite,
 			data_mem_memread,
-			data_mem_sign_mask
-		);
+			data_mem_sign_mask,
+			stall
+			);
+	/*;
 	/*
 	 *	Input Clock
 	 */
+	input stall;
 	input clk;
 
 	/*
@@ -187,11 +190,13 @@ module cpu(
 			.input2(pc_out),
 			.out(pc_adder_out)
 		);
-
+	wire pc_write_enable;
+	assign pc_write_enable = ~stall;
 	program_counter PC(
 			.inAddr(pc_in),
 			.outAddr(pc_out),
-			.clk(clk)
+			.clk(clk),
+			.write_enable(pc_write_enable)
 		);
 
 	mux2to1 inst_mux(
