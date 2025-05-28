@@ -31,12 +31,13 @@ module alu(
 
     wire [31:0] add_result;
     wire [31:0] sub_result;
+    reg  [31:0] add_result_d1, sub_result_d1;
 
     adder add_unit(
         .clk(clk),
         .rst(rst),
-        .input1(A_fwd),
-        .input2(B_fwd),
+        .input1(A_d1),      // FIX: align inputs to pipeline delay
+        .input2(B_d1),
         .out(add_result)
     );
 
@@ -55,11 +56,16 @@ module alu(
             B_d1 <= 0; B_d2 <= 0;
             B_neg_d1 <= 0; B_neg_d2 <= 0;
             ALUctl_d1 <= 0; ALUctl_d2 <= 0;
+            add_result_d1 <= 0;
+            sub_result_d1 <= 0;
         end else begin
             A_d1 <= A_fwd;  A_d2 <= A_d1;
             B_d1 <= B_fwd;  B_d2 <= B_d1;
             B_neg_d1 <= B_neg; B_neg_d2 <= B_neg_d1;
             ALUctl_d1 <= ALUctl; ALUctl_d2 <= ALUctl_d1;
+
+            add_result_d1 <= add_result;      // Capture delayed result
+            sub_result_d1 <= sub_result;
         end
     end
 
@@ -71,8 +77,8 @@ module alu(
             case (ALUctl_d2[3:0])
                 `kSAIL_MICROARCHITECTURE_ALUCTL_3to0_AND:   ALUOut <= A_d2 & B_d2;
                 `kSAIL_MICROARCHITECTURE_ALUCTL_3to0_OR:    ALUOut <= A_d2 | B_d2;
-                `kSAIL_MICROARCHITECTURE_ALUCTL_3to0_ADD:   ALUOut <= add_result;
-                `kSAIL_MICROARCHITECTURE_ALUCTL_3to0_SUB:   ALUOut <= sub_result;
+                `kSAIL_MICROARCHITECTURE_ALUCTL_3to0_ADD:   ALUOut <= add_result_d1;  // Use properly delayed result
+                `kSAIL_MICROARCHITECTURE_ALUCTL_3to0_SUB:   ALUOut <= sub_result_d1;
                 `kSAIL_MICROARCHITECTURE_ALUCTL_3to0_SLT:   ALUOut <= ($signed(A_d2) < $signed(B_d2)) ? 32'b1 : 32'b0;
                 `kSAIL_MICROARCHITECTURE_ALUCTL_3to0_SRL:   ALUOut <= A_d2 >> B_d2[4:0];
                 `kSAIL_MICROARCHITECTURE_ALUCTL_3to0_SRA:   ALUOut <= $signed(A_d2) >>> B_d2[4:0];
