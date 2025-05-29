@@ -44,6 +44,7 @@
 
 module cpu(
 			clk,
+			data_clk_stall,
 			inst_mem_in,
 			inst_mem_out,
 			data_mem_out,
@@ -57,6 +58,7 @@ module cpu(
 	 *	Input Clock
 	 */
 	input clk;
+	input data_clk_stall;
 
 	/*
 	 *	instruction memory input
@@ -212,9 +214,10 @@ module cpu(
 	 *	IF/ID Pipeline Register
 	 */
 	if_id if_id_reg(
-			.clk(clk),
-			.data_in({inst_mux_out, pc_out}),
-			.data_out(if_id_out)
+    		.clk(clk),
+    		.enable(~data_clk_stall),
+    		.data_in({inst_mux_out, pc_out}),
+    		.data_out(if_id_out)
 		);
 
 	/*
@@ -312,6 +315,7 @@ module cpu(
 	//ID/EX Pipeline Register
 	id_ex id_ex_reg(
 			.clk(clk),
+			.enable(~data_clk_stall),
 			.data_in({if_id_out[63:52], RegB_AddrFwdFlush_mux_out[4:0], RegA_AddrFwdFlush_mux_out[4:0], if_id_out[43:39], dataMem_sign_mask, alu_ctl, imm_out, RegB_mux_out, RegA_mux_out, if_id_out[31:0], cont_mux_out[10:7], predict, cont_mux_out[6:0]}),
 			.data_out(id_ex_out)
 		);
@@ -362,6 +366,7 @@ module cpu(
 	//EX/MEM Pipeline Register
 	ex_mem ex_mem_reg(
 			.clk(clk),
+			.enable(~data_clk_stall),
 			.data_in({id_ex_out[177:166], id_ex_out[155:151], wb_fwd2_mux_out, lui_result, alu_branch_enable, addr_adder_sum, id_ex_out[43:12], ex_cont_mux_out[8:0]}),
 			.data_out(ex_mem_out)
 		);
@@ -394,6 +399,7 @@ module cpu(
 	//MEM/WB Pipeline Register
 	mem_wb mem_wb_reg(
 			.clk(clk),
+			.enable(~data_clk_stall),
 			.data_in({ex_mem_out[154:143], ex_mem_out[142:138], data_mem_out, mem_csrr_mux_out, ex_mem_out[105:74], ex_mem_out[3:0]}),
 			.data_out(mem_wb_out)
 		);

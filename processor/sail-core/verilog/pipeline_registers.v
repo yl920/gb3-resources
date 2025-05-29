@@ -43,8 +43,9 @@
 
 
 /* IF/ID pipeline registers */ 
-module if_id (clk, data_in, data_out);
+module if_id (clk, enable, data_in, data_out);
 	input			clk;
+	input enable;
 	input [63:0]		data_in;
 	output reg[63:0]	data_out;
 
@@ -62,6 +63,7 @@ module if_id (clk, data_in, data_out);
 	end
 
 	always @(posedge clk) begin
+		if (enable)
 		data_out <= data_in;
 	end
 endmodule
@@ -69,8 +71,9 @@ endmodule
 
 
 /* ID/EX pipeline registers */ 
-module id_ex (clk, data_in, data_out);
+module id_ex (clk, enable, data_in, data_out);
 	input			clk;
+	input enable;
 	input [177:0]		data_in;
 	output reg[177:0]	data_out;
 
@@ -89,6 +92,7 @@ module id_ex (clk, data_in, data_out);
 	end
 
 	always @(posedge clk) begin
+		if (enable)
 		data_out <= data_in;
 	end
 endmodule
@@ -96,8 +100,9 @@ endmodule
 
 
 /* EX/MEM pipeline registers */ 
-module ex_mem (clk, data_in, data_out);
+module ex_mem (clk, enable, data_in, data_out);
 	input			clk;
+	input enable;
 	input [154:0]		data_in;
 	output reg[154:0]	data_out;
 
@@ -116,6 +121,7 @@ module ex_mem (clk, data_in, data_out);
 	end
 
 	always @(posedge clk) begin
+		if (enable)
 		data_out <= data_in;
 	end
 endmodule
@@ -123,8 +129,9 @@ endmodule
 
 
 /* MEM/WB pipeline registers */ 
-module mem_wb (clk, data_in, data_out);
+module mem_wb (clk, enable, data_in, data_out);
 	input			clk;
+	input enable;
 	input [116:0]		data_in;
 	output reg[116:0]	data_out;
 
@@ -143,6 +150,7 @@ module mem_wb (clk, data_in, data_out);
 	end
 
 	always @(posedge clk) begin
+		if (enable)
 		data_out <= data_in;
 	end
 endmodule
