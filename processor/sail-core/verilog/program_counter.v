@@ -44,8 +44,9 @@
 
 
 
-module program_counter(inAddr, outAddr, clk);
+module program_counter(inAddr, outAddr, clk,write_enable);
 	input			clk;
+	input write_enable;
 	input [31:0]		inAddr;
 	output reg[31:0]	outAddr;
 
@@ -63,6 +64,7 @@ module program_counter(inAddr, outAddr, clk);
 	end
 
 	always @(posedge clk) begin
-		outAddr <= inAddr;
+		if (write_enable)
+				outAddr <= inAddr;
 	end
 endmodule

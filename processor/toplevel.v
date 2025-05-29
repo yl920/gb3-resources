@@ -83,7 +83,8 @@ module top (led);
 		.data_mem_WrData(data_WrData),
 		.data_mem_memwrite(data_memwrite),
 		.data_mem_memread(data_memread),
-		.data_mem_sign_mask(data_sign_mask)
+		.data_mem_sign_mask(data_sign_mask),
+		.stall(data_clk_stall)
 	);
 
 	instruction_memory inst_mem( 
