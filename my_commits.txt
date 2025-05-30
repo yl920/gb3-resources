@@ -1,0 +1,256 @@
+commit 12ca5339508e3c9c14c4a3bcb3948a5c35363582
+Author: cf573 <cf573@cam.ac.uk>
+Date:   Wed May 28 17:34:04 2025 +0100
+
+    Add write_enable to program_counter for power-saving PC update
+
+diff --git a/hardwareblink/Makefile b/hardwareblink/Makefile
+index 88f41d4..e227746 100644
+--- a/hardwareblink/Makefile
++++ b/hardwareblink/Makefile
+@@ -1,12 +1,14 @@
+-DESIGN = hardwareblink
++DESIGN = hardware
+ GB3_ROOT = /gb3-resources
+-sail-nextpnr:
++all: $(DESIGN)
++
++$(DESIGN):
+ 	mkdir -p $(GB3_ROOT)/build
+ 	yosys -p "synth_ice40 -blif $(DESIGN).blif; write_json $(DESIGN).json" $(DESIGN).v
+-	nextpnr-ice40 --up5k --package uwg30 --json $(DESIGN).json --pcf $(DESIGN).pcf --asc $(DESIGN).asc
++	nextpnr-ice40 --up5k --package uwg30 --json $(DESIGN).json --pcf hardwareblink.pcf --asc $(DESIGN).asc
+ 	icepack $(DESIGN).asc design.bin
+ 	cp design.bin $(GB3_ROOT)/build/
+ 
+ 
+ clean:
+-	rm -f *.json *.blif *.asc *.bin
+\ No newline at end of file
++	rm -f *.json *.blif *.asc *.bin
+diff --git a/processor/Makefile b/processor/Makefile
+index a058f07..542c380 100644
+--- a/processor/Makefile
++++ b/processor/Makefile
+@@ -15,4 +15,4 @@ sail-nextpnr:
+ clean:
+ 	rm -f *.json *.blif *.asc *.bin
+ 	rm -f programs/*.hex
+-	rm -f verilog/*.hex
+\ No newline at end of file
++	rm -f verilog/*.hex
+diff --git a/processor/sail-core/verilog/cpu.v b/processor/sail-core/verilog/cpu.v
+index 4b1eb84..4671260 100644
+--- a/processor/sail-core/verilog/cpu.v
++++ b/processor/sail-core/verilog/cpu.v
+@@ -51,11 +51,14 @@ module cpu(
+ 			data_mem_WrData,
+ 			data_mem_memwrite,
+ 			data_mem_memread,
+-			data_mem_sign_mask
+-		);
++			data_mem_sign_mask,
++			stall
++			);
++	/*;
+ 	/*
+ 	 *	Input Clock
+ 	 */
++	input stall;
+ 	input clk;
+ 
+ 	/*
+@@ -187,11 +190,13 @@ module cpu(
+ 			.input2(pc_out),
+ 			.out(pc_adder_out)
+ 		);
+-
++	wire pc_write_enable;
++	assign pc_write_enable = ~stall;
+ 	program_counter PC(
+ 			.inAddr(pc_in),
+ 			.outAddr(pc_out),
+-			.clk(clk)
++			.clk(clk),
++			.write_enable(pc_write_enable)
+ 		);
+ 
+ 	mux2to1 inst_mux(
+diff --git a/processor/sail-core/verilog/program_counter.v b/processor/sail-core/verilog/program_counter.v
+index d87196a..b7fa34f 100644
+--- a/processor/sail-core/verilog/program_counter.v
++++ b/processor/sail-core/verilog/program_counter.v
+@@ -44,8 +44,9 @@
+ 
+ 
+ 
+-module program_counter(inAddr, outAddr, clk);
++module program_counter(inAddr, outAddr, clk,write_enable);
+ 	input			clk;
++	input write_enable;
+ 	input [31:0]		inAddr;
+ 	output reg[31:0]	outAddr;
+ 
+@@ -63,6 +64,7 @@ module program_counter(inAddr, outAddr, clk);
+ 	end
+ 
+ 	always @(posedge clk) begin
+-		outAddr <= inAddr;
++		if (write_enable)
++				outAddr <= inAddr;
+ 	end
+ endmodule
+diff --git a/processor/toplevel.v b/processor/toplevel.v
+index ba6276b..3152bff 100644
+--- a/processor/toplevel.v
++++ b/processor/toplevel.v
+@@ -83,7 +83,8 @@ module top (led);
+ 		.data_mem_WrData(data_WrData),
+ 		.data_mem_memwrite(data_memwrite),
+ 		.data_mem_memread(data_memread),
+-		.data_mem_sign_mask(data_sign_mask)
++		.data_mem_sign_mask(data_sign_mask),
++		.stall(data_clk_stall)
+ 	);
+ 
+ 	instruction_memory inst_mem( 
+commit dfb576bcf50aefc881c744e141f61e1592911f3a
+Author: cf573 <cf573@cam.ac.uk>
+Date:   Thu May 29 23:19:34 2025 +0100
+
+    remove csr logic
+
+diff --git a/processor/sail-core/verilog/control_unit.v b/processor/sail-core/verilog/control_unit.v
+index 0d004f3..a223304 100644
+--- a/processor/sail-core/verilog/control_unit.v
++++ b/processor/sail-core/verilog/control_unit.v
+@@ -69,5 +69,5 @@ module control(
+ 	assign Lui = (~opcode[6]) & (opcode[5]) & (opcode[4]) & (~opcode[3]) & (opcode[2]);
+ 	assign Auipc = (~opcode[6]) & (~opcode[5]) & (opcode[4]) & (~opcode[3]) & (opcode[2]);
+ 	assign Fence = (~opcode[5]) & opcode[3] & (opcode[2]);
+-	assign CSRR = (opcode[6]) & (opcode[4]);
++	assign CSRR = 1'b0;
+ endmodule
+diff --git a/processor/sail-core/verilog/cpu.v b/processor/sail-core/verilog/cpu.v
+index 4671260..8c26efc 100644
+--- a/processor/sail-core/verilog/cpu.v
++++ b/processor/sail-core/verilog/cpu.v
+@@ -109,8 +109,8 @@ module cpu(
+ 	wire			Lui1;
+ 	wire			Auipc1;
+ 	wire			Fence_signal;
+-	wire			CSRR_signal;
+-	wire			CSRRI_signal;
++	wire			CSRR_signal = 1'b0;
++	wire			CSRRI_signal = 1'b0;
+ 
+ 	/*
+ 	 *	Decode stage
+@@ -123,7 +123,7 @@ module cpu(
+ 	wire [31:0]		RegB_mux_out;
+ 	wire [31:0]		RegA_AddrFwdFlush_mux_out;
+ 	wire [31:0]		RegB_AddrFwdFlush_mux_out;
+-	wire [31:0]		rdValOut_CSR;
++	wire [31:0]		rdValOut_CSR = 32'h0;
+ 	wire [3:0]		dataMem_sign_mask;
+ 
+ 	/*
+@@ -225,6 +225,7 @@ module cpu(
+ 	/*
+ 	 *	Decode Stage
+ 	 */
++	wire CSRR_dummy;
+ 	control control_unit(
+ 			.opcode({if_id_out[38:32]}),
+ 			.MemtoReg(MemtoReg1),
+@@ -238,7 +239,7 @@ module cpu(
+ 			.Lui(Lui1),
+ 			.Auipc(Auipc1),
+ 			.Fence(Fence_signal),
+-			.CSRR(CSRR_signal)
++			.CSRR(CSRR_dummy)
+ 		);
+ 
+ 	mux2to1 cont_mux(
+@@ -274,7 +275,7 @@ module cpu(
+ 			.func3(if_id_out[46:44]),
+ 			.sign_mask(dataMem_sign_mask)
+ 		);
+-
++/*
+ 	csr_file ControlAndStatus_registers(
+ 			.clk(clk),
+ 			.write(mem_wb_out[3]), //TODO
+@@ -283,8 +284,8 @@ module cpu(
+ 			.rdAddr_CSR(inst_mux_out[31:20]),
+ 			.rdVal_CSR(rdValOut_CSR)
+ 		);
+-
+-	mux2to1 RegA_mux(
++*/
++	/*mux2to1 RegA_mux(
+ 			.input0(regA_out),
+ 			.input1({27'b0, if_id_out[51:47]}),
+ 			.select(CSRRI_signal),
+@@ -296,8 +297,10 @@ module cpu(
+ 			.input1(rdValOut_CSR),
+ 			.select(CSRR_signal),
+ 			.out(RegB_mux_out)
+-		);
+-
++		);*/
++	assign RegA_mux_out = regA_out;
++	assign RegB_mux_out = regB_out;
++/*
+ 	mux2to1 RegA_AddrFwdFlush_mux( //TODO cleanup
+ 			.input0({27'b0, if_id_out[51:47]}),
+ 			.input1(32'b0),
+@@ -311,8 +314,13 @@ module cpu(
+ 			.select(CSRR_signal),
+ 			.out(RegB_AddrFwdFlush_mux_out)
+ 		);
++*/
++
++assign RegA_AddrFwdFlush_mux_out = {27'b0,if_id_out[51:47]};
+ 
+-	assign CSRRI_signal = CSRR_signal & (if_id_out[46]);
++assign RegB_AddrFwdFlush_mux_out = {27'b0,if_id_out[56:52]};
++	
++	//assign CSRRI_signal = if_id_out[46];
+ 
+ 	//ID/EX Pipeline Register
+ 	id_ex id_ex_reg(
+@@ -388,13 +396,15 @@ module cpu(
+ 			.select(ex_mem_out[8]),
+ 			.out(auipc_mux_out)
+ 		);
+-
++/*
+ 	mux2to1 mem_csrr_mux(
+ 			.input0(auipc_mux_out),
+ 			.input1(ex_mem_out[137:106]),
+ 			.select(ex_mem_out[3]),
+ 			.out(mem_csrr_mux_out)
+ 		);
++		*/
++	 assign mem_csrr_mux_out = auipc_mux_out;
+ 
+ 	//MEM/WB Pipeline Register
+ 	mem_wb mem_wb_reg(
+@@ -426,11 +436,11 @@ module cpu(
+ 			.WB_RegWriteAddr(mem_wb_out[104:100]),
+ 			.MEM_RegWrite(ex_mem_out[2]),
+ 			.WB_RegWrite(mem_wb_out[2]),
+-			.EX_CSRR_Addr(id_ex_out[177:166]),
+-			.MEM_CSRR_Addr(ex_mem_out[154:143]),
+-			.WB_CSRR_Addr(mem_wb_out[116:105]),
+-			.MEM_CSRR(ex_mem_out[3]),
+-			.WB_CSRR(mem_wb_out[3]),
++			.EX_CSRR_Addr(12'b0),
++			.MEM_CSRR_Addr(12'b0),
++			.WB_CSRR_Addr(12'b0),
++			.MEM_CSRR(1'b0),
++			.WB_CSRR(1'b0),
+ 			.MEM_fwd1(mfwd1),
+ 			.MEM_fwd2(mfwd2),
+ 			.WB_fwd1(wfwd1),
