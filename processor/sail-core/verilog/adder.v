@@ -43,12 +43,33 @@
  *		and program counter increment among other things.
  */
 
+module adder (
+    input  wire [31:0] input1,
+    input  wire [31:0] input2,
+    output wire [31:0] out
+);
 
 
-module adder(input1, input2, out);
-	input [31:0]	input1;
-	input [31:0]	input2;
-	output [31:0]	out;
+    wire carry_out;
 
-	assign		out = input1 + input2;
+    SB_MAC16 dsp_adder_inst (
+        .A (input1[31:16]),
+        .B (input1[15:0]),
+        .C (input2[31:16]),
+        .D (input2[15:0]),
+        .O (out),
+        .CE (1'b1),
+        .CI (1'b0),
+        .CO (carry_out)
+    );
+
+    // Configure DSP block for dual 16-bit addition with carry handling
+    defparam dsp_adder_inst.TOPOUTPUT_SELECT       = 2'b01;
+    defparam dsp_adder_inst.TOPADDSUB_UPPERINPUT   = 1'b1;
+    defparam dsp_adder_inst.TOPADDSUB_CARRYSELECT  = 2'b11;
+    defparam dsp_adder_inst.BOTOUTPUT_SELECT       = 2'b01;
+    defparam dsp_adder_inst.BOTADDSUB_UPPERINPUT   = 1'b1;
+    defparam dsp_adder_inst.BOTADDSUB_CARRYSELECT  = 2'b00;
+
 endmodule
+
