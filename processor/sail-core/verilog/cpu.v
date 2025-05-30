@@ -90,7 +90,8 @@ module cpu(
 	/*
 	 *	Pipeline Registers
 	 */
-	wire [63:0]		if_id_out;
+	wire [31:0]		if_id_out_upper;
+	wire [31:0]		if_id_out_lower;
 	wire [177:0]		id_ex_out;
 	wire [154:0]		ex_mem_out;
 	wire [116:0]		mem_wb_out;
@@ -217,9 +218,11 @@ module cpu(
 	 *	IF/ID Pipeline Register
 	 */
 	if_id if_id_reg(
-			.clk(clk),
-			.data_in({inst_mux_out, pc_out}),
-			.data_out(if_id_out)
+    		.clk(clk),
+    		.enable(~data_clk_stall),
+    		.data_in({inst_mux_out, pc_out}),
+    		.data_out_upper(if_id_out_upper),
+			.data_out_lower(if_id_out_lower)
 		);
 
 	/*
@@ -227,7 +230,7 @@ module cpu(
 	 */
 	wire CSRR_dummy;
 	control control_unit(
-			.opcode({if_id_out[38:32]}),
+			.opcode({if_id_out_upper[6:0]}),
 			.MemtoReg(MemtoReg1),
 			.RegWrite(RegWrite1),
 			.MemWrite(MemWrite1),
@@ -261,18 +264,18 @@ module cpu(
 		);
 
 	imm_gen immediate_generator(
-			.inst(if_id_out[63:32]),
+			.inst(if_id_out_upper[31:0]),
 			.imm(imm_out)
 		);
 
 	ALUControl alu_control(
-			.Opcode(if_id_out[38:32]),
-			.FuncCode({if_id_out[62], if_id_out[46:44]}),
+			.Opcode(if_id_out_upper[6:0]),
+			.FuncCode({if_id_out_upper[30], if_id_out_upper[16:12]}),
 			.ALUCtl(alu_ctl)
 		);
 
 	sign_mask_gen sign_mask_gen_inst(
-			.func3(if_id_out[46:44]),
+			.func3(if_id_out_upper[14:12]),
 			.sign_mask(dataMem_sign_mask)
 		);
 /*
@@ -316,16 +319,17 @@ module cpu(
 		);
 */
 
-assign RegA_AddrFwdFlush_mux_out = {27'b0,if_id_out[51:47]};
+assign RegA_AddrFwdFlush_mux_out = {27'b0,if_id_out_upper[19:15]};
 
-assign RegB_AddrFwdFlush_mux_out = {27'b0,if_id_out[56:52]};
+assign RegB_AddrFwdFlush_mux_out = {27'b0,if_id_out_upper[24:20]};
 	
 	//assign CSRRI_signal = if_id_out[46];
 
 	//ID/EX Pipeline Register
 	id_ex id_ex_reg(
 			.clk(clk),
-			.data_in({if_id_out[63:52], RegB_AddrFwdFlush_mux_out[4:0], RegA_AddrFwdFlush_mux_out[4:0], if_id_out[43:39], dataMem_sign_mask, alu_ctl, imm_out, RegB_mux_out, RegA_mux_out, if_id_out[31:0], cont_mux_out[10:7], predict, cont_mux_out[6:0]}),
+			.enable(~data_clk_stall),
+			.data_in({if_id_out_upper[31:20], RegB_AddrFwdFlush_mux_out[4:0], RegA_AddrFwdFlush_mux_out[4:0], if_id_out_upper[11:7], dataMem_sign_mask, alu_ctl, imm_out, RegB_mux_out, RegA_mux_out, if_id_out_lower[31:0], cont_mux_out[10:7], predict, cont_mux_out[6:0]}),
 			.data_out(id_ex_out)
 		);
 
@@ -488,7 +492,7 @@ assign RegB_AddrFwdFlush_mux_out = {27'b0,if_id_out[56:52]};
 			.actual_branch_decision(actual_branch_decision),
 			.branch_decode_sig(cont_mux_out[6]),
 			.branch_mem_sig(ex_mem_out[6]),
-			.in_addr(if_id_out[31:0]),
+			.in_addr(if_id_out_lower[31:0]),
 			.offset(imm_out),
 			.branch_addr(branch_predictor_addr),
 			.prediction(predict)

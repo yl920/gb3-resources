@@ -43,10 +43,11 @@
 
 
 /* IF/ID pipeline registers */ 
-module if_id (clk, data_in, data_out);
+module if_id (clk, enable, data_in, data_out_upper, data_out_lower);
 	input			clk;
 	input [63:0]		data_in;
-	output reg[63:0]	data_out;
+	output reg[31:0]	data_out_upper;
+	output reg[31:0]	data_out_lower;
 
 	/*
 	 *	This uses Yosys's support for nonzero initial values:
@@ -58,11 +59,14 @@ module if_id (clk, data_in, data_out);
 	 *	modules in the design.
 	 */
 	initial begin
-		data_out = 64'b0;
+		data_out_upper = 32'b0;
+		data_out_lower = 32'b0;
 	end
 
 	always @(posedge clk) begin
-		data_out <= data_in;
+		if (enable)
+		data_out_upper <= data_in[63:32];
+		data_out_lower <= data_in[31:0];
 	end
 endmodule
 
