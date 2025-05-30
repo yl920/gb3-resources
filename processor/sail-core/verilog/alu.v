@@ -75,74 +75,25 @@ module alu(ALUctl, A, B, ALUOut, Branch_Enable);
 		Branch_Enable = 1'b0;
 	end
 
-	always @(ALUctl, A, B) begin
-		case (ALUctl[3:0])
-			/*
-			 *	AND (the fields also match ANDI and LUI)
-			 */
-			`kSAIL_MICROARCHITECTURE_ALUCTL_3to0_AND:	ALUOut = A & B;
+	reg [31:0] result;
 
-			/*
-			 *	OR (the fields also match ORI)
-			 */
-			`kSAIL_MICROARCHITECTURE_ALUCTL_3to0_OR:	ALUOut = A | B;
+always @(*) begin
+	case (ALUctl[3:0])
+    4'b0000: result = A + B;  // ADD
+    4'b0001: result = A - B;  // SUB
+    4'b0010: result = A & B;  // AND
+    4'b0011: result = A | B;  // OR
+    4'b0100: result = A ^ B;  // XOR
+    4'b0101: result = A << B[4:0]; // SLL
+    4'b0110: result = A >> B[4:0]; // SRL
+    4'b0111: result = $signed(A) >>> B[4:0]; // SRA
+    4'b1000: result = ($signed(A) < $signed(B)) ? 32'b1 : 32'b0; // SLT
+    4'b1001: result = (A < B) ? 32'b1 : 32'b0; // SLTU
+    default: result = 32'b0;
+  endcase
+  ALUOut = result;
+end
 
-			/*
-			 *	ADD (the fields also match AUIPC, all loads, all stores, and ADDI)
-			 */
-			`kSAIL_MICROARCHITECTURE_ALUCTL_3to0_ADD:	ALUOut = A + B;
-
-			/*
-			 *	SUBTRACT (the fields also matches all branches)
-			 */
-			`kSAIL_MICROARCHITECTURE_ALUCTL_3to0_SUB:	ALUOut = A - B;
-
-			/*
-			 *	SLT (the fields also matches all the other SLT variants)
-			 */
-			`kSAIL_MICROARCHITECTURE_ALUCTL_3to0_SLT:	ALUOut = $signed(A) < $signed(B) ? 32'b1 : 32'b0;
-
-			/*
-			 *	SRL (the fields also matches the other SRL variants)
-			 */
-			`kSAIL_MICROARCHITECTURE_ALUCTL_3to0_SRL:	ALUOut = A >> B[4:0];
-
-			/*
-			 *	SRA (the fields also matches the other SRA variants)
-			 */
-			`kSAIL_MICROARCHITECTURE_ALUCTL_3to0_SRA:	ALUOut = $signed(A) >>> B[4:0];
-
-			/*
-			 *	SLL (the fields also match the other SLL variants)
-			 */
-			`kSAIL_MICROARCHITECTURE_ALUCTL_3to0_SLL:	ALUOut = A << B[4:0];
-
-			/*
-			 *	XOR (the fields also match other XOR variants)
-			 */
-			`kSAIL_MICROARCHITECTURE_ALUCTL_3to0_XOR:	ALUOut = A ^ B;
-
-			/*
-			 *	CSRRW  only
-			 */
-			`kSAIL_MICROARCHITECTURE_ALUCTL_3to0_CSRRW:	ALUOut = A;
-
-			/*
-			 *	CSRRS only
-			 */
-			`kSAIL_MICROARCHITECTURE_ALUCTL_3to0_CSRRS:	ALUOut = A | B;
-
-			/*
-			 *	CSRRC only
-			 */
-			`kSAIL_MICROARCHITECTURE_ALUCTL_3to0_CSRRC:	ALUOut = (~A) & B;
-
-			/*
-			 *	Should never happen.
-			 */
-			default:					ALUOut = 0;
-		endcase
-	end
 
 	always @(ALUctl, ALUOut, A, B) begin
 		case (ALUctl[6:4])
