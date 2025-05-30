@@ -1,0 +1,1022 @@
+mkdir -p /gb3-resources/build
+cp programs/data.hex verilog/
+cp programs/program.hex verilog/
+yosys -q /gb3-resources/processor/yscripts/sail.ys
+Warning: Resizing cell port cpu.ex_cont_mux.out from 11 bits to 32 bits.
+Warning: Wire imm_gen.imm has an unprocessed 'init' attribute.
+nextpnr-ice40 --up5k --package uwg30 --json sail.json --pcf pcf/sail.pcf --asc sail.asc
+Info: constrained 'led[7]' to bel 'X9/Y0/io1'
+Info: constrained 'led[6]' to bel 'X6/Y0/io0'
+Info: constrained 'led[5]' to bel 'X5/Y0/io0'
+Info: constrained 'led[4]' to bel 'X6/Y31/io0'
+Info: constrained 'led[3]' to bel 'X5/Y31/io0'
+Info: constrained 'led[2]' to bel 'X19/Y0/io1'
+Info: constrained 'led[1]' to bel 'X4/Y31/io0'
+Info: constrained 'led[0]' to bel 'X13/Y0/io0'
+
+Info: Packing constants..
+Info: Packing IOs..
+Info: Packing LUT-FFs..
+Info:     2060 LCs used as LUT4 only
+Info:      216 LCs used as LUT4 and DFF
+Info: Packing non-LUT FFs..
+Info:      503 LCs used as DFF only
+Info: Packing carries..
+Info:       66 LCs used as CARRY only
+Info: Packing RAMs..
+Info: Placing PLLs..
+Info: Packing special functions..
+Info:   constrained ICESTORM_HFOSC 'OSCInst0_OSC' to X0/Y31/hfosc_1
+Info:     Derived frequency constraint of 6.0 MHz for net clk
+Info: Promoting globals..
+Info: promoting clk_proc (fanout 605)
+Info: promoting processor.data_clk_stall_SB_LUT4_I3_O [cen] (fanout 514)
+Info: promoting data_mem_inst.clk_stall_SB_DFFE_Q_E_SB_LUT4_O_I3_SB_LUT4_O_I2_SB_LUT4_O_I3_SB_LUT4_I3_O_SB_LUT4_I2_1_O [cen] (fanout 49)
+Info: promoting data_mem_inst.clk_stall_SB_DFFE_Q_E_SB_LUT4_O_I3_SB_LUT4_I2_O [cen] (fanout 32)
+Info: promoting data_mem_inst.clk_stall_SB_DFFE_Q_E_SB_LUT4_O_I3_SB_LUT4_I2_1_O [cen] (fanout 32)
+Info: Constraining chains...
+Info:        3 LCs used to legalise carry chains.
+Info: Checksum: 0xf9d23832
+
+Info: Annotating ports with timing budgets for target frequency 12.00 MHz
+Info: Checksum: 0xcec8f0a6
+
+Info: Device utilisation:
+Info: 	         ICESTORM_LC:  2850/ 5280    53%
+Info: 	        ICESTORM_RAM:    12/   30    40%
+Info: 	               SB_IO:     8/   96     8%
+Info: 	               SB_GB:     6/    8    75%
+Info: 	        ICESTORM_PLL:     0/    1     0%
+Info: 	         SB_WARMBOOT:     0/    1     0%
+Info: 	        ICESTORM_DSP:     0/    8     0%
+Info: 	      ICESTORM_HFOSC:     1/    1   100%
+Info: 	      ICESTORM_LFOSC:     0/    1     0%
+Info: 	              SB_I2C:     0/    2     0%
+Info: 	              SB_SPI:     0/    2     0%
+Info: 	              IO_I3C:     0/    2     0%
+Info: 	         SB_LEDDA_IP:     0/    1     0%
+Info: 	         SB_RGBA_DRV:     0/    1     0%
+Info: 	      ICESTORM_SPRAM:     0/    4     0%
+
+Info: Placed 10 cells based on constraints.
+Info: Creating initial placement for remaining 2867 cells.
+Info:   initial placement placed 500/2867 cells
+Info:   initial placement placed 1000/2867 cells
+Info:   initial placement placed 1500/2867 cells
+Info:   initial placement placed 2000/2867 cells
+Info:   initial placement placed 2500/2867 cells
+Info:   initial placement placed 2867/2867 cells
+Info: Initial placement time 0.98s
+Info: Running simulated annealing placer.
+Info:   at iteration #1: temp = 1.000000, timing cost = 2226, wirelen = 70412
+Info:   at iteration #5: temp = 0.062500, timing cost = 1836, wirelen = 70522
+Info:   at iteration #10: temp = 0.020503, timing cost = 1765, wirelen = 68066
+Info:   at iteration #15: temp = 0.013452, timing cost = 2558, wirelen = 66580
+Info:   at iteration #20: temp = 0.007943, timing cost = 2092, wirelen = 67142
+Info:   at iteration #25: temp = 0.005212, timing cost = 2427, wirelen = 66032
+Info:   at iteration #30: temp = 0.003077, timing cost = 3016, wirelen = 66966
+Info:   at iteration #35: temp = 0.002019, timing cost = 2252, wirelen = 65212
+Info:   at iteration #40: temp = 0.001325, timing cost = 2986, wirelen = 65306
+Info:   at iteration #45: temp = 0.000869, timing cost = 2861, wirelen = 63816
+Info:   at iteration #50: temp = 0.000671, timing cost = 2864, wirelen = 62575
+Info:   at iteration #55: temp = 0.000546, timing cost = 2607, wirelen = 61984
+Info:   at iteration #60: temp = 0.000468, timing cost = 2113, wirelen = 61024
+Info:   at iteration #65: temp = 0.000381, timing cost = 2899, wirelen = 60065
+Info:   at iteration #70: temp = 0.000327, timing cost = 3383, wirelen = 59356
+Info:   at iteration #75: temp = 0.000295, timing cost = 3501, wirelen = 57229
+Info:   at iteration #80: temp = 0.000253, timing cost = 2095, wirelen = 56475
+Info:   at iteration #85: temp = 0.000217, timing cost = 2648, wirelen = 54833
+Info:   at iteration #90: temp = 0.000196, timing cost = 3130, wirelen = 53154
+Info:   at iteration #95: temp = 0.000177, timing cost = 2650, wirelen = 50916
+Info:   at iteration #100: temp = 0.000160, timing cost = 2222, wirelen = 48350
+Info:   at iteration #105: temp = 0.000144, timing cost = 2738, wirelen = 47330
+Info:   at iteration #110: temp = 0.000137, timing cost = 2886, wirelen = 44098
+Info:   at iteration #115: temp = 0.000130, timing cost = 2375, wirelen = 42084
+Info:   at iteration #120: temp = 0.000123, timing cost = 2131, wirelen = 39050
+Info:   at iteration #125: temp = 0.000117, timing cost = 2342, wirelen = 35503
+Info:   at iteration #130: temp = 0.000111, timing cost = 1809, wirelen = 34445
+Info:   at iteration #135: temp = 0.000101, timing cost = 2052, wirelen = 33412
+Info:   at iteration #140: temp = 0.000101, timing cost = 1549, wirelen = 29551
+Info:   at iteration #145: temp = 0.000096, timing cost = 2143, wirelen = 28344
+Info:   at iteration #150: temp = 0.000096, timing cost = 1706, wirelen = 26392
+Info:   at iteration #155: temp = 0.000086, timing cost = 1809, wirelen = 25783
+Info:   at iteration #160: temp = 0.000082, timing cost = 1768, wirelen = 23520
+Info: Legalising relative constraints...
+Info:     moved 82 cells, 46 unplaced (after legalising chains)
+Info:        average distance 1.355178
+Info:        maximum distance 2.236068
+Info:     moved 128 cells, 0 unplaced (after replacing ripped up cells)
+Info:        average distance 2.262543
+Info:        maximum distance 9.486833
+Info:   at iteration #165: temp = 0.000078, timing cost = 1443, wirelen = 22813
+Info:   at iteration #170: temp = 0.000078, timing cost = 1703, wirelen = 21321
+Info:   at iteration #175: temp = 0.000074, timing cost = 1712, wirelen = 20116
+Info:   at iteration #180: temp = 0.000070, timing cost = 1374, wirelen = 19042
+Info:   at iteration #185: temp = 0.000067, timing cost = 1423, wirelen = 18173
+Info:   at iteration #190: temp = 0.000063, timing cost = 1374, wirelen = 17514
+Info:   at iteration #195: temp = 0.000060, timing cost = 1350, wirelen = 16656
+Info:   at iteration #200: temp = 0.000057, timing cost = 1275, wirelen = 15860
+Info:   at iteration #205: temp = 0.000054, timing cost = 1333, wirelen = 15159
+Info:   at iteration #210: temp = 0.000049, timing cost = 1316, wirelen = 14406
+Info:   at iteration #215: temp = 0.000047, timing cost = 1185, wirelen = 13780
+Info:   at iteration #220: temp = 0.000042, timing cost = 1172, wirelen = 13360
+Info:   at iteration #225: temp = 0.000032, timing cost = 1120, wirelen = 13050
+Info:   at iteration #230: temp = 0.000032, timing cost = 1075, wirelen = 12136
+Info:   at iteration #235: temp = 0.000020, timing cost = 1044, wirelen = 11590
+Info:   at iteration #240: temp = 0.000016, timing cost = 1021, wirelen = 11046
+Info:   at iteration #245: temp = 0.000010, timing cost = 997, wirelen = 10736
+Info:   at iteration #250: temp = 0.000004, timing cost = 990, wirelen = 10589
+Info:   at iteration #255: temp = 0.000002, timing cost = 985, wirelen = 10549
+Info:   at iteration #260: temp = 0.000001, timing cost = 985, wirelen = 10539
+Info:   at iteration #265: temp = 0.000000, timing cost = 984, wirelen = 10527
+Info:   at iteration #270: temp = 0.000000, timing cost = 983, wirelen = 10523
+Info:   at iteration #275: temp = 0.000000, timing cost = 983, wirelen = 10517
+Info:   at iteration #279: temp = 0.000000, timing cost = 982, wirelen = 10517 
+Info: SA placement time 32.39s
+
+Info: Max frequency for clock               'clk': 15.61 MHz (PASS at 6.00 MHz)
+Info: Max frequency for clock 'clk_proc_$glb_clk': 16.18 MHz (PASS at 12.00 MHz)
+
+Info: Max delay posedge clk               -> <async>                  : 5.34 ns
+Info: Max delay posedge clk               -> posedge clk_proc_$glb_clk: 54.71 ns
+Info: Max delay posedge clk_proc_$glb_clk -> posedge clk              : 71.17 ns
+
+Info: Slack histogram:
+Info:  legend: * represents 8 endpoint(s)
+Info:          + represents [1,8) endpoint(s)
+Info: [ 21510,  28555) |*+
+Info: [ 28555,  35600) |****+
+Info: [ 35600,  42645) |***+
+Info: [ 42645,  49690) |*+
+Info: [ 49690,  56735) |***************+
+Info: [ 56735,  63780) |**************+
+Info: [ 63780,  70825) |***********************************+
+Info: [ 70825,  77870) |************************************************************ 
+Info: [ 77870,  84915) |*****************************************+
+Info: [ 84915,  91960) | 
+Info: [ 91960,  99005) |+
+Info: [ 99005, 106050) |*+
+Info: [106050, 113095) |+
+Info: [113095, 120140) |*+
+Info: [120140, 127185) |*+
+Info: [127185, 134230) | 
+Info: [134230, 141275) |***+
+Info: [141275, 148320) |**********************+
+Info: [148320, 155365) |*************+
+Info: [155365, 162410) |************************+
+Info: Checksum: 0x1d25658e
+
+Info: Routing..
+Info: Setting up routing queue.
+Info: Routing 9030 arcs.
+Info:            |   (re-)routed arcs  |   delta    | remaining|       time spent     |
+Info:    IterCnt |  w/ripup   wo/ripup |  w/r  wo/r |      arcs| batch(sec) total(sec)|
+Info:       1000 |       27        972 |   27   972 |      8066|       0.35       0.35|
+Info:       2000 |      158       1841 |  131   869 |      7297|       0.21       0.57|
+Info:       3000 |      315       2684 |  157   843 |      6543|       0.14       0.71|
+Info:       4000 |      555       3444 |  240   760 |      5847|       0.14       0.84|
+Info:       5000 |      982       4017 |  427   573 |      5419|       0.27       1.11|
+Info:       6000 |     1066       4933 |   84   916 |      4566|       0.28       1.39|
+Info:       7000 |     1217       5782 |  151   849 |      3797|       0.20       1.59|
+Info:       8000 |     1462       6537 |  245   755 |      3161|       0.32       1.91|
+Info:       9000 |     1719       7280 |  257   743 |      2547|       0.38       2.29|
+Info:      10000 |     1998       8001 |  279   721 |      1979|       0.34       2.63|
+Info:      11000 |     2347       8652 |  349   651 |      1587|       0.40       3.03|
+Info:      12000 |     2751       9248 |  404   596 |      1272|       0.41       3.44|
+Info:      13000 |     3283       9716 |  532   468 |      1205|       0.58       4.02|
+Info:      14000 |     3824      10175 |  541   459 |      1086|       0.47       4.49|
+Info:      15000 |     4223      10776 |  399   601 |       718|       0.35       4.84|
+Info:      16000 |     4731      11268 |  508   492 |       603|       0.54       5.38|
+Info:      17000 |     5014      11985 |  283   717 |        54|       0.64       6.02|
+Info:      17177 |     5101      12076 |   87    91 |         0|       0.12       6.13|
+Info: Routing complete.
+Info: Router1 time 6.13s
+Info: Checksum: 0x21264e8e
+
+Info: Critical path report for clock 'clk' (posedge -> posedge):
+Info: curr total
+Info:  1.4  1.4  Source data_mem_inst.read_buf_SB_LUT4_O_31_LC.O
+Info:  1.8  3.2    Net data_out[0] budget 0.000000 ns (14,13) -> (15,12)
+Info:                Sink processor.dataMemOut_fwd_mux.out_SB_LUT4_O_31_LC.I1
+Info:  1.2  4.4  Source processor.dataMemOut_fwd_mux.out_SB_LUT4_O_31_LC.O
+Info:  1.8  6.1    Net processor.dataMemOut_fwd_mux_out[0] budget -2.381000 ns (15,12) -> (16,13)
+Info:                Sink processor.mem_fwd2_mux.out_SB_LUT4_O_31_LC.I1
+Info:  1.2  7.4  Source processor.mem_fwd2_mux.out_SB_LUT4_O_31_LC.O
+Info:  1.8  9.1    Net processor.mem_fwd2_mux_out[0] budget -0.175000 ns (16,13) -> (15,13)
+Info:                Sink processor.wb_fwd2_mux.out_SB_LUT4_O_31_LC.I2
+Info:  1.2 10.3  Source processor.wb_fwd2_mux.out_SB_LUT4_O_31_LC.O
+Info:  4.1 14.5    Net data_WrData[0] budget -0.297000 ns (15,13) -> (13,5)
+Info:                Sink processor.alu_mux.out_SB_LUT4_O_31_LC.I2
+Info:  1.2 15.7  Source processor.alu_mux.out_SB_LUT4_O_31_LC.O
+Info:  3.7 19.4    Net processor.alu_mux_out[0] budget 0.000000 ns (13,5) -> (14,15)
+Info:                Sink processor.alu_main.Branch_Enable_SB_LUT4_O_I0_SB_LUT4_O_I0_SB_LUT4_O_I3_SB_CARRY_CO_I1_SB_CARRY_I1_CO_SB_CARRY_CO_29_I1_SB_LUT4_O_LC.I3
+Info:  0.9 20.3  Source processor.alu_main.Branch_Enable_SB_LUT4_O_I0_SB_LUT4_O_I0_SB_LUT4_O_I3_SB_CARRY_CO_I1_SB_CARRY_I1_CO_SB_CARRY_CO_29_I1_SB_LUT4_O_LC.O
+Info:  1.8 22.0    Net processor.alu_main.Branch_Enable_SB_LUT4_O_I0_SB_LUT4_O_I0_SB_LUT4_O_I3_SB_CARRY_CO_I1_SB_CARRY_I1_CO_SB_CARRY_CO_29_I1 budget 0.000000 ns (14,15) -> (14,16)
+Info:                Sink processor.alu_main.Branch_Enable_SB_LUT4_O_I0_SB_LUT4_O_I0_SB_LUT4_O_I3_SB_CARRY_CO_I1_SB_CARRY_I1_CO_SB_CARRY_CO_29_I1_SB_CARRY_I1$CARRY.I2
+Info:  0.6 22.6  Source processor.alu_main.Branch_Enable_SB_LUT4_O_I0_SB_LUT4_O_I0_SB_LUT4_O_I3_SB_CARRY_CO_I1_SB_CARRY_I1_CO_SB_CARRY_CO_29_I1_SB_CARRY_I1$CARRY.COUT
+Info:  0.0 22.6    Net processor.alu_main.Branch_Enable_SB_LUT4_O_I0_SB_LUT4_O_I0_SB_LUT4_O_I3_SB_CARRY_CO_I1_SB_CARRY_I1_CO_SB_CARRY_CO_I1_SB_CARRY_I1_CO[1] budget 0.000000 ns (14,16) -> (14,16)
+Info:                Sink processor.alu_main.Branch_Enable_SB_LUT4_O_I0_SB_LUT4_O_I0_SB_LUT4_O_I3_SB_CARRY_CO_I1_SB_CARRY_I1_CO_SB_CARRY_CO_18_I1_SB_CARRY_I1$CARRY.CIN
+Info:  0.3 22.9  Source processor.alu_main.Branch_Enable_SB_LUT4_O_I0_SB_LUT4_O_I0_SB_LUT4_O_I3_SB_CARRY_CO_I1_SB_CARRY_I1_CO_SB_CARRY_CO_18_I1_SB_CARRY_I1$CARRY.COUT
+Info:  0.0 22.9    Net processor.alu_main.Branch_Enable_SB_LUT4_O_I0_SB_LUT4_O_I0_SB_LUT4_O_I3_SB_CARRY_CO_I1_SB_CARRY_I1_CO_SB_CARRY_CO_I1_SB_CARRY_I1_CO[2] budget 0.000000 ns (14,16) -> (14,16)
+Info:                Sink processor.alu_main.Branch_Enable_SB_LUT4_O_I0_SB_LUT4_O_I0_SB_LUT4_O_I3_SB_CARRY_CO_I1_SB_CARRY_I1_CO_SB_CARRY_CO_7_I1_SB_CARRY_I1$CARRY.CIN
+Info:  0.3 23.2  Source processor.alu_main.Branch_Enable_SB_LUT4_O_I0_SB_LUT4_O_I0_SB_LUT4_O_I3_SB_CARRY_CO_I1_SB_CARRY_I1_CO_SB_CARRY_CO_7_I1_SB_CARRY_I1$CARRY.COUT
+Info:  0.0 23.2    Net processor.alu_main.Branch_Enable_SB_LUT4_O_I0_SB_LUT4_O_I0_SB_LUT4_O_I3_SB_CARRY_CO_I1_SB_CARRY_I1_CO_SB_CARRY_CO_I1_SB_CARRY_I1_CO[3] budget 0.000000 ns (14,16) -> (14,16)
+Info:                Sink processor.alu_main.Branch_Enable_SB_LUT4_O_I0_SB_LUT4_O_I0_SB_LUT4_O_I3_SB_CARRY_CO_I1_SB_CARRY_I1_CO_SB_CARRY_CO_6_I1_SB_CARRY_I1$CARRY.CIN
+Info:  0.3 23.5  Source processor.alu_main.Branch_Enable_SB_LUT4_O_I0_SB_LUT4_O_I0_SB_LUT4_O_I3_SB_CARRY_CO_I1_SB_CARRY_I1_CO_SB_CARRY_CO_6_I1_SB_CARRY_I1$CARRY.COUT
+Info:  0.0 23.5    Net processor.alu_main.Branch_Enable_SB_LUT4_O_I0_SB_LUT4_O_I0_SB_LUT4_O_I3_SB_CARRY_CO_I1_SB_CARRY_I1_CO_SB_CARRY_CO_I1_SB_CARRY_I1_CO[4] budget 0.000000 ns (14,16) -> (14,16)
+Info:                Sink processor.alu_main.Branch_Enable_SB_LUT4_O_I0_SB_LUT4_O_I0_SB_LUT4_O_I3_SB_CARRY_CO_I1_SB_CARRY_I1_CO_SB_CARRY_CO_5_I1_SB_CARRY_I1$CARRY.CIN
+Info:  0.3 23.7  Source processor.alu_main.Branch_Enable_SB_LUT4_O_I0_SB_LUT4_O_I0_SB_LUT4_O_I3_SB_CARRY_CO_I1_SB_CARRY_I1_CO_SB_CARRY_CO_5_I1_SB_CARRY_I1$CARRY.COUT
+Info:  0.0 23.7    Net processor.alu_main.Branch_Enable_SB_LUT4_O_I0_SB_LUT4_O_I0_SB_LUT4_O_I3_SB_CARRY_CO_I1_SB_CARRY_I1_CO_SB_CARRY_CO_I1_SB_CARRY_I1_CO[5] budget 0.000000 ns (14,16) -> (14,16)
+Info:                Sink processor.alu_main.Branch_Enable_SB_LUT4_O_I0_SB_LUT4_O_I0_SB_LUT4_O_I3_SB_CARRY_CO_I1_SB_CARRY_I1_CO_SB_CARRY_CO_4_I1_SB_CARRY_I1$CARRY.CIN
+Info:  0.3 24.0  Source processor.alu_main.Branch_Enable_SB_LUT4_O_I0_SB_LUT4_O_I0_SB_LUT4_O_I3_SB_CARRY_CO_I1_SB_CARRY_I1_CO_SB_CARRY_CO_4_I1_SB_CARRY_I1$CARRY.COUT
+Info:  0.0 24.0    Net processor.alu_main.Branch_Enable_SB_LUT4_O_I0_SB_LUT4_O_I0_SB_LUT4_O_I3_SB_CARRY_CO_I1_SB_CARRY_I1_CO_SB_CARRY_CO_I1_SB_CARRY_I1_CO[6] budget 0.000000 ns (14,16) -> (14,16)
+Info:                Sink processor.alu_main.Branch_Enable_SB_LUT4_O_I0_SB_LUT4_O_I0_SB_LUT4_O_I3_SB_CARRY_CO_I1_SB_CARRY_I1_CO_SB_CARRY_CO_3_I1_SB_CARRY_I1$CARRY.CIN
+Info:  0.3 24.3  Source processor.alu_main.Branch_Enable_SB_LUT4_O_I0_SB_LUT4_O_I0_SB_LUT4_O_I3_SB_CARRY_CO_I1_SB_CARRY_I1_CO_SB_CARRY_CO_3_I1_SB_CARRY_I1$CARRY.COUT
+Info:  0.0 24.3    Net processor.alu_main.Branch_Enable_SB_LUT4_O_I0_SB_LUT4_O_I0_SB_LUT4_O_I3_SB_CARRY_CO_I1_SB_CARRY_I1_CO_SB_CARRY_CO_I1_SB_CARRY_I1_CO[7] budget 0.000000 ns (14,16) -> (14,16)
+Info:                Sink processor.alu_main.Branch_Enable_SB_LUT4_O_I0_SB_LUT4_O_I0_SB_LUT4_O_I3_SB_CARRY_CO_I1_SB_CARRY_I1_CO_SB_CARRY_CO_2_I1_SB_CARRY_I1$CARRY.CIN
+Info:  0.3 24.6  Source processor.alu_main.Branch_Enable_SB_LUT4_O_I0_SB_LUT4_O_I0_SB_LUT4_O_I3_SB_CARRY_CO_I1_SB_CARRY_I1_CO_SB_CARRY_CO_2_I1_SB_CARRY_I1$CARRY.COUT
+Info:  0.6 25.1    Net processor.alu_main.Branch_Enable_SB_LUT4_O_I0_SB_LUT4_O_I0_SB_LUT4_O_I3_SB_CARRY_CO_I1_SB_CARRY_I1_CO_SB_CARRY_CO_I1_SB_CARRY_I1_CO[8] budget 0.560000 ns (14,16) -> (14,17)
+Info:                Sink processor.alu_main.Branch_Enable_SB_LUT4_O_I0_SB_LUT4_O_I0_SB_LUT4_O_I3_SB_CARRY_CO_I1_SB_CARRY_I1_CO_SB_CARRY_CO_1_I1_SB_CARRY_I1$CARRY.CIN
+Info:  0.3 25.4  Source processor.alu_main.Branch_Enable_SB_LUT4_O_I0_SB_LUT4_O_I0_SB_LUT4_O_I3_SB_CARRY_CO_I1_SB_CARRY_I1_CO_SB_CARRY_CO_1_I1_SB_CARRY_I1$CARRY.COUT
+Info:  0.0 25.4    Net processor.alu_main.Branch_Enable_SB_LUT4_O_I0_SB_LUT4_O_I0_SB_LUT4_O_I3_SB_CARRY_CO_I1_SB_CARRY_I1_CO_SB_CARRY_CO_I1_SB_CARRY_I1_CO[9] budget 0.000000 ns (14,17) -> (14,17)
+Info:                Sink processor.alu_main.Branch_Enable_SB_LUT4_O_I0_SB_LUT4_O_I0_SB_LUT4_O_I3_SB_CARRY_CO_I1_SB_CARRY_I1_CO_SB_CARRY_CO_I1_SB_CARRY_I1$CARRY.CIN
+Info:  0.3 25.7  Source processor.alu_main.Branch_Enable_SB_LUT4_O_I0_SB_LUT4_O_I0_SB_LUT4_O_I3_SB_CARRY_CO_I1_SB_CARRY_I1_CO_SB_CARRY_CO_I1_SB_CARRY_I1$CARRY.COUT
+Info:  0.0 25.7    Net processor.alu_main.Branch_Enable_SB_LUT4_O_I0_SB_LUT4_O_I0_SB_LUT4_O_I3_SB_CARRY_CO_I1_SB_CARRY_I1_CO_SB_CARRY_CO_I1_SB_CARRY_I1_CO[10] budget 0.000000 ns (14,17) -> (14,17)
+Info:                Sink processor.alu_main.Branch_Enable_SB_LUT4_O_I0_SB_LUT4_O_I0_SB_LUT4_O_I3_SB_CARRY_CO_I1_SB_CARRY_I1_CO_SB_CARRY_CO_28_I1_SB_CARRY_I1$CARRY.CIN
+Info:  0.3 26.0  Source processor.alu_main.Branch_Enable_SB_LUT4_O_I0_SB_LUT4_O_I0_SB_LUT4_O_I3_SB_CARRY_CO_I1_SB_CARRY_I1_CO_SB_CARRY_CO_28_I1_SB_CARRY_I1$CARRY.COUT
+Info:  0.0 26.0    Net processor.alu_main.Branch_Enable_SB_LUT4_O_I0_SB_LUT4_O_I0_SB_LUT4_O_I3_SB_CARRY_CO_I1_SB_CARRY_I1_CO_SB_CARRY_CO_I1_SB_CARRY_I1_CO[11] budget 0.000000 ns (14,17) -> (14,17)
+Info:                Sink processor.alu_main.Branch_Enable_SB_LUT4_O_I0_SB_LUT4_O_I0_SB_LUT4_O_I3_SB_CARRY_CO_I1_SB_CARRY_I1_CO_SB_CARRY_CO_27_I1_SB_CARRY_I1$CARRY.CIN
+Info:  0.3 26.3  Source processor.alu_main.Branch_Enable_SB_LUT4_O_I0_SB_LUT4_O_I0_SB_LUT4_O_I3_SB_CARRY_CO_I1_SB_CARRY_I1_CO_SB_CARRY_CO_27_I1_SB_CARRY_I1$CARRY.COUT
+Info:  0.0 26.3    Net processor.alu_main.Branch_Enable_SB_LUT4_O_I0_SB_LUT4_O_I0_SB_LUT4_O_I3_SB_CARRY_CO_I1_SB_CARRY_I1_CO_SB_CARRY_CO_I1_SB_CARRY_I1_CO[12] budget 0.000000 ns (14,17) -> (14,17)
+Info:                Sink processor.alu_main.Branch_Enable_SB_LUT4_O_I0_SB_LUT4_O_I0_SB_LUT4_O_I3_SB_CARRY_CO_I1_SB_CARRY_I1_CO_SB_CARRY_CO_26_I1_SB_CARRY_I1$CARRY.CIN
+Info:  0.3 26.5  Source processor.alu_main.Branch_Enable_SB_LUT4_O_I0_SB_LUT4_O_I0_SB_LUT4_O_I3_SB_CARRY_CO_I1_SB_CARRY_I1_CO_SB_CARRY_CO_26_I1_SB_CARRY_I1$CARRY.COUT
+Info:  0.0 26.5    Net processor.alu_main.Branch_Enable_SB_LUT4_O_I0_SB_LUT4_O_I0_SB_LUT4_O_I3_SB_CARRY_CO_I1_SB_CARRY_I1_CO_SB_CARRY_CO_I1_SB_CARRY_I1_CO[13] budget 0.000000 ns (14,17) -> (14,17)
+Info:                Sink processor.alu_main.Branch_Enable_SB_LUT4_O_I0_SB_LUT4_O_I0_SB_LUT4_O_I3_SB_CARRY_CO_I1_SB_CARRY_I1_CO_SB_CARRY_CO_25_I1_SB_CARRY_I1$CARRY.CIN
+Info:  0.3 26.8  Source processor.alu_main.Branch_Enable_SB_LUT4_O_I0_SB_LUT4_O_I0_SB_LUT4_O_I3_SB_CARRY_CO_I1_SB_CARRY_I1_CO_SB_CARRY_CO_25_I1_SB_CARRY_I1$CARRY.COUT
+Info:  0.0 26.8    Net processor.alu_main.Branch_Enable_SB_LUT4_O_I0_SB_LUT4_O_I0_SB_LUT4_O_I3_SB_CARRY_CO_I1_SB_CARRY_I1_CO_SB_CARRY_CO_I1_SB_CARRY_I1_CO[14] budget 0.000000 ns (14,17) -> (14,17)
+Info:                Sink processor.alu_main.Branch_Enable_SB_LUT4_O_I0_SB_LUT4_O_I0_SB_LUT4_O_I3_SB_CARRY_CO_I1_SB_CARRY_I1_CO_SB_CARRY_CO_24_I1_SB_CARRY_I1$CARRY.CIN
+Info:  0.3 27.1  Source processor.alu_main.Branch_Enable_SB_LUT4_O_I0_SB_LUT4_O_I0_SB_LUT4_O_I3_SB_CARRY_CO_I1_SB_CARRY_I1_CO_SB_CARRY_CO_24_I1_SB_CARRY_I1$CARRY.COUT
+Info:  0.0 27.1    Net processor.alu_main.Branch_Enable_SB_LUT4_O_I0_SB_LUT4_O_I0_SB_LUT4_O_I3_SB_CARRY_CO_I1_SB_CARRY_I1_CO_SB_CARRY_CO_I1_SB_CARRY_I1_CO[15] budget 0.000000 ns (14,17) -> (14,17)
+Info:                Sink processor.alu_main.Branch_Enable_SB_LUT4_O_I0_SB_LUT4_O_I0_SB_LUT4_O_I3_SB_CARRY_CO_I1_SB_CARRY_I1_CO_SB_CARRY_CO_23_I1_SB_CARRY_I1$CARRY.CIN
+Info:  0.3 27.4  Source processor.alu_main.Branch_Enable_SB_LUT4_O_I0_SB_LUT4_O_I0_SB_LUT4_O_I3_SB_CARRY_CO_I1_SB_CARRY_I1_CO_SB_CARRY_CO_23_I1_SB_CARRY_I1$CARRY.COUT
+Info:  0.6 27.9    Net processor.alu_main.Branch_Enable_SB_LUT4_O_I0_SB_LUT4_O_I0_SB_LUT4_O_I3_SB_CARRY_CO_I1_SB_CARRY_I1_CO_SB_CARRY_CO_I1_SB_CARRY_I1_CO[16] budget 0.560000 ns (14,17) -> (14,18)
+Info:                Sink processor.alu_main.Branch_Enable_SB_LUT4_O_I0_SB_LUT4_O_I0_SB_LUT4_O_I3_SB_CARRY_CO_I1_SB_CARRY_I1_CO_SB_CARRY_CO_22_I1_SB_CARRY_I1$CARRY.CIN
+Info:  0.3 28.2  Source processor.alu_main.Branch_Enable_SB_LUT4_O_I0_SB_LUT4_O_I0_SB_LUT4_O_I3_SB_CARRY_CO_I1_SB_CARRY_I1_CO_SB_CARRY_CO_22_I1_SB_CARRY_I1$CARRY.COUT
+Info:  0.0 28.2    Net processor.alu_main.Branch_Enable_SB_LUT4_O_I0_SB_LUT4_O_I0_SB_LUT4_O_I3_SB_CARRY_CO_I1_SB_CARRY_I1_CO_SB_CARRY_CO_I1_SB_CARRY_I1_CO[17] budget 0.000000 ns (14,18) -> (14,18)
+Info:                Sink processor.alu_main.Branch_Enable_SB_LUT4_O_I0_SB_LUT4_O_I0_SB_LUT4_O_I3_SB_CARRY_CO_I1_SB_CARRY_I1_CO_SB_CARRY_CO_21_I1_SB_CARRY_I1$CARRY.CIN
+Info:  0.3 28.5  Source processor.alu_main.Branch_Enable_SB_LUT4_O_I0_SB_LUT4_O_I0_SB_LUT4_O_I3_SB_CARRY_CO_I1_SB_CARRY_I1_CO_SB_CARRY_CO_21_I1_SB_CARRY_I1$CARRY.COUT
+Info:  0.0 28.5    Net processor.alu_main.Branch_Enable_SB_LUT4_O_I0_SB_LUT4_O_I0_SB_LUT4_O_I3_SB_CARRY_CO_I1_SB_CARRY_I1_CO_SB_CARRY_CO_I1_SB_CARRY_I1_CO[18] budget 0.000000 ns (14,18) -> (14,18)
+Info:                Sink processor.alu_main.Branch_Enable_SB_LUT4_O_I0_SB_LUT4_O_I0_SB_LUT4_O_I3_SB_CARRY_CO_I1_SB_CARRY_I1_CO_SB_CARRY_CO_20_I1_SB_CARRY_I1$CARRY.CIN
+Info:  0.3 28.8  Source processor.alu_main.Branch_Enable_SB_LUT4_O_I0_SB_LUT4_O_I0_SB_LUT4_O_I3_SB_CARRY_CO_I1_SB_CARRY_I1_CO_SB_CARRY_CO_20_I1_SB_CARRY_I1$CARRY.COUT
+Info:  0.0 28.8    Net processor.alu_main.Branch_Enable_SB_LUT4_O_I0_SB_LUT4_O_I0_SB_LUT4_O_I3_SB_CARRY_CO_I1_SB_CARRY_I1_CO_SB_CARRY_CO_I1_SB_CARRY_I1_CO[19] budget 0.000000 ns (14,18) -> (14,18)
+Info:                Sink processor.alu_main.Branch_Enable_SB_LUT4_O_I0_SB_LUT4_O_I0_SB_LUT4_O_I3_SB_CARRY_CO_I1_SB_CARRY_I1_CO_SB_CARRY_CO_19_I1_SB_CARRY_I1$CARRY.CIN
+Info:  0.3 29.0  Source processor.alu_main.Branch_Enable_SB_LUT4_O_I0_SB_LUT4_O_I0_SB_LUT4_O_I3_SB_CARRY_CO_I1_SB_CARRY_I1_CO_SB_CARRY_CO_19_I1_SB_CARRY_I1$CARRY.COUT
+Info:  0.0 29.0    Net processor.alu_main.Branch_Enable_SB_LUT4_O_I0_SB_LUT4_O_I0_SB_LUT4_O_I3_SB_CARRY_CO_I1_SB_CARRY_I1_CO_SB_CARRY_CO_I1_SB_CARRY_I1_CO[20] budget 0.000000 ns (14,18) -> (14,18)
+Info:                Sink processor.alu_main.Branch_Enable_SB_LUT4_O_I0_SB_LUT4_O_I0_SB_LUT4_O_I3_SB_CARRY_CO_I1_SB_CARRY_I1_CO_SB_CARRY_CO_17_I1_SB_CARRY_I1$CARRY.CIN
+Info:  0.3 29.3  Source processor.alu_main.Branch_Enable_SB_LUT4_O_I0_SB_LUT4_O_I0_SB_LUT4_O_I3_SB_CARRY_CO_I1_SB_CARRY_I1_CO_SB_CARRY_CO_17_I1_SB_CARRY_I1$CARRY.COUT
+Info:  0.0 29.3    Net processor.alu_main.Branch_Enable_SB_LUT4_O_I0_SB_LUT4_O_I0_SB_LUT4_O_I3_SB_CARRY_CO_I1_SB_CARRY_I1_CO_SB_CARRY_CO_I1_SB_CARRY_I1_CO[21] budget 0.000000 ns (14,18) -> (14,18)
+Info:                Sink processor.alu_main.Branch_Enable_SB_LUT4_O_I0_SB_LUT4_O_I0_SB_LUT4_O_I3_SB_CARRY_CO_I1_SB_CARRY_I1_CO_SB_CARRY_CO_16_I1_SB_CARRY_I1$CARRY.CIN
+Info:  0.3 29.6  Source processor.alu_main.Branch_Enable_SB_LUT4_O_I0_SB_LUT4_O_I0_SB_LUT4_O_I3_SB_CARRY_CO_I1_SB_CARRY_I1_CO_SB_CARRY_CO_16_I1_SB_CARRY_I1$CARRY.COUT
+Info:  0.0 29.6    Net processor.alu_main.Branch_Enable_SB_LUT4_O_I0_SB_LUT4_O_I0_SB_LUT4_O_I3_SB_CARRY_CO_I1_SB_CARRY_I1_CO_SB_CARRY_CO_I1_SB_CARRY_I1_CO[22] budget 0.000000 ns (14,18) -> (14,18)
+Info:                Sink processor.alu_main.Branch_Enable_SB_LUT4_O_I0_SB_LUT4_O_I0_SB_LUT4_O_I3_SB_CARRY_CO_I1_SB_CARRY_I1_CO_SB_CARRY_CO_15_I1_SB_CARRY_I1$CARRY.CIN
+Info:  0.3 29.9  Source processor.alu_main.Branch_Enable_SB_LUT4_O_I0_SB_LUT4_O_I0_SB_LUT4_O_I3_SB_CARRY_CO_I1_SB_CARRY_I1_CO_SB_CARRY_CO_15_I1_SB_CARRY_I1$CARRY.COUT
+Info:  0.0 29.9    Net processor.alu_main.Branch_Enable_SB_LUT4_O_I0_SB_LUT4_O_I0_SB_LUT4_O_I3_SB_CARRY_CO_I1_SB_CARRY_I1_CO_SB_CARRY_CO_I1_SB_CARRY_I1_CO[23] budget 0.000000 ns (14,18) -> (14,18)
+Info:                Sink processor.alu_main.Branch_Enable_SB_LUT4_O_I0_SB_LUT4_O_I0_SB_LUT4_O_I3_SB_CARRY_CO_I1_SB_CARRY_I1_CO_SB_CARRY_CO_14_I1_SB_CARRY_I1$CARRY.CIN
+Info:  0.3 30.1  Source processor.alu_main.Branch_Enable_SB_LUT4_O_I0_SB_LUT4_O_I0_SB_LUT4_O_I3_SB_CARRY_CO_I1_SB_CARRY_I1_CO_SB_CARRY_CO_14_I1_SB_CARRY_I1$CARRY.COUT
+Info:  0.6 30.7    Net processor.alu_main.Branch_Enable_SB_LUT4_O_I0_SB_LUT4_O_I0_SB_LUT4_O_I3_SB_CARRY_CO_I1_SB_CARRY_I1_CO_SB_CARRY_CO_I1_SB_CARRY_I1_CO[24] budget 0.560000 ns (14,18) -> (14,19)
+Info:                Sink processor.alu_main.Branch_Enable_SB_LUT4_O_I0_SB_LUT4_O_I0_SB_LUT4_O_I3_SB_CARRY_CO_I1_SB_CARRY_I1_CO_SB_CARRY_CO_13_I1_SB_CARRY_I1$CARRY.CIN
+Info:  0.3 31.0  Source processor.alu_main.Branch_Enable_SB_LUT4_O_I0_SB_LUT4_O_I0_SB_LUT4_O_I3_SB_CARRY_CO_I1_SB_CARRY_I1_CO_SB_CARRY_CO_13_I1_SB_CARRY_I1$CARRY.COUT
+Info:  0.0 31.0    Net processor.alu_main.Branch_Enable_SB_LUT4_O_I0_SB_LUT4_O_I0_SB_LUT4_O_I3_SB_CARRY_CO_I1_SB_CARRY_I1_CO_SB_CARRY_CO_I1_SB_CARRY_I1_CO[25] budget 0.000000 ns (14,19) -> (14,19)
+Info:                Sink processor.alu_main.Branch_Enable_SB_LUT4_O_I0_SB_LUT4_O_I0_SB_LUT4_O_I3_SB_CARRY_CO_I1_SB_CARRY_I1_CO_SB_CARRY_CO_12_I1_SB_CARRY_I1$CARRY.CIN
+Info:  0.3 31.3  Source processor.alu_main.Branch_Enable_SB_LUT4_O_I0_SB_LUT4_O_I0_SB_LUT4_O_I3_SB_CARRY_CO_I1_SB_CARRY_I1_CO_SB_CARRY_CO_12_I1_SB_CARRY_I1$CARRY.COUT
+Info:  0.0 31.3    Net processor.alu_main.Branch_Enable_SB_LUT4_O_I0_SB_LUT4_O_I0_SB_LUT4_O_I3_SB_CARRY_CO_I1_SB_CARRY_I1_CO_SB_CARRY_CO_I1_SB_CARRY_I1_CO[26] budget 0.000000 ns (14,19) -> (14,19)
+Info:                Sink processor.alu_main.Branch_Enable_SB_LUT4_O_I0_SB_LUT4_O_I0_SB_LUT4_O_I3_SB_CARRY_CO_I1_SB_CARRY_I1_CO_SB_CARRY_CO_11_I1_SB_CARRY_I1$CARRY.CIN
+Info:  0.3 31.5  Source processor.alu_main.Branch_Enable_SB_LUT4_O_I0_SB_LUT4_O_I0_SB_LUT4_O_I3_SB_CARRY_CO_I1_SB_CARRY_I1_CO_SB_CARRY_CO_11_I1_SB_CARRY_I1$CARRY.COUT
+Info:  0.0 31.5    Net processor.alu_main.Branch_Enable_SB_LUT4_O_I0_SB_LUT4_O_I0_SB_LUT4_O_I3_SB_CARRY_CO_I1_SB_CARRY_I1_CO_SB_CARRY_CO_I1_SB_CARRY_I1_CO[27] budget 0.000000 ns (14,19) -> (14,19)
+Info:                Sink processor.alu_main.Branch_Enable_SB_LUT4_O_I0_SB_LUT4_O_I0_SB_LUT4_O_I3_SB_CARRY_CO_I1_SB_CARRY_I1_CO_SB_CARRY_CO_10_I1_SB_CARRY_I1$CARRY.CIN
+Info:  0.3 31.8  Source processor.alu_main.Branch_Enable_SB_LUT4_O_I0_SB_LUT4_O_I0_SB_LUT4_O_I3_SB_CARRY_CO_I1_SB_CARRY_I1_CO_SB_CARRY_CO_10_I1_SB_CARRY_I1$CARRY.COUT
+Info:  0.0 31.8    Net processor.alu_main.Branch_Enable_SB_LUT4_O_I0_SB_LUT4_O_I0_SB_LUT4_O_I3_SB_CARRY_CO_I1_SB_CARRY_I1_CO_SB_CARRY_CO_I1_SB_CARRY_I1_CO[28] budget 0.000000 ns (14,19) -> (14,19)
+Info:                Sink processor.alu_main.Branch_Enable_SB_LUT4_O_I0_SB_LUT4_O_I0_SB_LUT4_O_I3_SB_CARRY_CO_I1_SB_CARRY_I1_CO_SB_CARRY_CO_9_I1_SB_CARRY_I1$CARRY.CIN
+Info:  0.3 32.1  Source processor.alu_main.Branch_Enable_SB_LUT4_O_I0_SB_LUT4_O_I0_SB_LUT4_O_I3_SB_CARRY_CO_I1_SB_CARRY_I1_CO_SB_CARRY_CO_9_I1_SB_CARRY_I1$CARRY.COUT
+Info:  0.0 32.1    Net processor.alu_main.Branch_Enable_SB_LUT4_O_I0_SB_LUT4_O_I0_SB_LUT4_O_I3_SB_CARRY_CO_I1_SB_CARRY_I1_CO_SB_CARRY_CO_I1_SB_CARRY_I1_CO[29] budget 0.000000 ns (14,19) -> (14,19)
+Info:                Sink processor.alu_main.Branch_Enable_SB_LUT4_O_I0_SB_LUT4_O_I0_SB_LUT4_O_I3_SB_CARRY_CO_I1_SB_CARRY_I1_CO_SB_CARRY_CO_8_I1_SB_CARRY_I1$CARRY.CIN
+Info:  0.3 32.4  Source processor.alu_main.Branch_Enable_SB_LUT4_O_I0_SB_LUT4_O_I0_SB_LUT4_O_I3_SB_CARRY_CO_I1_SB_CARRY_I1_CO_SB_CARRY_CO_8_I1_SB_CARRY_I1$CARRY.COUT
+Info:  0.0 32.4    Net processor.alu_main.Branch_Enable_SB_LUT4_O_I0_SB_LUT4_O_I0_SB_LUT4_O_I3_SB_CARRY_CO_I1_SB_CARRY_I1_CO_SB_CARRY_CO_I1_SB_CARRY_I1_CO[30] budget 0.000000 ns (14,19) -> (14,19)
+Info:                Sink processor.alu_main.Branch_Enable_SB_LUT4_O_I0_SB_LUT4_O_I0_SB_LUT4_O_I3_SB_CARRY_CO$CARRY.CIN
+Info:  0.3 32.6  Source processor.alu_main.Branch_Enable_SB_LUT4_O_I0_SB_LUT4_O_I0_SB_LUT4_O_I3_SB_CARRY_CO$CARRY.COUT
+Info:  0.0 32.6    Net processor.alu_main.Branch_Enable_SB_LUT4_O_I0_SB_LUT4_O_I0_SB_LUT4_O_I3 budget 0.000000 ns (14,19) -> (14,19)
+Info:                Sink processor.alu_main.Branch_Enable_SB_LUT4_O_I0_SB_LUT4_O_I0_SB_LUT4_O_LC.CIN
+Info:  0.3 32.9  Source processor.alu_main.Branch_Enable_SB_LUT4_O_I0_SB_LUT4_O_I0_SB_LUT4_O_LC.COUT
+Info:  1.2 34.1    Net $nextpnr_ICESTORM_LC_0$I3 budget 1.220000 ns (14,19) -> (14,20)
+Info:                Sink $nextpnr_ICESTORM_LC_0.I3
+Info:  0.9 35.0  Source $nextpnr_ICESTORM_LC_0.O
+Info:  1.8 36.8    Net processor.alu_main.Branch_Enable_SB_LUT4_O_I0_SB_LUT4_O_I0_SB_LUT4_O_I0 budget -18.236000 ns (14,20) -> (14,19)
+Info:                Sink processor.alu_main.Branch_Enable_SB_LUT4_O_I0_SB_LUT4_O_I0_SB_LUT4_O_LC.I0
+Info:  1.3 38.1  Source processor.alu_main.Branch_Enable_SB_LUT4_O_I0_SB_LUT4_O_I0_SB_LUT4_O_LC.O
+Info:  3.7 41.8    Net processor.alu_main.Branch_Enable_SB_LUT4_O_I0_SB_LUT4_O_I0 budget 0.718000 ns (14,19) -> (13,12)
+Info:                Sink processor.alu_main.Branch_Enable_SB_LUT4_O_I0_SB_LUT4_O_I0_SB_LUT4_I1_LC.I1
+Info:  1.2 43.0  Source processor.alu_main.Branch_Enable_SB_LUT4_O_I0_SB_LUT4_O_I0_SB_LUT4_I1_LC.O
+Info:  1.8 44.8    Net processor.alu_main.ALUOut_SB_LUT4_O_15_I3_SB_LUT4_O_I3_SB_LUT4_O_I2 budget 0.381000 ns (13,12) -> (13,11)
+Info:                Sink processor.alu_main.ALUOut_SB_LUT4_O_15_I3_SB_LUT4_O_I3_SB_LUT4_O_LC.I2
+Info:  1.2 46.0  Source processor.alu_main.ALUOut_SB_LUT4_O_15_I3_SB_LUT4_O_I3_SB_LUT4_O_LC.O
+Info:  1.8 47.7    Net processor.alu_main.ALUOut_SB_LUT4_O_15_I3_SB_LUT4_O_I3 budget 0.429000 ns (13,11) -> (13,10)
+Info:                Sink processor.alu_main.ALUOut_SB_LUT4_O_15_I3_SB_LUT4_O_LC.I3
+Info:  0.9 48.6  Source processor.alu_main.ALUOut_SB_LUT4_O_15_I3_SB_LUT4_O_LC.O
+Info:  1.8 50.4    Net processor.alu_main.ALUOut_SB_LUT4_O_15_I3 budget 1.052000 ns (13,10) -> (13,9)
+Info:                Sink processor.alu_main.ALUOut_SB_LUT4_O_15_LC.I3
+Info:  0.9 51.2  Source processor.alu_main.ALUOut_SB_LUT4_O_15_LC.O
+Info:  1.8 53.0    Net processor.alu_result[0] budget 0.926000 ns (13,9) -> (13,10)
+Info:                Sink processor.lui_mux.out_SB_LUT4_O_31_LC.I2
+Info:  1.2 54.2  Source processor.lui_mux.out_SB_LUT4_O_31_LC.O
+Info:  1.8 56.0    Net data_addr[0] budget 4.331000 ns (13,10) -> (12,9)
+Info:                Sink data_mem_inst.memwrite_SB_LUT4_I3_O_SB_LUT4_I1_I0_SB_LUT4_O_LC.I0
+Info:  1.3 57.2  Source data_mem_inst.memwrite_SB_LUT4_I3_O_SB_LUT4_I1_I0_SB_LUT4_O_LC.O
+Info:  3.5 60.7    Net data_mem_inst.memwrite_SB_LUT4_I3_O_SB_LUT4_I1_I0 budget 4.185000 ns (12,9) -> (7,8)
+Info:                Sink data_mem_inst.memwrite_SB_LUT4_I3_O_SB_LUT4_I1_LC.I0
+Info:  1.3 62.0  Source data_mem_inst.memwrite_SB_LUT4_I3_O_SB_LUT4_I1_LC.O
+Info:  4.9 67.0    Net data_mem_inst.memwrite_SB_LUT4_I3_O_SB_LUT4_I1_O budget 5.386000 ns (7,8) -> (8,24)
+Info:                Sink data_mem_inst.led_reg_SB_DFFE_Q_3_DFFLC.CEN
+Info:  0.1 67.1  Setup data_mem_inst.led_reg_SB_DFFE_Q_3_DFFLC.CEN
+Info: 26.6 ns logic, 40.5 ns routing
+
+Info: Critical path report for clock 'clk_proc_$glb_clk' (posedge -> posedge):
+Info: curr total
+Info:  1.4  1.4  Source processor.ex_mem_reg.data_out_SB_DFFE_Q_16_DFFLC.O
+Info:  1.8  3.2    Net processor.ex_mem_out[138] budget -0.974000 ns (21,16) -> (22,15)
+Info:                Sink processor.forwarding_unit.MEM_fwd2_SB_LUT4_O_I0_SB_LUT4_O_I2_SB_LUT4_O_LC.I0
+Info:  1.3  4.4  Source processor.forwarding_unit.MEM_fwd2_SB_LUT4_O_I0_SB_LUT4_O_I2_SB_LUT4_O_LC.O
+Info:  1.8  6.2    Net processor.forwarding_unit.MEM_fwd2_SB_LUT4_O_I0_SB_LUT4_O_I2 budget -1.114000 ns (22,15) -> (22,15)
+Info:                Sink processor.forwarding_unit.MEM_fwd2_SB_LUT4_O_I0_SB_LUT4_O_LC.I2
+Info:  1.2  7.4  Source processor.forwarding_unit.MEM_fwd2_SB_LUT4_O_I0_SB_LUT4_O_LC.O
+Info:  3.6 11.0    Net processor.forwarding_unit.MEM_fwd2_SB_LUT4_O_I0 budget -2.367000 ns (22,15) -> (17,14)
+Info:                Sink processor.forwarding_unit.MEM_fwd2_SB_LUT4_O_LC.I0
+Info:  1.3 12.3  Source processor.forwarding_unit.MEM_fwd2_SB_LUT4_O_LC.O
+Info:  1.8 14.0    Net processor.mfwd2 budget -0.204000 ns (17,14) -> (16,13)
+Info:                Sink processor.mem_fwd2_mux.out_SB_LUT4_O_31_LC.I3
+Info:  0.9 14.9  Source processor.mem_fwd2_mux.out_SB_LUT4_O_31_LC.O
+Info:  1.8 16.7    Net processor.mem_fwd2_mux_out[0] budget -0.175000 ns (16,13) -> (15,13)
+Info:                Sink processor.wb_fwd2_mux.out_SB_LUT4_O_31_LC.I2
+Info:  1.2 17.9  Source processor.wb_fwd2_mux.out_SB_LUT4_O_31_LC.O
+Info:  4.1 22.0    Net data_WrData[0] budget -0.297000 ns (15,13) -> (13,5)
+Info:                Sink processor.alu_mux.out_SB_LUT4_O_31_LC.I2
+Info:  1.2 23.2  Source processor.alu_mux.out_SB_LUT4_O_31_LC.O
+Info:  3.7 26.9    Net processor.alu_mux_out[0] budget 0.000000 ns (13,5) -> (14,15)
+Info:                Sink processor.alu_main.Branch_Enable_SB_LUT4_O_I0_SB_LUT4_O_I0_SB_LUT4_O_I3_SB_CARRY_CO_I1_SB_CARRY_I1_CO_SB_CARRY_CO_29_I1_SB_LUT4_O_LC.I3
+Info:  0.9 27.8  Source processor.alu_main.Branch_Enable_SB_LUT4_O_I0_SB_LUT4_O_I0_SB_LUT4_O_I3_SB_CARRY_CO_I1_SB_CARRY_I1_CO_SB_CARRY_CO_29_I1_SB_LUT4_O_LC.O
+Info:  1.8 29.6    Net processor.alu_main.Branch_Enable_SB_LUT4_O_I0_SB_LUT4_O_I0_SB_LUT4_O_I3_SB_CARRY_CO_I1_SB_CARRY_I1_CO_SB_CARRY_CO_29_I1 budget 0.000000 ns (14,15) -> (14,16)
+Info:                Sink processor.alu_main.Branch_Enable_SB_LUT4_O_I0_SB_LUT4_O_I0_SB_LUT4_O_I3_SB_CARRY_CO_I1_SB_CARRY_I1_CO_SB_CARRY_CO_29_I1_SB_CARRY_I1$CARRY.I2
+Info:  0.6 30.2  Source processor.alu_main.Branch_Enable_SB_LUT4_O_I0_SB_LUT4_O_I0_SB_LUT4_O_I3_SB_CARRY_CO_I1_SB_CARRY_I1_CO_SB_CARRY_CO_29_I1_SB_CARRY_I1$CARRY.COUT
+Info:  0.0 30.2    Net processor.alu_main.Branch_Enable_SB_LUT4_O_I0_SB_LUT4_O_I0_SB_LUT4_O_I3_SB_CARRY_CO_I1_SB_CARRY_I1_CO_SB_CARRY_CO_I1_SB_CARRY_I1_CO[1] budget 0.000000 ns (14,16) -> (14,16)
+Info:                Sink processor.alu_main.Branch_Enable_SB_LUT4_O_I0_SB_LUT4_O_I0_SB_LUT4_O_I3_SB_CARRY_CO_I1_SB_CARRY_I1_CO_SB_CARRY_CO_18_I1_SB_CARRY_I1$CARRY.CIN
+Info:  0.3 30.5  Source processor.alu_main.Branch_Enable_SB_LUT4_O_I0_SB_LUT4_O_I0_SB_LUT4_O_I3_SB_CARRY_CO_I1_SB_CARRY_I1_CO_SB_CARRY_CO_18_I1_SB_CARRY_I1$CARRY.COUT
+Info:  0.0 30.5    Net processor.alu_main.Branch_Enable_SB_LUT4_O_I0_SB_LUT4_O_I0_SB_LUT4_O_I3_SB_CARRY_CO_I1_SB_CARRY_I1_CO_SB_CARRY_CO_I1_SB_CARRY_I1_CO[2] budget 0.000000 ns (14,16) -> (14,16)
+Info:                Sink processor.alu_main.Branch_Enable_SB_LUT4_O_I0_SB_LUT4_O_I0_SB_LUT4_O_I3_SB_CARRY_CO_I1_SB_CARRY_I1_CO_SB_CARRY_CO_7_I1_SB_CARRY_I1$CARRY.CIN
+Info:  0.3 30.7  Source processor.alu_main.Branch_Enable_SB_LUT4_O_I0_SB_LUT4_O_I0_SB_LUT4_O_I3_SB_CARRY_CO_I1_SB_CARRY_I1_CO_SB_CARRY_CO_7_I1_SB_CARRY_I1$CARRY.COUT
+Info:  0.0 30.7    Net processor.alu_main.Branch_Enable_SB_LUT4_O_I0_SB_LUT4_O_I0_SB_LUT4_O_I3_SB_CARRY_CO_I1_SB_CARRY_I1_CO_SB_CARRY_CO_I1_SB_CARRY_I1_CO[3] budget 0.000000 ns (14,16) -> (14,16)
+Info:                Sink processor.alu_main.Branch_Enable_SB_LUT4_O_I0_SB_LUT4_O_I0_SB_LUT4_O_I3_SB_CARRY_CO_I1_SB_CARRY_I1_CO_SB_CARRY_CO_6_I1_SB_CARRY_I1$CARRY.CIN
+Info:  0.3 31.0  Source processor.alu_main.Branch_Enable_SB_LUT4_O_I0_SB_LUT4_O_I0_SB_LUT4_O_I3_SB_CARRY_CO_I1_SB_CARRY_I1_CO_SB_CARRY_CO_6_I1_SB_CARRY_I1$CARRY.COUT
+Info:  0.0 31.0    Net processor.alu_main.Branch_Enable_SB_LUT4_O_I0_SB_LUT4_O_I0_SB_LUT4_O_I3_SB_CARRY_CO_I1_SB_CARRY_I1_CO_SB_CARRY_CO_I1_SB_CARRY_I1_CO[4] budget 0.000000 ns (14,16) -> (14,16)
+Info:                Sink processor.alu_main.Branch_Enable_SB_LUT4_O_I0_SB_LUT4_O_I0_SB_LUT4_O_I3_SB_CARRY_CO_I1_SB_CARRY_I1_CO_SB_CARRY_CO_5_I1_SB_CARRY_I1$CARRY.CIN
+Info:  0.3 31.3  Source processor.alu_main.Branch_Enable_SB_LUT4_O_I0_SB_LUT4_O_I0_SB_LUT4_O_I3_SB_CARRY_CO_I1_SB_CARRY_I1_CO_SB_CARRY_CO_5_I1_SB_CARRY_I1$CARRY.COUT
+Info:  0.0 31.3    Net processor.alu_main.Branch_Enable_SB_LUT4_O_I0_SB_LUT4_O_I0_SB_LUT4_O_I3_SB_CARRY_CO_I1_SB_CARRY_I1_CO_SB_CARRY_CO_I1_SB_CARRY_I1_CO[5] budget 0.000000 ns (14,16) -> (14,16)
+Info:                Sink processor.alu_main.Branch_Enable_SB_LUT4_O_I0_SB_LUT4_O_I0_SB_LUT4_O_I3_SB_CARRY_CO_I1_SB_CARRY_I1_CO_SB_CARRY_CO_4_I1_SB_CARRY_I1$CARRY.CIN
+Info:  0.3 31.6  Source processor.alu_main.Branch_Enable_SB_LUT4_O_I0_SB_LUT4_O_I0_SB_LUT4_O_I3_SB_CARRY_CO_I1_SB_CARRY_I1_CO_SB_CARRY_CO_4_I1_SB_CARRY_I1$CARRY.COUT
+Info:  0.0 31.6    Net processor.alu_main.Branch_Enable_SB_LUT4_O_I0_SB_LUT4_O_I0_SB_LUT4_O_I3_SB_CARRY_CO_I1_SB_CARRY_I1_CO_SB_CARRY_CO_I1_SB_CARRY_I1_CO[6] budget 0.000000 ns (14,16) -> (14,16)
+Info:                Sink processor.alu_main.Branch_Enable_SB_LUT4_O_I0_SB_LUT4_O_I0_SB_LUT4_O_I3_SB_CARRY_CO_I1_SB_CARRY_I1_CO_SB_CARRY_CO_3_I1_SB_CARRY_I1$CARRY.CIN
+Info:  0.3 31.9  Source processor.alu_main.Branch_Enable_SB_LUT4_O_I0_SB_LUT4_O_I0_SB_LUT4_O_I3_SB_CARRY_CO_I1_SB_CARRY_I1_CO_SB_CARRY_CO_3_I1_SB_CARRY_I1$CARRY.COUT
+Info:  0.0 31.9    Net processor.alu_main.Branch_Enable_SB_LUT4_O_I0_SB_LUT4_O_I0_SB_LUT4_O_I3_SB_CARRY_CO_I1_SB_CARRY_I1_CO_SB_CARRY_CO_I1_SB_CARRY_I1_CO[7] budget 0.000000 ns (14,16) -> (14,16)
+Info:                Sink processor.alu_main.Branch_Enable_SB_LUT4_O_I0_SB_LUT4_O_I0_SB_LUT4_O_I3_SB_CARRY_CO_I1_SB_CARRY_I1_CO_SB_CARRY_CO_2_I1_SB_CARRY_I1$CARRY.CIN
+Info:  0.3 32.1  Source processor.alu_main.Branch_Enable_SB_LUT4_O_I0_SB_LUT4_O_I0_SB_LUT4_O_I3_SB_CARRY_CO_I1_SB_CARRY_I1_CO_SB_CARRY_CO_2_I1_SB_CARRY_I1$CARRY.COUT
+Info:  0.6 32.7    Net processor.alu_main.Branch_Enable_SB_LUT4_O_I0_SB_LUT4_O_I0_SB_LUT4_O_I3_SB_CARRY_CO_I1_SB_CARRY_I1_CO_SB_CARRY_CO_I1_SB_CARRY_I1_CO[8] budget 0.560000 ns (14,16) -> (14,17)
+Info:                Sink processor.alu_main.Branch_Enable_SB_LUT4_O_I0_SB_LUT4_O_I0_SB_LUT4_O_I3_SB_CARRY_CO_I1_SB_CARRY_I1_CO_SB_CARRY_CO_1_I1_SB_CARRY_I1$CARRY.CIN
+Info:  0.3 33.0  Source processor.alu_main.Branch_Enable_SB_LUT4_O_I0_SB_LUT4_O_I0_SB_LUT4_O_I3_SB_CARRY_CO_I1_SB_CARRY_I1_CO_SB_CARRY_CO_1_I1_SB_CARRY_I1$CARRY.COUT
+Info:  0.0 33.0    Net processor.alu_main.Branch_Enable_SB_LUT4_O_I0_SB_LUT4_O_I0_SB_LUT4_O_I3_SB_CARRY_CO_I1_SB_CARRY_I1_CO_SB_CARRY_CO_I1_SB_CARRY_I1_CO[9] budget 0.000000 ns (14,17) -> (14,17)
+Info:                Sink processor.alu_main.Branch_Enable_SB_LUT4_O_I0_SB_LUT4_O_I0_SB_LUT4_O_I3_SB_CARRY_CO_I1_SB_CARRY_I1_CO_SB_CARRY_CO_I1_SB_CARRY_I1$CARRY.CIN
+Info:  0.3 33.2  Source processor.alu_main.Branch_Enable_SB_LUT4_O_I0_SB_LUT4_O_I0_SB_LUT4_O_I3_SB_CARRY_CO_I1_SB_CARRY_I1_CO_SB_CARRY_CO_I1_SB_CARRY_I1$CARRY.COUT
+Info:  0.0 33.2    Net processor.alu_main.Branch_Enable_SB_LUT4_O_I0_SB_LUT4_O_I0_SB_LUT4_O_I3_SB_CARRY_CO_I1_SB_CARRY_I1_CO_SB_CARRY_CO_I1_SB_CARRY_I1_CO[10] budget 0.000000 ns (14,17) -> (14,17)
+Info:                Sink processor.alu_main.Branch_Enable_SB_LUT4_O_I0_SB_LUT4_O_I0_SB_LUT4_O_I3_SB_CARRY_CO_I1_SB_CARRY_I1_CO_SB_CARRY_CO_28_I1_SB_CARRY_I1$CARRY.CIN
+Info:  0.3 33.5  Source processor.alu_main.Branch_Enable_SB_LUT4_O_I0_SB_LUT4_O_I0_SB_LUT4_O_I3_SB_CARRY_CO_I1_SB_CARRY_I1_CO_SB_CARRY_CO_28_I1_SB_CARRY_I1$CARRY.COUT
+Info:  0.0 33.5    Net processor.alu_main.Branch_Enable_SB_LUT4_O_I0_SB_LUT4_O_I0_SB_LUT4_O_I3_SB_CARRY_CO_I1_SB_CARRY_I1_CO_SB_CARRY_CO_I1_SB_CARRY_I1_CO[11] budget 0.000000 ns (14,17) -> (14,17)
+Info:                Sink processor.alu_main.Branch_Enable_SB_LUT4_O_I0_SB_LUT4_O_I0_SB_LUT4_O_I3_SB_CARRY_CO_I1_SB_CARRY_I1_CO_SB_CARRY_CO_27_I1_SB_CARRY_I1$CARRY.CIN
+Info:  0.3 33.8  Source processor.alu_main.Branch_Enable_SB_LUT4_O_I0_SB_LUT4_O_I0_SB_LUT4_O_I3_SB_CARRY_CO_I1_SB_CARRY_I1_CO_SB_CARRY_CO_27_I1_SB_CARRY_I1$CARRY.COUT
+Info:  0.0 33.8    Net processor.alu_main.Branch_Enable_SB_LUT4_O_I0_SB_LUT4_O_I0_SB_LUT4_O_I3_SB_CARRY_CO_I1_SB_CARRY_I1_CO_SB_CARRY_CO_I1_SB_CARRY_I1_CO[12] budget 0.000000 ns (14,17) -> (14,17)
+Info:                Sink processor.alu_main.Branch_Enable_SB_LUT4_O_I0_SB_LUT4_O_I0_SB_LUT4_O_I3_SB_CARRY_CO_I1_SB_CARRY_I1_CO_SB_CARRY_CO_26_I1_SB_CARRY_I1$CARRY.CIN
+Info:  0.3 34.1  Source processor.alu_main.Branch_Enable_SB_LUT4_O_I0_SB_LUT4_O_I0_SB_LUT4_O_I3_SB_CARRY_CO_I1_SB_CARRY_I1_CO_SB_CARRY_CO_26_I1_SB_CARRY_I1$CARRY.COUT
+Info:  0.0 34.1    Net processor.alu_main.Branch_Enable_SB_LUT4_O_I0_SB_LUT4_O_I0_SB_LUT4_O_I3_SB_CARRY_CO_I1_SB_CARRY_I1_CO_SB_CARRY_CO_I1_SB_CARRY_I1_CO[13] budget 0.000000 ns (14,17) -> (14,17)
+Info:                Sink processor.alu_main.Branch_Enable_SB_LUT4_O_I0_SB_LUT4_O_I0_SB_LUT4_O_I3_SB_CARRY_CO_I1_SB_CARRY_I1_CO_SB_CARRY_CO_25_I1_SB_CARRY_I1$CARRY.CIN
+Info:  0.3 34.4  Source processor.alu_main.Branch_Enable_SB_LUT4_O_I0_SB_LUT4_O_I0_SB_LUT4_O_I3_SB_CARRY_CO_I1_SB_CARRY_I1_CO_SB_CARRY_CO_25_I1_SB_CARRY_I1$CARRY.COUT
+Info:  0.0 34.4    Net processor.alu_main.Branch_Enable_SB_LUT4_O_I0_SB_LUT4_O_I0_SB_LUT4_O_I3_SB_CARRY_CO_I1_SB_CARRY_I1_CO_SB_CARRY_CO_I1_SB_CARRY_I1_CO[14] budget 0.000000 ns (14,17) -> (14,17)
+Info:                Sink processor.alu_main.Branch_Enable_SB_LUT4_O_I0_SB_LUT4_O_I0_SB_LUT4_O_I3_SB_CARRY_CO_I1_SB_CARRY_I1_CO_SB_CARRY_CO_24_I1_SB_CARRY_I1$CARRY.CIN
+Info:  0.3 34.6  Source processor.alu_main.Branch_Enable_SB_LUT4_O_I0_SB_LUT4_O_I0_SB_LUT4_O_I3_SB_CARRY_CO_I1_SB_CARRY_I1_CO_SB_CARRY_CO_24_I1_SB_CARRY_I1$CARRY.COUT
+Info:  0.0 34.6    Net processor.alu_main.Branch_Enable_SB_LUT4_O_I0_SB_LUT4_O_I0_SB_LUT4_O_I3_SB_CARRY_CO_I1_SB_CARRY_I1_CO_SB_CARRY_CO_I1_SB_CARRY_I1_CO[15] budget 0.000000 ns (14,17) -> (14,17)
+Info:                Sink processor.alu_main.Branch_Enable_SB_LUT4_O_I0_SB_LUT4_O_I0_SB_LUT4_O_I3_SB_CARRY_CO_I1_SB_CARRY_I1_CO_SB_CARRY_CO_23_I1_SB_CARRY_I1$CARRY.CIN
+Info:  0.3 34.9  Source processor.alu_main.Branch_Enable_SB_LUT4_O_I0_SB_LUT4_O_I0_SB_LUT4_O_I3_SB_CARRY_CO_I1_SB_CARRY_I1_CO_SB_CARRY_CO_23_I1_SB_CARRY_I1$CARRY.COUT
+Info:  0.6 35.5    Net processor.alu_main.Branch_Enable_SB_LUT4_O_I0_SB_LUT4_O_I0_SB_LUT4_O_I3_SB_CARRY_CO_I1_SB_CARRY_I1_CO_SB_CARRY_CO_I1_SB_CARRY_I1_CO[16] budget 0.560000 ns (14,17) -> (14,18)
+Info:                Sink processor.alu_main.Branch_Enable_SB_LUT4_O_I0_SB_LUT4_O_I0_SB_LUT4_O_I3_SB_CARRY_CO_I1_SB_CARRY_I1_CO_SB_CARRY_CO_22_I1_SB_CARRY_I1$CARRY.CIN
+Info:  0.3 35.7  Source processor.alu_main.Branch_Enable_SB_LUT4_O_I0_SB_LUT4_O_I0_SB_LUT4_O_I3_SB_CARRY_CO_I1_SB_CARRY_I1_CO_SB_CARRY_CO_22_I1_SB_CARRY_I1$CARRY.COUT
+Info:  0.0 35.7    Net processor.alu_main.Branch_Enable_SB_LUT4_O_I0_SB_LUT4_O_I0_SB_LUT4_O_I3_SB_CARRY_CO_I1_SB_CARRY_I1_CO_SB_CARRY_CO_I1_SB_CARRY_I1_CO[17] budget 0.000000 ns (14,18) -> (14,18)
+Info:                Sink processor.alu_main.Branch_Enable_SB_LUT4_O_I0_SB_LUT4_O_I0_SB_LUT4_O_I3_SB_CARRY_CO_I1_SB_CARRY_I1_CO_SB_CARRY_CO_21_I1_SB_CARRY_I1$CARRY.CIN
+Info:  0.3 36.0  Source processor.alu_main.Branch_Enable_SB_LUT4_O_I0_SB_LUT4_O_I0_SB_LUT4_O_I3_SB_CARRY_CO_I1_SB_CARRY_I1_CO_SB_CARRY_CO_21_I1_SB_CARRY_I1$CARRY.COUT
+Info:  0.0 36.0    Net processor.alu_main.Branch_Enable_SB_LUT4_O_I0_SB_LUT4_O_I0_SB_LUT4_O_I3_SB_CARRY_CO_I1_SB_CARRY_I1_CO_SB_CARRY_CO_I1_SB_CARRY_I1_CO[18] budget 0.000000 ns (14,18) -> (14,18)
+Info:                Sink processor.alu_main.Branch_Enable_SB_LUT4_O_I0_SB_LUT4_O_I0_SB_LUT4_O_I3_SB_CARRY_CO_I1_SB_CARRY_I1_CO_SB_CARRY_CO_20_I1_SB_CARRY_I1$CARRY.CIN
+Info:  0.3 36.3  Source processor.alu_main.Branch_Enable_SB_LUT4_O_I0_SB_LUT4_O_I0_SB_LUT4_O_I3_SB_CARRY_CO_I1_SB_CARRY_I1_CO_SB_CARRY_CO_20_I1_SB_CARRY_I1$CARRY.COUT
+Info:  0.0 36.3    Net processor.alu_main.Branch_Enable_SB_LUT4_O_I0_SB_LUT4_O_I0_SB_LUT4_O_I3_SB_CARRY_CO_I1_SB_CARRY_I1_CO_SB_CARRY_CO_I1_SB_CARRY_I1_CO[19] budget 0.000000 ns (14,18) -> (14,18)
+Info:                Sink processor.alu_main.Branch_Enable_SB_LUT4_O_I0_SB_LUT4_O_I0_SB_LUT4_O_I3_SB_CARRY_CO_I1_SB_CARRY_I1_CO_SB_CARRY_CO_19_I1_SB_CARRY_I1$CARRY.CIN
+Info:  0.3 36.6  Source processor.alu_main.Branch_Enable_SB_LUT4_O_I0_SB_LUT4_O_I0_SB_LUT4_O_I3_SB_CARRY_CO_I1_SB_CARRY_I1_CO_SB_CARRY_CO_19_I1_SB_CARRY_I1$CARRY.COUT
+Info:  0.0 36.6    Net processor.alu_main.Branch_Enable_SB_LUT4_O_I0_SB_LUT4_O_I0_SB_LUT4_O_I3_SB_CARRY_CO_I1_SB_CARRY_I1_CO_SB_CARRY_CO_I1_SB_CARRY_I1_CO[20] budget 0.000000 ns (14,18) -> (14,18)
+Info:                Sink processor.alu_main.Branch_Enable_SB_LUT4_O_I0_SB_LUT4_O_I0_SB_LUT4_O_I3_SB_CARRY_CO_I1_SB_CARRY_I1_CO_SB_CARRY_CO_17_I1_SB_CARRY_I1$CARRY.CIN
+Info:  0.3 36.9  Source processor.alu_main.Branch_Enable_SB_LUT4_O_I0_SB_LUT4_O_I0_SB_LUT4_O_I3_SB_CARRY_CO_I1_SB_CARRY_I1_CO_SB_CARRY_CO_17_I1_SB_CARRY_I1$CARRY.COUT
+Info:  0.0 36.9    Net processor.alu_main.Branch_Enable_SB_LUT4_O_I0_SB_LUT4_O_I0_SB_LUT4_O_I3_SB_CARRY_CO_I1_SB_CARRY_I1_CO_SB_CARRY_CO_I1_SB_CARRY_I1_CO[21] budget 0.000000 ns (14,18) -> (14,18)
+Info:                Sink processor.alu_main.Branch_Enable_SB_LUT4_O_I0_SB_LUT4_O_I0_SB_LUT4_O_I3_SB_CARRY_CO_I1_SB_CARRY_I1_CO_SB_CARRY_CO_16_I1_SB_CARRY_I1$CARRY.CIN
+Info:  0.3 37.1  Source processor.alu_main.Branch_Enable_SB_LUT4_O_I0_SB_LUT4_O_I0_SB_LUT4_O_I3_SB_CARRY_CO_I1_SB_CARRY_I1_CO_SB_CARRY_CO_16_I1_SB_CARRY_I1$CARRY.COUT
+Info:  0.0 37.1    Net processor.alu_main.Branch_Enable_SB_LUT4_O_I0_SB_LUT4_O_I0_SB_LUT4_O_I3_SB_CARRY_CO_I1_SB_CARRY_I1_CO_SB_CARRY_CO_I1_SB_CARRY_I1_CO[22] budget 0.000000 ns (14,18) -> (14,18)
+Info:                Sink processor.alu_main.Branch_Enable_SB_LUT4_O_I0_SB_LUT4_O_I0_SB_LUT4_O_I3_SB_CARRY_CO_I1_SB_CARRY_I1_CO_SB_CARRY_CO_15_I1_SB_CARRY_I1$CARRY.CIN
+Info:  0.3 37.4  Source processor.alu_main.Branch_Enable_SB_LUT4_O_I0_SB_LUT4_O_I0_SB_LUT4_O_I3_SB_CARRY_CO_I1_SB_CARRY_I1_CO_SB_CARRY_CO_15_I1_SB_CARRY_I1$CARRY.COUT
+Info:  0.0 37.4    Net processor.alu_main.Branch_Enable_SB_LUT4_O_I0_SB_LUT4_O_I0_SB_LUT4_O_I3_SB_CARRY_CO_I1_SB_CARRY_I1_CO_SB_CARRY_CO_I1_SB_CARRY_I1_CO[23] budget 0.000000 ns (14,18) -> (14,18)
+Info:                Sink processor.alu_main.Branch_Enable_SB_LUT4_O_I0_SB_LUT4_O_I0_SB_LUT4_O_I3_SB_CARRY_CO_I1_SB_CARRY_I1_CO_SB_CARRY_CO_14_I1_SB_CARRY_I1$CARRY.CIN
+Info:  0.3 37.7  Source processor.alu_main.Branch_Enable_SB_LUT4_O_I0_SB_LUT4_O_I0_SB_LUT4_O_I3_SB_CARRY_CO_I1_SB_CARRY_I1_CO_SB_CARRY_CO_14_I1_SB_CARRY_I1$CARRY.COUT
+Info:  0.6 38.2    Net processor.alu_main.Branch_Enable_SB_LUT4_O_I0_SB_LUT4_O_I0_SB_LUT4_O_I3_SB_CARRY_CO_I1_SB_CARRY_I1_CO_SB_CARRY_CO_I1_SB_CARRY_I1_CO[24] budget 0.560000 ns (14,18) -> (14,19)
+Info:                Sink processor.alu_main.Branch_Enable_SB_LUT4_O_I0_SB_LUT4_O_I0_SB_LUT4_O_I3_SB_CARRY_CO_I1_SB_CARRY_I1_CO_SB_CARRY_CO_13_I1_SB_CARRY_I1$CARRY.CIN
+Info:  0.3 38.5  Source processor.alu_main.Branch_Enable_SB_LUT4_O_I0_SB_LUT4_O_I0_SB_LUT4_O_I3_SB_CARRY_CO_I1_SB_CARRY_I1_CO_SB_CARRY_CO_13_I1_SB_CARRY_I1$CARRY.COUT
+Info:  0.0 38.5    Net processor.alu_main.Branch_Enable_SB_LUT4_O_I0_SB_LUT4_O_I0_SB_LUT4_O_I3_SB_CARRY_CO_I1_SB_CARRY_I1_CO_SB_CARRY_CO_I1_SB_CARRY_I1_CO[25] budget 0.000000 ns (14,19) -> (14,19)
+Info:                Sink processor.alu_main.Branch_Enable_SB_LUT4_O_I0_SB_LUT4_O_I0_SB_LUT4_O_I3_SB_CARRY_CO_I1_SB_CARRY_I1_CO_SB_CARRY_CO_12_I1_SB_CARRY_I1$CARRY.CIN
+Info:  0.3 38.8  Source processor.alu_main.Branch_Enable_SB_LUT4_O_I0_SB_LUT4_O_I0_SB_LUT4_O_I3_SB_CARRY_CO_I1_SB_CARRY_I1_CO_SB_CARRY_CO_12_I1_SB_CARRY_I1$CARRY.COUT
+Info:  0.0 38.8    Net processor.alu_main.Branch_Enable_SB_LUT4_O_I0_SB_LUT4_O_I0_SB_LUT4_O_I3_SB_CARRY_CO_I1_SB_CARRY_I1_CO_SB_CARRY_CO_I1_SB_CARRY_I1_CO[26] budget 0.000000 ns (14,19) -> (14,19)
+Info:                Sink processor.alu_main.Branch_Enable_SB_LUT4_O_I0_SB_LUT4_O_I0_SB_LUT4_O_I3_SB_CARRY_CO_I1_SB_CARRY_I1_CO_SB_CARRY_CO_11_I1_SB_CARRY_I1$CARRY.CIN
+Info:  0.3 39.1  Source processor.alu_main.Branch_Enable_SB_LUT4_O_I0_SB_LUT4_O_I0_SB_LUT4_O_I3_SB_CARRY_CO_I1_SB_CARRY_I1_CO_SB_CARRY_CO_11_I1_SB_CARRY_I1$CARRY.COUT
+Info:  0.0 39.1    Net processor.alu_main.Branch_Enable_SB_LUT4_O_I0_SB_LUT4_O_I0_SB_LUT4_O_I3_SB_CARRY_CO_I1_SB_CARRY_I1_CO_SB_CARRY_CO_I1_SB_CARRY_I1_CO[27] budget 0.000000 ns (14,19) -> (14,19)
+Info:                Sink processor.alu_main.Branch_Enable_SB_LUT4_O_I0_SB_LUT4_O_I0_SB_LUT4_O_I3_SB_CARRY_CO_I1_SB_CARRY_I1_CO_SB_CARRY_CO_10_I1_SB_CARRY_I1$CARRY.CIN
+Info:  0.3 39.4  Source processor.alu_main.Branch_Enable_SB_LUT4_O_I0_SB_LUT4_O_I0_SB_LUT4_O_I3_SB_CARRY_CO_I1_SB_CARRY_I1_CO_SB_CARRY_CO_10_I1_SB_CARRY_I1$CARRY.COUT
+Info:  0.0 39.4    Net processor.alu_main.Branch_Enable_SB_LUT4_O_I0_SB_LUT4_O_I0_SB_LUT4_O_I3_SB_CARRY_CO_I1_SB_CARRY_I1_CO_SB_CARRY_CO_I1_SB_CARRY_I1_CO[28] budget 0.000000 ns (14,19) -> (14,19)
+Info:                Sink processor.alu_main.Branch_Enable_SB_LUT4_O_I0_SB_LUT4_O_I0_SB_LUT4_O_I3_SB_CARRY_CO_I1_SB_CARRY_I1_CO_SB_CARRY_CO_9_I1_SB_CARRY_I1$CARRY.CIN
+Info:  0.3 39.6  Source processor.alu_main.Branch_Enable_SB_LUT4_O_I0_SB_LUT4_O_I0_SB_LUT4_O_I3_SB_CARRY_CO_I1_SB_CARRY_I1_CO_SB_CARRY_CO_9_I1_SB_CARRY_I1$CARRY.COUT
+Info:  0.0 39.6    Net processor.alu_main.Branch_Enable_SB_LUT4_O_I0_SB_LUT4_O_I0_SB_LUT4_O_I3_SB_CARRY_CO_I1_SB_CARRY_I1_CO_SB_CARRY_CO_I1_SB_CARRY_I1_CO[29] budget 0.000000 ns (14,19) -> (14,19)
+Info:                Sink processor.alu_main.Branch_Enable_SB_LUT4_O_I0_SB_LUT4_O_I0_SB_LUT4_O_I3_SB_CARRY_CO_I1_SB_CARRY_I1_CO_SB_CARRY_CO_8_I1_SB_CARRY_I1$CARRY.CIN
+Info:  0.3 39.9  Source processor.alu_main.Branch_Enable_SB_LUT4_O_I0_SB_LUT4_O_I0_SB_LUT4_O_I3_SB_CARRY_CO_I1_SB_CARRY_I1_CO_SB_CARRY_CO_8_I1_SB_CARRY_I1$CARRY.COUT
+Info:  0.0 39.9    Net processor.alu_main.Branch_Enable_SB_LUT4_O_I0_SB_LUT4_O_I0_SB_LUT4_O_I3_SB_CARRY_CO_I1_SB_CARRY_I1_CO_SB_CARRY_CO_I1_SB_CARRY_I1_CO[30] budget 0.000000 ns (14,19) -> (14,19)
+Info:                Sink processor.alu_main.Branch_Enable_SB_LUT4_O_I0_SB_LUT4_O_I0_SB_LUT4_O_I3_SB_CARRY_CO$CARRY.CIN
+Info:  0.3 40.2  Source processor.alu_main.Branch_Enable_SB_LUT4_O_I0_SB_LUT4_O_I0_SB_LUT4_O_I3_SB_CARRY_CO$CARRY.COUT
+Info:  0.0 40.2    Net processor.alu_main.Branch_Enable_SB_LUT4_O_I0_SB_LUT4_O_I0_SB_LUT4_O_I3 budget 0.000000 ns (14,19) -> (14,19)
+Info:                Sink processor.alu_main.Branch_Enable_SB_LUT4_O_I0_SB_LUT4_O_I0_SB_LUT4_O_LC.CIN
+Info:  0.3 40.5  Source processor.alu_main.Branch_Enable_SB_LUT4_O_I0_SB_LUT4_O_I0_SB_LUT4_O_LC.COUT
+Info:  1.2 41.7    Net $nextpnr_ICESTORM_LC_0$I3 budget 1.220000 ns (14,19) -> (14,20)
+Info:                Sink $nextpnr_ICESTORM_LC_0.I3
+Info:  0.9 42.6  Source $nextpnr_ICESTORM_LC_0.O
+Info:  1.8 44.3    Net processor.alu_main.Branch_Enable_SB_LUT4_O_I0_SB_LUT4_O_I0_SB_LUT4_O_I0 budget -18.236000 ns (14,20) -> (14,19)
+Info:                Sink processor.alu_main.Branch_Enable_SB_LUT4_O_I0_SB_LUT4_O_I0_SB_LUT4_O_LC.I0
+Info:  1.3 45.6  Source processor.alu_main.Branch_Enable_SB_LUT4_O_I0_SB_LUT4_O_I0_SB_LUT4_O_LC.O
+Info:  3.7 49.3    Net processor.alu_main.Branch_Enable_SB_LUT4_O_I0_SB_LUT4_O_I0 budget 0.718000 ns (14,19) -> (13,12)
+Info:                Sink processor.alu_main.Branch_Enable_SB_LUT4_O_I0_SB_LUT4_O_I0_SB_LUT4_I1_LC.I1
+Info:  1.2 50.5  Source processor.alu_main.Branch_Enable_SB_LUT4_O_I0_SB_LUT4_O_I0_SB_LUT4_I1_LC.O
+Info:  1.8 52.3    Net processor.alu_main.ALUOut_SB_LUT4_O_15_I3_SB_LUT4_O_I3_SB_LUT4_O_I2 budget 0.381000 ns (13,12) -> (13,11)
+Info:                Sink processor.alu_main.ALUOut_SB_LUT4_O_15_I3_SB_LUT4_O_I3_SB_LUT4_O_LC.I2
+Info:  1.2 53.5  Source processor.alu_main.ALUOut_SB_LUT4_O_15_I3_SB_LUT4_O_I3_SB_LUT4_O_LC.O
+Info:  1.8 55.3    Net processor.alu_main.ALUOut_SB_LUT4_O_15_I3_SB_LUT4_O_I3 budget 0.429000 ns (13,11) -> (13,10)
+Info:                Sink processor.alu_main.ALUOut_SB_LUT4_O_15_I3_SB_LUT4_O_LC.I3
+Info:  0.9 56.1  Source processor.alu_main.ALUOut_SB_LUT4_O_15_I3_SB_LUT4_O_LC.O
+Info:  1.8 57.9    Net processor.alu_main.ALUOut_SB_LUT4_O_15_I3 budget 1.052000 ns (13,10) -> (13,9)
+Info:                Sink processor.alu_main.ALUOut_SB_LUT4_O_15_LC.I3
+Info:  0.9 58.8  Source processor.alu_main.ALUOut_SB_LUT4_O_15_LC.O
+Info:  1.8 60.5    Net processor.alu_result[0] budget 0.926000 ns (13,9) -> (13,10)
+Info:                Sink processor.lui_mux.out_SB_LUT4_O_31_LC.I2
+Info:  1.2 61.7  Source processor.lui_mux.out_SB_LUT4_O_31_LC.O
+Info:  1.8 63.5    Net data_addr[0] budget -0.524000 ns (13,10) -> (14,11)
+Info:                Sink processor.ex_mem_reg.data_out_SB_DFFE_Q_80_DFFLC.I0
+Info:  1.2 64.7  Setup processor.ex_mem_reg.data_out_SB_DFFE_Q_80_DFFLC.I0
+Info: 27.3 ns logic, 37.4 ns routing
+
+Info: Critical path report for cross-domain path 'posedge clk' -> '<async>':
+Info: curr total
+Info:  1.4  1.4  Source data_mem_inst.led_reg_SB_DFFE_Q_6_DFFLC.O
+Info:  4.2  5.6    Net led[1]$SB_IO_OUT budget 81.943001 ns (4,19) -> (4,31)
+Info:                Sink led[1]$sb_io.D_OUT_0
+Info: 1.4 ns logic, 4.2 ns routing
+
+Info: Critical path report for cross-domain path 'posedge clk' -> 'posedge clk_proc_$glb_clk':
+Info: curr total
+Info:  1.4  1.4  Source data_mem_inst.read_buf_SB_LUT4_O_31_LC.O
+Info:  1.8  3.2    Net data_out[0] budget 0.000000 ns (14,13) -> (15,12)
+Info:                Sink processor.dataMemOut_fwd_mux.out_SB_LUT4_O_31_LC.I1
+Info:  1.2  4.4  Source processor.dataMemOut_fwd_mux.out_SB_LUT4_O_31_LC.O
+Info:  1.8  6.1    Net processor.dataMemOut_fwd_mux_out[0] budget -2.381000 ns (15,12) -> (16,13)
+Info:                Sink processor.mem_fwd2_mux.out_SB_LUT4_O_31_LC.I1
+Info:  1.2  7.4  Source processor.mem_fwd2_mux.out_SB_LUT4_O_31_LC.O
+Info:  1.8  9.1    Net processor.mem_fwd2_mux_out[0] budget -0.175000 ns (16,13) -> (15,13)
+Info:                Sink processor.wb_fwd2_mux.out_SB_LUT4_O_31_LC.I2
+Info:  1.2 10.3  Source processor.wb_fwd2_mux.out_SB_LUT4_O_31_LC.O
+Info:  4.1 14.5    Net data_WrData[0] budget -0.297000 ns (15,13) -> (13,5)
+Info:                Sink processor.alu_mux.out_SB_LUT4_O_31_LC.I2
+Info:  1.2 15.7  Source processor.alu_mux.out_SB_LUT4_O_31_LC.O
+Info:  3.7 19.4    Net processor.alu_mux_out[0] budget 0.000000 ns (13,5) -> (14,15)
+Info:                Sink processor.alu_main.Branch_Enable_SB_LUT4_O_I0_SB_LUT4_O_I0_SB_LUT4_O_I3_SB_CARRY_CO_I1_SB_CARRY_I1_CO_SB_CARRY_CO_29_I1_SB_LUT4_O_LC.I3
+Info:  0.9 20.3  Source processor.alu_main.Branch_Enable_SB_LUT4_O_I0_SB_LUT4_O_I0_SB_LUT4_O_I3_SB_CARRY_CO_I1_SB_CARRY_I1_CO_SB_CARRY_CO_29_I1_SB_LUT4_O_LC.O
+Info:  1.8 22.0    Net processor.alu_main.Branch_Enable_SB_LUT4_O_I0_SB_LUT4_O_I0_SB_LUT4_O_I3_SB_CARRY_CO_I1_SB_CARRY_I1_CO_SB_CARRY_CO_29_I1 budget 0.000000 ns (14,15) -> (14,16)
+Info:                Sink processor.alu_main.Branch_Enable_SB_LUT4_O_I0_SB_LUT4_O_I0_SB_LUT4_O_I3_SB_CARRY_CO_I1_SB_CARRY_I1_CO_SB_CARRY_CO_29_I1_SB_CARRY_I1$CARRY.I2
+Info:  0.6 22.6  Source processor.alu_main.Branch_Enable_SB_LUT4_O_I0_SB_LUT4_O_I0_SB_LUT4_O_I3_SB_CARRY_CO_I1_SB_CARRY_I1_CO_SB_CARRY_CO_29_I1_SB_CARRY_I1$CARRY.COUT
+Info:  0.0 22.6    Net processor.alu_main.Branch_Enable_SB_LUT4_O_I0_SB_LUT4_O_I0_SB_LUT4_O_I3_SB_CARRY_CO_I1_SB_CARRY_I1_CO_SB_CARRY_CO_I1_SB_CARRY_I1_CO[1] budget 0.000000 ns (14,16) -> (14,16)
+Info:                Sink processor.alu_main.Branch_Enable_SB_LUT4_O_I0_SB_LUT4_O_I0_SB_LUT4_O_I3_SB_CARRY_CO_I1_SB_CARRY_I1_CO_SB_CARRY_CO_18_I1_SB_CARRY_I1$CARRY.CIN
+Info:  0.3 22.9  Source processor.alu_main.Branch_Enable_SB_LUT4_O_I0_SB_LUT4_O_I0_SB_LUT4_O_I3_SB_CARRY_CO_I1_SB_CARRY_I1_CO_SB_CARRY_CO_18_I1_SB_CARRY_I1$CARRY.COUT
+Info:  0.0 22.9    Net processor.alu_main.Branch_Enable_SB_LUT4_O_I0_SB_LUT4_O_I0_SB_LUT4_O_I3_SB_CARRY_CO_I1_SB_CARRY_I1_CO_SB_CARRY_CO_I1_SB_CARRY_I1_CO[2] budget 0.000000 ns (14,16) -> (14,16)
+Info:                Sink processor.alu_main.Branch_Enable_SB_LUT4_O_I0_SB_LUT4_O_I0_SB_LUT4_O_I3_SB_CARRY_CO_I1_SB_CARRY_I1_CO_SB_CARRY_CO_7_I1_SB_CARRY_I1$CARRY.CIN
+Info:  0.3 23.2  Source processor.alu_main.Branch_Enable_SB_LUT4_O_I0_SB_LUT4_O_I0_SB_LUT4_O_I3_SB_CARRY_CO_I1_SB_CARRY_I1_CO_SB_CARRY_CO_7_I1_SB_CARRY_I1$CARRY.COUT
+Info:  0.0 23.2    Net processor.alu_main.Branch_Enable_SB_LUT4_O_I0_SB_LUT4_O_I0_SB_LUT4_O_I3_SB_CARRY_CO_I1_SB_CARRY_I1_CO_SB_CARRY_CO_I1_SB_CARRY_I1_CO[3] budget 0.000000 ns (14,16) -> (14,16)
+Info:                Sink processor.alu_main.Branch_Enable_SB_LUT4_O_I0_SB_LUT4_O_I0_SB_LUT4_O_I3_SB_CARRY_CO_I1_SB_CARRY_I1_CO_SB_CARRY_CO_6_I1_SB_CARRY_I1$CARRY.CIN
+Info:  0.3 23.5  Source processor.alu_main.Branch_Enable_SB_LUT4_O_I0_SB_LUT4_O_I0_SB_LUT4_O_I3_SB_CARRY_CO_I1_SB_CARRY_I1_CO_SB_CARRY_CO_6_I1_SB_CARRY_I1$CARRY.COUT
+Info:  0.0 23.5    Net processor.alu_main.Branch_Enable_SB_LUT4_O_I0_SB_LUT4_O_I0_SB_LUT4_O_I3_SB_CARRY_CO_I1_SB_CARRY_I1_CO_SB_CARRY_CO_I1_SB_CARRY_I1_CO[4] budget 0.000000 ns (14,16) -> (14,16)
+Info:                Sink processor.alu_main.Branch_Enable_SB_LUT4_O_I0_SB_LUT4_O_I0_SB_LUT4_O_I3_SB_CARRY_CO_I1_SB_CARRY_I1_CO_SB_CARRY_CO_5_I1_SB_CARRY_I1$CARRY.CIN
+Info:  0.3 23.7  Source processor.alu_main.Branch_Enable_SB_LUT4_O_I0_SB_LUT4_O_I0_SB_LUT4_O_I3_SB_CARRY_CO_I1_SB_CARRY_I1_CO_SB_CARRY_CO_5_I1_SB_CARRY_I1$CARRY.COUT
+Info:  0.0 23.7    Net processor.alu_main.Branch_Enable_SB_LUT4_O_I0_SB_LUT4_O_I0_SB_LUT4_O_I3_SB_CARRY_CO_I1_SB_CARRY_I1_CO_SB_CARRY_CO_I1_SB_CARRY_I1_CO[5] budget 0.000000 ns (14,16) -> (14,16)
+Info:                Sink processor.alu_main.Branch_Enable_SB_LUT4_O_I0_SB_LUT4_O_I0_SB_LUT4_O_I3_SB_CARRY_CO_I1_SB_CARRY_I1_CO_SB_CARRY_CO_4_I1_SB_CARRY_I1$CARRY.CIN
+Info:  0.3 24.0  Source processor.alu_main.Branch_Enable_SB_LUT4_O_I0_SB_LUT4_O_I0_SB_LUT4_O_I3_SB_CARRY_CO_I1_SB_CARRY_I1_CO_SB_CARRY_CO_4_I1_SB_CARRY_I1$CARRY.COUT
+Info:  0.0 24.0    Net processor.alu_main.Branch_Enable_SB_LUT4_O_I0_SB_LUT4_O_I0_SB_LUT4_O_I3_SB_CARRY_CO_I1_SB_CARRY_I1_CO_SB_CARRY_CO_I1_SB_CARRY_I1_CO[6] budget 0.000000 ns (14,16) -> (14,16)
+Info:                Sink processor.alu_main.Branch_Enable_SB_LUT4_O_I0_SB_LUT4_O_I0_SB_LUT4_O_I3_SB_CARRY_CO_I1_SB_CARRY_I1_CO_SB_CARRY_CO_3_I1_SB_CARRY_I1$CARRY.CIN
+Info:  0.3 24.3  Source processor.alu_main.Branch_Enable_SB_LUT4_O_I0_SB_LUT4_O_I0_SB_LUT4_O_I3_SB_CARRY_CO_I1_SB_CARRY_I1_CO_SB_CARRY_CO_3_I1_SB_CARRY_I1$CARRY.COUT
+Info:  0.0 24.3    Net processor.alu_main.Branch_Enable_SB_LUT4_O_I0_SB_LUT4_O_I0_SB_LUT4_O_I3_SB_CARRY_CO_I1_SB_CARRY_I1_CO_SB_CARRY_CO_I1_SB_CARRY_I1_CO[7] budget 0.000000 ns (14,16) -> (14,16)
+Info:                Sink processor.alu_main.Branch_Enable_SB_LUT4_O_I0_SB_LUT4_O_I0_SB_LUT4_O_I3_SB_CARRY_CO_I1_SB_CARRY_I1_CO_SB_CARRY_CO_2_I1_SB_CARRY_I1$CARRY.CIN
+Info:  0.3 24.6  Source processor.alu_main.Branch_Enable_SB_LUT4_O_I0_SB_LUT4_O_I0_SB_LUT4_O_I3_SB_CARRY_CO_I1_SB_CARRY_I1_CO_SB_CARRY_CO_2_I1_SB_CARRY_I1$CARRY.COUT
+Info:  0.6 25.1    Net processor.alu_main.Branch_Enable_SB_LUT4_O_I0_SB_LUT4_O_I0_SB_LUT4_O_I3_SB_CARRY_CO_I1_SB_CARRY_I1_CO_SB_CARRY_CO_I1_SB_CARRY_I1_CO[8] budget 0.560000 ns (14,16) -> (14,17)
+Info:                Sink processor.alu_main.Branch_Enable_SB_LUT4_O_I0_SB_LUT4_O_I0_SB_LUT4_O_I3_SB_CARRY_CO_I1_SB_CARRY_I1_CO_SB_CARRY_CO_1_I1_SB_CARRY_I1$CARRY.CIN
+Info:  0.3 25.4  Source processor.alu_main.Branch_Enable_SB_LUT4_O_I0_SB_LUT4_O_I0_SB_LUT4_O_I3_SB_CARRY_CO_I1_SB_CARRY_I1_CO_SB_CARRY_CO_1_I1_SB_CARRY_I1$CARRY.COUT
+Info:  0.0 25.4    Net processor.alu_main.Branch_Enable_SB_LUT4_O_I0_SB_LUT4_O_I0_SB_LUT4_O_I3_SB_CARRY_CO_I1_SB_CARRY_I1_CO_SB_CARRY_CO_I1_SB_CARRY_I1_CO[9] budget 0.000000 ns (14,17) -> (14,17)
+Info:                Sink processor.alu_main.Branch_Enable_SB_LUT4_O_I0_SB_LUT4_O_I0_SB_LUT4_O_I3_SB_CARRY_CO_I1_SB_CARRY_I1_CO_SB_CARRY_CO_I1_SB_CARRY_I1$CARRY.CIN
+Info:  0.3 25.7  Source processor.alu_main.Branch_Enable_SB_LUT4_O_I0_SB_LUT4_O_I0_SB_LUT4_O_I3_SB_CARRY_CO_I1_SB_CARRY_I1_CO_SB_CARRY_CO_I1_SB_CARRY_I1$CARRY.COUT
+Info:  0.0 25.7    Net processor.alu_main.Branch_Enable_SB_LUT4_O_I0_SB_LUT4_O_I0_SB_LUT4_O_I3_SB_CARRY_CO_I1_SB_CARRY_I1_CO_SB_CARRY_CO_I1_SB_CARRY_I1_CO[10] budget 0.000000 ns (14,17) -> (14,17)
+Info:                Sink processor.alu_main.Branch_Enable_SB_LUT4_O_I0_SB_LUT4_O_I0_SB_LUT4_O_I3_SB_CARRY_CO_I1_SB_CARRY_I1_CO_SB_CARRY_CO_28_I1_SB_CARRY_I1$CARRY.CIN
+Info:  0.3 26.0  Source processor.alu_main.Branch_Enable_SB_LUT4_O_I0_SB_LUT4_O_I0_SB_LUT4_O_I3_SB_CARRY_CO_I1_SB_CARRY_I1_CO_SB_CARRY_CO_28_I1_SB_CARRY_I1$CARRY.COUT
+Info:  0.0 26.0    Net processor.alu_main.Branch_Enable_SB_LUT4_O_I0_SB_LUT4_O_I0_SB_LUT4_O_I3_SB_CARRY_CO_I1_SB_CARRY_I1_CO_SB_CARRY_CO_I1_SB_CARRY_I1_CO[11] budget 0.000000 ns (14,17) -> (14,17)
+Info:                Sink processor.alu_main.Branch_Enable_SB_LUT4_O_I0_SB_LUT4_O_I0_SB_LUT4_O_I3_SB_CARRY_CO_I1_SB_CARRY_I1_CO_SB_CARRY_CO_27_I1_SB_CARRY_I1$CARRY.CIN
+Info:  0.3 26.3  Source processor.alu_main.Branch_Enable_SB_LUT4_O_I0_SB_LUT4_O_I0_SB_LUT4_O_I3_SB_CARRY_CO_I1_SB_CARRY_I1_CO_SB_CARRY_CO_27_I1_SB_CARRY_I1$CARRY.COUT
+Info:  0.0 26.3    Net processor.alu_main.Branch_Enable_SB_LUT4_O_I0_SB_LUT4_O_I0_SB_LUT4_O_I3_SB_CARRY_CO_I1_SB_CARRY_I1_CO_SB_CARRY_CO_I1_SB_CARRY_I1_CO[12] budget 0.000000 ns (14,17) -> (14,17)
+Info:                Sink processor.alu_main.Branch_Enable_SB_LUT4_O_I0_SB_LUT4_O_I0_SB_LUT4_O_I3_SB_CARRY_CO_I1_SB_CARRY_I1_CO_SB_CARRY_CO_26_I1_SB_CARRY_I1$CARRY.CIN
+Info:  0.3 26.5  Source processor.alu_main.Branch_Enable_SB_LUT4_O_I0_SB_LUT4_O_I0_SB_LUT4_O_I3_SB_CARRY_CO_I1_SB_CARRY_I1_CO_SB_CARRY_CO_26_I1_SB_CARRY_I1$CARRY.COUT
+Info:  0.0 26.5    Net processor.alu_main.Branch_Enable_SB_LUT4_O_I0_SB_LUT4_O_I0_SB_LUT4_O_I3_SB_CARRY_CO_I1_SB_CARRY_I1_CO_SB_CARRY_CO_I1_SB_CARRY_I1_CO[13] budget 0.000000 ns (14,17) -> (14,17)
+Info:                Sink processor.alu_main.Branch_Enable_SB_LUT4_O_I0_SB_LUT4_O_I0_SB_LUT4_O_I3_SB_CARRY_CO_I1_SB_CARRY_I1_CO_SB_CARRY_CO_25_I1_SB_CARRY_I1$CARRY.CIN
+Info:  0.3 26.8  Source processor.alu_main.Branch_Enable_SB_LUT4_O_I0_SB_LUT4_O_I0_SB_LUT4_O_I3_SB_CARRY_CO_I1_SB_CARRY_I1_CO_SB_CARRY_CO_25_I1_SB_CARRY_I1$CARRY.COUT
+Info:  0.0 26.8    Net processor.alu_main.Branch_Enable_SB_LUT4_O_I0_SB_LUT4_O_I0_SB_LUT4_O_I3_SB_CARRY_CO_I1_SB_CARRY_I1_CO_SB_CARRY_CO_I1_SB_CARRY_I1_CO[14] budget 0.000000 ns (14,17) -> (14,17)
+Info:                Sink processor.alu_main.Branch_Enable_SB_LUT4_O_I0_SB_LUT4_O_I0_SB_LUT4_O_I3_SB_CARRY_CO_I1_SB_CARRY_I1_CO_SB_CARRY_CO_24_I1_SB_CARRY_I1$CARRY.CIN
+Info:  0.3 27.1  Source processor.alu_main.Branch_Enable_SB_LUT4_O_I0_SB_LUT4_O_I0_SB_LUT4_O_I3_SB_CARRY_CO_I1_SB_CARRY_I1_CO_SB_CARRY_CO_24_I1_SB_CARRY_I1$CARRY.COUT
+Info:  0.0 27.1    Net processor.alu_main.Branch_Enable_SB_LUT4_O_I0_SB_LUT4_O_I0_SB_LUT4_O_I3_SB_CARRY_CO_I1_SB_CARRY_I1_CO_SB_CARRY_CO_I1_SB_CARRY_I1_CO[15] budget 0.000000 ns (14,17) -> (14,17)
+Info:                Sink processor.alu_main.Branch_Enable_SB_LUT4_O_I0_SB_LUT4_O_I0_SB_LUT4_O_I3_SB_CARRY_CO_I1_SB_CARRY_I1_CO_SB_CARRY_CO_23_I1_SB_CARRY_I1$CARRY.CIN
+Info:  0.3 27.4  Source processor.alu_main.Branch_Enable_SB_LUT4_O_I0_SB_LUT4_O_I0_SB_LUT4_O_I3_SB_CARRY_CO_I1_SB_CARRY_I1_CO_SB_CARRY_CO_23_I1_SB_CARRY_I1$CARRY.COUT
+Info:  0.6 27.9    Net processor.alu_main.Branch_Enable_SB_LUT4_O_I0_SB_LUT4_O_I0_SB_LUT4_O_I3_SB_CARRY_CO_I1_SB_CARRY_I1_CO_SB_CARRY_CO_I1_SB_CARRY_I1_CO[16] budget 0.560000 ns (14,17) -> (14,18)
+Info:                Sink processor.alu_main.Branch_Enable_SB_LUT4_O_I0_SB_LUT4_O_I0_SB_LUT4_O_I3_SB_CARRY_CO_I1_SB_CARRY_I1_CO_SB_CARRY_CO_22_I1_SB_CARRY_I1$CARRY.CIN
+Info:  0.3 28.2  Source processor.alu_main.Branch_Enable_SB_LUT4_O_I0_SB_LUT4_O_I0_SB_LUT4_O_I3_SB_CARRY_CO_I1_SB_CARRY_I1_CO_SB_CARRY_CO_22_I1_SB_CARRY_I1$CARRY.COUT
+Info:  0.0 28.2    Net processor.alu_main.Branch_Enable_SB_LUT4_O_I0_SB_LUT4_O_I0_SB_LUT4_O_I3_SB_CARRY_CO_I1_SB_CARRY_I1_CO_SB_CARRY_CO_I1_SB_CARRY_I1_CO[17] budget 0.000000 ns (14,18) -> (14,18)
+Info:                Sink processor.alu_main.Branch_Enable_SB_LUT4_O_I0_SB_LUT4_O_I0_SB_LUT4_O_I3_SB_CARRY_CO_I1_SB_CARRY_I1_CO_SB_CARRY_CO_21_I1_SB_CARRY_I1$CARRY.CIN
+Info:  0.3 28.5  Source processor.alu_main.Branch_Enable_SB_LUT4_O_I0_SB_LUT4_O_I0_SB_LUT4_O_I3_SB_CARRY_CO_I1_SB_CARRY_I1_CO_SB_CARRY_CO_21_I1_SB_CARRY_I1$CARRY.COUT
+Info:  0.0 28.5    Net processor.alu_main.Branch_Enable_SB_LUT4_O_I0_SB_LUT4_O_I0_SB_LUT4_O_I3_SB_CARRY_CO_I1_SB_CARRY_I1_CO_SB_CARRY_CO_I1_SB_CARRY_I1_CO[18] budget 0.000000 ns (14,18) -> (14,18)
+Info:                Sink processor.alu_main.Branch_Enable_SB_LUT4_O_I0_SB_LUT4_O_I0_SB_LUT4_O_I3_SB_CARRY_CO_I1_SB_CARRY_I1_CO_SB_CARRY_CO_20_I1_SB_CARRY_I1$CARRY.CIN
+Info:  0.3 28.8  Source processor.alu_main.Branch_Enable_SB_LUT4_O_I0_SB_LUT4_O_I0_SB_LUT4_O_I3_SB_CARRY_CO_I1_SB_CARRY_I1_CO_SB_CARRY_CO_20_I1_SB_CARRY_I1$CARRY.COUT
+Info:  0.0 28.8    Net processor.alu_main.Branch_Enable_SB_LUT4_O_I0_SB_LUT4_O_I0_SB_LUT4_O_I3_SB_CARRY_CO_I1_SB_CARRY_I1_CO_SB_CARRY_CO_I1_SB_CARRY_I1_CO[19] budget 0.000000 ns (14,18) -> (14,18)
+Info:                Sink processor.alu_main.Branch_Enable_SB_LUT4_O_I0_SB_LUT4_O_I0_SB_LUT4_O_I3_SB_CARRY_CO_I1_SB_CARRY_I1_CO_SB_CARRY_CO_19_I1_SB_CARRY_I1$CARRY.CIN
+Info:  0.3 29.0  Source processor.alu_main.Branch_Enable_SB_LUT4_O_I0_SB_LUT4_O_I0_SB_LUT4_O_I3_SB_CARRY_CO_I1_SB_CARRY_I1_CO_SB_CARRY_CO_19_I1_SB_CARRY_I1$CARRY.COUT
+Info:  0.0 29.0    Net processor.alu_main.Branch_Enable_SB_LUT4_O_I0_SB_LUT4_O_I0_SB_LUT4_O_I3_SB_CARRY_CO_I1_SB_CARRY_I1_CO_SB_CARRY_CO_I1_SB_CARRY_I1_CO[20] budget 0.000000 ns (14,18) -> (14,18)
+Info:                Sink processor.alu_main.Branch_Enable_SB_LUT4_O_I0_SB_LUT4_O_I0_SB_LUT4_O_I3_SB_CARRY_CO_I1_SB_CARRY_I1_CO_SB_CARRY_CO_17_I1_SB_CARRY_I1$CARRY.CIN
+Info:  0.3 29.3  Source processor.alu_main.Branch_Enable_SB_LUT4_O_I0_SB_LUT4_O_I0_SB_LUT4_O_I3_SB_CARRY_CO_I1_SB_CARRY_I1_CO_SB_CARRY_CO_17_I1_SB_CARRY_I1$CARRY.COUT
+Info:  0.0 29.3    Net processor.alu_main.Branch_Enable_SB_LUT4_O_I0_SB_LUT4_O_I0_SB_LUT4_O_I3_SB_CARRY_CO_I1_SB_CARRY_I1_CO_SB_CARRY_CO_I1_SB_CARRY_I1_CO[21] budget 0.000000 ns (14,18) -> (14,18)
+Info:                Sink processor.alu_main.Branch_Enable_SB_LUT4_O_I0_SB_LUT4_O_I0_SB_LUT4_O_I3_SB_CARRY_CO_I1_SB_CARRY_I1_CO_SB_CARRY_CO_16_I1_SB_CARRY_I1$CARRY.CIN
+Info:  0.3 29.6  Source processor.alu_main.Branch_Enable_SB_LUT4_O_I0_SB_LUT4_O_I0_SB_LUT4_O_I3_SB_CARRY_CO_I1_SB_CARRY_I1_CO_SB_CARRY_CO_16_I1_SB_CARRY_I1$CARRY.COUT
+Info:  0.0 29.6    Net processor.alu_main.Branch_Enable_SB_LUT4_O_I0_SB_LUT4_O_I0_SB_LUT4_O_I3_SB_CARRY_CO_I1_SB_CARRY_I1_CO_SB_CARRY_CO_I1_SB_CARRY_I1_CO[22] budget 0.000000 ns (14,18) -> (14,18)
+Info:                Sink processor.alu_main.Branch_Enable_SB_LUT4_O_I0_SB_LUT4_O_I0_SB_LUT4_O_I3_SB_CARRY_CO_I1_SB_CARRY_I1_CO_SB_CARRY_CO_15_I1_SB_CARRY_I1$CARRY.CIN
+Info:  0.3 29.9  Source processor.alu_main.Branch_Enable_SB_LUT4_O_I0_SB_LUT4_O_I0_SB_LUT4_O_I3_SB_CARRY_CO_I1_SB_CARRY_I1_CO_SB_CARRY_CO_15_I1_SB_CARRY_I1$CARRY.COUT
+Info:  0.0 29.9    Net processor.alu_main.Branch_Enable_SB_LUT4_O_I0_SB_LUT4_O_I0_SB_LUT4_O_I3_SB_CARRY_CO_I1_SB_CARRY_I1_CO_SB_CARRY_CO_I1_SB_CARRY_I1_CO[23] budget 0.000000 ns (14,18) -> (14,18)
+Info:                Sink processor.alu_main.Branch_Enable_SB_LUT4_O_I0_SB_LUT4_O_I0_SB_LUT4_O_I3_SB_CARRY_CO_I1_SB_CARRY_I1_CO_SB_CARRY_CO_14_I1_SB_CARRY_I1$CARRY.CIN
+Info:  0.3 30.1  Source processor.alu_main.Branch_Enable_SB_LUT4_O_I0_SB_LUT4_O_I0_SB_LUT4_O_I3_SB_CARRY_CO_I1_SB_CARRY_I1_CO_SB_CARRY_CO_14_I1_SB_CARRY_I1$CARRY.COUT
+Info:  0.6 30.7    Net processor.alu_main.Branch_Enable_SB_LUT4_O_I0_SB_LUT4_O_I0_SB_LUT4_O_I3_SB_CARRY_CO_I1_SB_CARRY_I1_CO_SB_CARRY_CO_I1_SB_CARRY_I1_CO[24] budget 0.560000 ns (14,18) -> (14,19)
+Info:                Sink processor.alu_main.Branch_Enable_SB_LUT4_O_I0_SB_LUT4_O_I0_SB_LUT4_O_I3_SB_CARRY_CO_I1_SB_CARRY_I1_CO_SB_CARRY_CO_13_I1_SB_CARRY_I1$CARRY.CIN
+Info:  0.3 31.0  Source processor.alu_main.Branch_Enable_SB_LUT4_O_I0_SB_LUT4_O_I0_SB_LUT4_O_I3_SB_CARRY_CO_I1_SB_CARRY_I1_CO_SB_CARRY_CO_13_I1_SB_CARRY_I1$CARRY.COUT
+Info:  0.0 31.0    Net processor.alu_main.Branch_Enable_SB_LUT4_O_I0_SB_LUT4_O_I0_SB_LUT4_O_I3_SB_CARRY_CO_I1_SB_CARRY_I1_CO_SB_CARRY_CO_I1_SB_CARRY_I1_CO[25] budget 0.000000 ns (14,19) -> (14,19)
+Info:                Sink processor.alu_main.Branch_Enable_SB_LUT4_O_I0_SB_LUT4_O_I0_SB_LUT4_O_I3_SB_CARRY_CO_I1_SB_CARRY_I1_CO_SB_CARRY_CO_12_I1_SB_CARRY_I1$CARRY.CIN
+Info:  0.3 31.3  Source processor.alu_main.Branch_Enable_SB_LUT4_O_I0_SB_LUT4_O_I0_SB_LUT4_O_I3_SB_CARRY_CO_I1_SB_CARRY_I1_CO_SB_CARRY_CO_12_I1_SB_CARRY_I1$CARRY.COUT
+Info:  0.0 31.3    Net processor.alu_main.Branch_Enable_SB_LUT4_O_I0_SB_LUT4_O_I0_SB_LUT4_O_I3_SB_CARRY_CO_I1_SB_CARRY_I1_CO_SB_CARRY_CO_I1_SB_CARRY_I1_CO[26] budget 0.000000 ns (14,19) -> (14,19)
+Info:                Sink processor.alu_main.Branch_Enable_SB_LUT4_O_I0_SB_LUT4_O_I0_SB_LUT4_O_I3_SB_CARRY_CO_I1_SB_CARRY_I1_CO_SB_CARRY_CO_11_I1_SB_CARRY_I1$CARRY.CIN
+Info:  0.3 31.5  Source processor.alu_main.Branch_Enable_SB_LUT4_O_I0_SB_LUT4_O_I0_SB_LUT4_O_I3_SB_CARRY_CO_I1_SB_CARRY_I1_CO_SB_CARRY_CO_11_I1_SB_CARRY_I1$CARRY.COUT
+Info:  0.0 31.5    Net processor.alu_main.Branch_Enable_SB_LUT4_O_I0_SB_LUT4_O_I0_SB_LUT4_O_I3_SB_CARRY_CO_I1_SB_CARRY_I1_CO_SB_CARRY_CO_I1_SB_CARRY_I1_CO[27] budget 0.000000 ns (14,19) -> (14,19)
+Info:                Sink processor.alu_main.Branch_Enable_SB_LUT4_O_I0_SB_LUT4_O_I0_SB_LUT4_O_I3_SB_CARRY_CO_I1_SB_CARRY_I1_CO_SB_CARRY_CO_10_I1_SB_CARRY_I1$CARRY.CIN
+Info:  0.3 31.8  Source processor.alu_main.Branch_Enable_SB_LUT4_O_I0_SB_LUT4_O_I0_SB_LUT4_O_I3_SB_CARRY_CO_I1_SB_CARRY_I1_CO_SB_CARRY_CO_10_I1_SB_CARRY_I1$CARRY.COUT
+Info:  0.0 31.8    Net processor.alu_main.Branch_Enable_SB_LUT4_O_I0_SB_LUT4_O_I0_SB_LUT4_O_I3_SB_CARRY_CO_I1_SB_CARRY_I1_CO_SB_CARRY_CO_I1_SB_CARRY_I1_CO[28] budget 0.000000 ns (14,19) -> (14,19)
+Info:                Sink processor.alu_main.Branch_Enable_SB_LUT4_O_I0_SB_LUT4_O_I0_SB_LUT4_O_I3_SB_CARRY_CO_I1_SB_CARRY_I1_CO_SB_CARRY_CO_9_I1_SB_CARRY_I1$CARRY.CIN
+Info:  0.3 32.1  Source processor.alu_main.Branch_Enable_SB_LUT4_O_I0_SB_LUT4_O_I0_SB_LUT4_O_I3_SB_CARRY_CO_I1_SB_CARRY_I1_CO_SB_CARRY_CO_9_I1_SB_CARRY_I1$CARRY.COUT
+Info:  0.0 32.1    Net processor.alu_main.Branch_Enable_SB_LUT4_O_I0_SB_LUT4_O_I0_SB_LUT4_O_I3_SB_CARRY_CO_I1_SB_CARRY_I1_CO_SB_CARRY_CO_I1_SB_CARRY_I1_CO[29] budget 0.000000 ns (14,19) -> (14,19)
+Info:                Sink processor.alu_main.Branch_Enable_SB_LUT4_O_I0_SB_LUT4_O_I0_SB_LUT4_O_I3_SB_CARRY_CO_I1_SB_CARRY_I1_CO_SB_CARRY_CO_8_I1_SB_CARRY_I1$CARRY.CIN
+Info:  0.3 32.4  Source processor.alu_main.Branch_Enable_SB_LUT4_O_I0_SB_LUT4_O_I0_SB_LUT4_O_I3_SB_CARRY_CO_I1_SB_CARRY_I1_CO_SB_CARRY_CO_8_I1_SB_CARRY_I1$CARRY.COUT
+Info:  0.0 32.4    Net processor.alu_main.Branch_Enable_SB_LUT4_O_I0_SB_LUT4_O_I0_SB_LUT4_O_I3_SB_CARRY_CO_I1_SB_CARRY_I1_CO_SB_CARRY_CO_I1_SB_CARRY_I1_CO[30] budget 0.000000 ns (14,19) -> (14,19)
+Info:                Sink processor.alu_main.Branch_Enable_SB_LUT4_O_I0_SB_LUT4_O_I0_SB_LUT4_O_I3_SB_CARRY_CO$CARRY.CIN
+Info:  0.3 32.6  Source processor.alu_main.Branch_Enable_SB_LUT4_O_I0_SB_LUT4_O_I0_SB_LUT4_O_I3_SB_CARRY_CO$CARRY.COUT
+Info:  0.0 32.6    Net processor.alu_main.Branch_Enable_SB_LUT4_O_I0_SB_LUT4_O_I0_SB_LUT4_O_I3 budget 0.000000 ns (14,19) -> (14,19)
+Info:                Sink processor.alu_main.Branch_Enable_SB_LUT4_O_I0_SB_LUT4_O_I0_SB_LUT4_O_LC.CIN
+Info:  0.3 32.9  Source processor.alu_main.Branch_Enable_SB_LUT4_O_I0_SB_LUT4_O_I0_SB_LUT4_O_LC.COUT
+Info:  1.2 34.1    Net $nextpnr_ICESTORM_LC_0$I3 budget 1.220000 ns (14,19) -> (14,20)
+Info:                Sink $nextpnr_ICESTORM_LC_0.I3
+Info:  0.9 35.0  Source $nextpnr_ICESTORM_LC_0.O
+Info:  1.8 36.8    Net processor.alu_main.Branch_Enable_SB_LUT4_O_I0_SB_LUT4_O_I0_SB_LUT4_O_I0 budget -18.236000 ns (14,20) -> (14,19)
+Info:                Sink processor.alu_main.Branch_Enable_SB_LUT4_O_I0_SB_LUT4_O_I0_SB_LUT4_O_LC.I0
+Info:  1.3 38.1  Source processor.alu_main.Branch_Enable_SB_LUT4_O_I0_SB_LUT4_O_I0_SB_LUT4_O_LC.O
+Info:  3.7 41.8    Net processor.alu_main.Branch_Enable_SB_LUT4_O_I0_SB_LUT4_O_I0 budget 0.718000 ns (14,19) -> (13,12)
+Info:                Sink processor.alu_main.Branch_Enable_SB_LUT4_O_I0_SB_LUT4_O_I0_SB_LUT4_I1_LC.I1
+Info:  1.2 43.0  Source processor.alu_main.Branch_Enable_SB_LUT4_O_I0_SB_LUT4_O_I0_SB_LUT4_I1_LC.O
+Info:  1.8 44.8    Net processor.alu_main.ALUOut_SB_LUT4_O_15_I3_SB_LUT4_O_I3_SB_LUT4_O_I2 budget 0.381000 ns (13,12) -> (13,11)
+Info:                Sink processor.alu_main.ALUOut_SB_LUT4_O_15_I3_SB_LUT4_O_I3_SB_LUT4_O_LC.I2
+Info:  1.2 46.0  Source processor.alu_main.ALUOut_SB_LUT4_O_15_I3_SB_LUT4_O_I3_SB_LUT4_O_LC.O
+Info:  1.8 47.7    Net processor.alu_main.ALUOut_SB_LUT4_O_15_I3_SB_LUT4_O_I3 budget 0.429000 ns (13,11) -> (13,10)
+Info:                Sink processor.alu_main.ALUOut_SB_LUT4_O_15_I3_SB_LUT4_O_LC.I3
+Info:  0.9 48.6  Source processor.alu_main.ALUOut_SB_LUT4_O_15_I3_SB_LUT4_O_LC.O
+Info:  1.8 50.4    Net processor.alu_main.ALUOut_SB_LUT4_O_15_I3 budget 1.052000 ns (13,10) -> (13,9)
+Info:                Sink processor.alu_main.ALUOut_SB_LUT4_O_15_LC.I3
+Info:  0.9 51.2  Source processor.alu_main.ALUOut_SB_LUT4_O_15_LC.O
+Info:  1.8 53.0    Net processor.alu_result[0] budget 0.926000 ns (13,9) -> (13,10)
+Info:                Sink processor.lui_mux.out_SB_LUT4_O_31_LC.I2
+Info:  1.2 54.2  Source processor.lui_mux.out_SB_LUT4_O_31_LC.O
+Info:  1.8 56.0    Net data_addr[0] budget -0.524000 ns (13,10) -> (14,11)
+Info:                Sink processor.ex_mem_reg.data_out_SB_DFFE_Q_80_DFFLC.I0
+Info:  1.2 57.2  Setup processor.ex_mem_reg.data_out_SB_DFFE_Q_80_DFFLC.I0
+Info: 25.1 ns logic, 32.0 ns routing
+
+Info: Critical path report for cross-domain path 'posedge clk_proc_$glb_clk' -> 'posedge clk':
+Info: curr total
+Info:  1.4  1.4  Source processor.ex_mem_reg.data_out_SB_DFFE_Q_16_DFFLC.O
+Info:  1.8  3.2    Net processor.ex_mem_out[138] budget -0.974000 ns (21,16) -> (22,15)
+Info:                Sink processor.forwarding_unit.MEM_fwd2_SB_LUT4_O_I0_SB_LUT4_O_I2_SB_LUT4_O_LC.I0
+Info:  1.3  4.4  Source processor.forwarding_unit.MEM_fwd2_SB_LUT4_O_I0_SB_LUT4_O_I2_SB_LUT4_O_LC.O
+Info:  1.8  6.2    Net processor.forwarding_unit.MEM_fwd2_SB_LUT4_O_I0_SB_LUT4_O_I2 budget -1.114000 ns (22,15) -> (22,15)
+Info:                Sink processor.forwarding_unit.MEM_fwd2_SB_LUT4_O_I0_SB_LUT4_O_LC.I2
+Info:  1.2  7.4  Source processor.forwarding_unit.MEM_fwd2_SB_LUT4_O_I0_SB_LUT4_O_LC.O
+Info:  3.6 11.0    Net processor.forwarding_unit.MEM_fwd2_SB_LUT4_O_I0 budget -2.367000 ns (22,15) -> (17,14)
+Info:                Sink processor.forwarding_unit.MEM_fwd2_SB_LUT4_O_LC.I0
+Info:  1.3 12.3  Source processor.forwarding_unit.MEM_fwd2_SB_LUT4_O_LC.O
+Info:  1.8 14.0    Net processor.mfwd2 budget -0.204000 ns (17,14) -> (16,13)
+Info:                Sink processor.mem_fwd2_mux.out_SB_LUT4_O_31_LC.I3
+Info:  0.9 14.9  Source processor.mem_fwd2_mux.out_SB_LUT4_O_31_LC.O
+Info:  1.8 16.7    Net processor.mem_fwd2_mux_out[0] budget -0.175000 ns (16,13) -> (15,13)
+Info:                Sink processor.wb_fwd2_mux.out_SB_LUT4_O_31_LC.I2
+Info:  1.2 17.9  Source processor.wb_fwd2_mux.out_SB_LUT4_O_31_LC.O
+Info:  4.1 22.0    Net data_WrData[0] budget -0.297000 ns (15,13) -> (13,5)
+Info:                Sink processor.alu_mux.out_SB_LUT4_O_31_LC.I2
+Info:  1.2 23.2  Source processor.alu_mux.out_SB_LUT4_O_31_LC.O
+Info:  3.7 26.9    Net processor.alu_mux_out[0] budget 0.000000 ns (13,5) -> (14,15)
+Info:                Sink processor.alu_main.Branch_Enable_SB_LUT4_O_I0_SB_LUT4_O_I0_SB_LUT4_O_I3_SB_CARRY_CO_I1_SB_CARRY_I1_CO_SB_CARRY_CO_29_I1_SB_LUT4_O_LC.I3
+Info:  0.9 27.8  Source processor.alu_main.Branch_Enable_SB_LUT4_O_I0_SB_LUT4_O_I0_SB_LUT4_O_I3_SB_CARRY_CO_I1_SB_CARRY_I1_CO_SB_CARRY_CO_29_I1_SB_LUT4_O_LC.O
+Info:  1.8 29.6    Net processor.alu_main.Branch_Enable_SB_LUT4_O_I0_SB_LUT4_O_I0_SB_LUT4_O_I3_SB_CARRY_CO_I1_SB_CARRY_I1_CO_SB_CARRY_CO_29_I1 budget 0.000000 ns (14,15) -> (14,16)
+Info:                Sink processor.alu_main.Branch_Enable_SB_LUT4_O_I0_SB_LUT4_O_I0_SB_LUT4_O_I3_SB_CARRY_CO_I1_SB_CARRY_I1_CO_SB_CARRY_CO_29_I1_SB_CARRY_I1$CARRY.I2
+Info:  0.6 30.2  Source processor.alu_main.Branch_Enable_SB_LUT4_O_I0_SB_LUT4_O_I0_SB_LUT4_O_I3_SB_CARRY_CO_I1_SB_CARRY_I1_CO_SB_CARRY_CO_29_I1_SB_CARRY_I1$CARRY.COUT
+Info:  0.0 30.2    Net processor.alu_main.Branch_Enable_SB_LUT4_O_I0_SB_LUT4_O_I0_SB_LUT4_O_I3_SB_CARRY_CO_I1_SB_CARRY_I1_CO_SB_CARRY_CO_I1_SB_CARRY_I1_CO[1] budget 0.000000 ns (14,16) -> (14,16)
+Info:                Sink processor.alu_main.Branch_Enable_SB_LUT4_O_I0_SB_LUT4_O_I0_SB_LUT4_O_I3_SB_CARRY_CO_I1_SB_CARRY_I1_CO_SB_CARRY_CO_18_I1_SB_CARRY_I1$CARRY.CIN
+Info:  0.3 30.5  Source processor.alu_main.Branch_Enable_SB_LUT4_O_I0_SB_LUT4_O_I0_SB_LUT4_O_I3_SB_CARRY_CO_I1_SB_CARRY_I1_CO_SB_CARRY_CO_18_I1_SB_CARRY_I1$CARRY.COUT
+Info:  0.0 30.5    Net processor.alu_main.Branch_Enable_SB_LUT4_O_I0_SB_LUT4_O_I0_SB_LUT4_O_I3_SB_CARRY_CO_I1_SB_CARRY_I1_CO_SB_CARRY_CO_I1_SB_CARRY_I1_CO[2] budget 0.000000 ns (14,16) -> (14,16)
+Info:                Sink processor.alu_main.Branch_Enable_SB_LUT4_O_I0_SB_LUT4_O_I0_SB_LUT4_O_I3_SB_CARRY_CO_I1_SB_CARRY_I1_CO_SB_CARRY_CO_7_I1_SB_CARRY_I1$CARRY.CIN
+Info:  0.3 30.7  Source processor.alu_main.Branch_Enable_SB_LUT4_O_I0_SB_LUT4_O_I0_SB_LUT4_O_I3_SB_CARRY_CO_I1_SB_CARRY_I1_CO_SB_CARRY_CO_7_I1_SB_CARRY_I1$CARRY.COUT
+Info:  0.0 30.7    Net processor.alu_main.Branch_Enable_SB_LUT4_O_I0_SB_LUT4_O_I0_SB_LUT4_O_I3_SB_CARRY_CO_I1_SB_CARRY_I1_CO_SB_CARRY_CO_I1_SB_CARRY_I1_CO[3] budget 0.000000 ns (14,16) -> (14,16)
+Info:                Sink processor.alu_main.Branch_Enable_SB_LUT4_O_I0_SB_LUT4_O_I0_SB_LUT4_O_I3_SB_CARRY_CO_I1_SB_CARRY_I1_CO_SB_CARRY_CO_6_I1_SB_CARRY_I1$CARRY.CIN
+Info:  0.3 31.0  Source processor.alu_main.Branch_Enable_SB_LUT4_O_I0_SB_LUT4_O_I0_SB_LUT4_O_I3_SB_CARRY_CO_I1_SB_CARRY_I1_CO_SB_CARRY_CO_6_I1_SB_CARRY_I1$CARRY.COUT
+Info:  0.0 31.0    Net processor.alu_main.Branch_Enable_SB_LUT4_O_I0_SB_LUT4_O_I0_SB_LUT4_O_I3_SB_CARRY_CO_I1_SB_CARRY_I1_CO_SB_CARRY_CO_I1_SB_CARRY_I1_CO[4] budget 0.000000 ns (14,16) -> (14,16)
+Info:                Sink processor.alu_main.Branch_Enable_SB_LUT4_O_I0_SB_LUT4_O_I0_SB_LUT4_O_I3_SB_CARRY_CO_I1_SB_CARRY_I1_CO_SB_CARRY_CO_5_I1_SB_CARRY_I1$CARRY.CIN
+Info:  0.3 31.3  Source processor.alu_main.Branch_Enable_SB_LUT4_O_I0_SB_LUT4_O_I0_SB_LUT4_O_I3_SB_CARRY_CO_I1_SB_CARRY_I1_CO_SB_CARRY_CO_5_I1_SB_CARRY_I1$CARRY.COUT
+Info:  0.0 31.3    Net processor.alu_main.Branch_Enable_SB_LUT4_O_I0_SB_LUT4_O_I0_SB_LUT4_O_I3_SB_CARRY_CO_I1_SB_CARRY_I1_CO_SB_CARRY_CO_I1_SB_CARRY_I1_CO[5] budget 0.000000 ns (14,16) -> (14,16)
+Info:                Sink processor.alu_main.Branch_Enable_SB_LUT4_O_I0_SB_LUT4_O_I0_SB_LUT4_O_I3_SB_CARRY_CO_I1_SB_CARRY_I1_CO_SB_CARRY_CO_4_I1_SB_CARRY_I1$CARRY.CIN
+Info:  0.3 31.6  Source processor.alu_main.Branch_Enable_SB_LUT4_O_I0_SB_LUT4_O_I0_SB_LUT4_O_I3_SB_CARRY_CO_I1_SB_CARRY_I1_CO_SB_CARRY_CO_4_I1_SB_CARRY_I1$CARRY.COUT
+Info:  0.0 31.6    Net processor.alu_main.Branch_Enable_SB_LUT4_O_I0_SB_LUT4_O_I0_SB_LUT4_O_I3_SB_CARRY_CO_I1_SB_CARRY_I1_CO_SB_CARRY_CO_I1_SB_CARRY_I1_CO[6] budget 0.000000 ns (14,16) -> (14,16)
+Info:                Sink processor.alu_main.Branch_Enable_SB_LUT4_O_I0_SB_LUT4_O_I0_SB_LUT4_O_I3_SB_CARRY_CO_I1_SB_CARRY_I1_CO_SB_CARRY_CO_3_I1_SB_CARRY_I1$CARRY.CIN
+Info:  0.3 31.9  Source processor.alu_main.Branch_Enable_SB_LUT4_O_I0_SB_LUT4_O_I0_SB_LUT4_O_I3_SB_CARRY_CO_I1_SB_CARRY_I1_CO_SB_CARRY_CO_3_I1_SB_CARRY_I1$CARRY.COUT
+Info:  0.0 31.9    Net processor.alu_main.Branch_Enable_SB_LUT4_O_I0_SB_LUT4_O_I0_SB_LUT4_O_I3_SB_CARRY_CO_I1_SB_CARRY_I1_CO_SB_CARRY_CO_I1_SB_CARRY_I1_CO[7] budget 0.000000 ns (14,16) -> (14,16)
+Info:                Sink processor.alu_main.Branch_Enable_SB_LUT4_O_I0_SB_LUT4_O_I0_SB_LUT4_O_I3_SB_CARRY_CO_I1_SB_CARRY_I1_CO_SB_CARRY_CO_2_I1_SB_CARRY_I1$CARRY.CIN
+Info:  0.3 32.1  Source processor.alu_main.Branch_Enable_SB_LUT4_O_I0_SB_LUT4_O_I0_SB_LUT4_O_I3_SB_CARRY_CO_I1_SB_CARRY_I1_CO_SB_CARRY_CO_2_I1_SB_CARRY_I1$CARRY.COUT
+Info:  0.6 32.7    Net processor.alu_main.Branch_Enable_SB_LUT4_O_I0_SB_LUT4_O_I0_SB_LUT4_O_I3_SB_CARRY_CO_I1_SB_CARRY_I1_CO_SB_CARRY_CO_I1_SB_CARRY_I1_CO[8] budget 0.560000 ns (14,16) -> (14,17)
+Info:                Sink processor.alu_main.Branch_Enable_SB_LUT4_O_I0_SB_LUT4_O_I0_SB_LUT4_O_I3_SB_CARRY_CO_I1_SB_CARRY_I1_CO_SB_CARRY_CO_1_I1_SB_CARRY_I1$CARRY.CIN
+Info:  0.3 33.0  Source processor.alu_main.Branch_Enable_SB_LUT4_O_I0_SB_LUT4_O_I0_SB_LUT4_O_I3_SB_CARRY_CO_I1_SB_CARRY_I1_CO_SB_CARRY_CO_1_I1_SB_CARRY_I1$CARRY.COUT
+Info:  0.0 33.0    Net processor.alu_main.Branch_Enable_SB_LUT4_O_I0_SB_LUT4_O_I0_SB_LUT4_O_I3_SB_CARRY_CO_I1_SB_CARRY_I1_CO_SB_CARRY_CO_I1_SB_CARRY_I1_CO[9] budget 0.000000 ns (14,17) -> (14,17)
+Info:                Sink processor.alu_main.Branch_Enable_SB_LUT4_O_I0_SB_LUT4_O_I0_SB_LUT4_O_I3_SB_CARRY_CO_I1_SB_CARRY_I1_CO_SB_CARRY_CO_I1_SB_CARRY_I1$CARRY.CIN
+Info:  0.3 33.2  Source processor.alu_main.Branch_Enable_SB_LUT4_O_I0_SB_LUT4_O_I0_SB_LUT4_O_I3_SB_CARRY_CO_I1_SB_CARRY_I1_CO_SB_CARRY_CO_I1_SB_CARRY_I1$CARRY.COUT
+Info:  0.0 33.2    Net processor.alu_main.Branch_Enable_SB_LUT4_O_I0_SB_LUT4_O_I0_SB_LUT4_O_I3_SB_CARRY_CO_I1_SB_CARRY_I1_CO_SB_CARRY_CO_I1_SB_CARRY_I1_CO[10] budget 0.000000 ns (14,17) -> (14,17)
+Info:                Sink processor.alu_main.Branch_Enable_SB_LUT4_O_I0_SB_LUT4_O_I0_SB_LUT4_O_I3_SB_CARRY_CO_I1_SB_CARRY_I1_CO_SB_CARRY_CO_28_I1_SB_CARRY_I1$CARRY.CIN
+Info:  0.3 33.5  Source processor.alu_main.Branch_Enable_SB_LUT4_O_I0_SB_LUT4_O_I0_SB_LUT4_O_I3_SB_CARRY_CO_I1_SB_CARRY_I1_CO_SB_CARRY_CO_28_I1_SB_CARRY_I1$CARRY.COUT
+Info:  0.0 33.5    Net processor.alu_main.Branch_Enable_SB_LUT4_O_I0_SB_LUT4_O_I0_SB_LUT4_O_I3_SB_CARRY_CO_I1_SB_CARRY_I1_CO_SB_CARRY_CO_I1_SB_CARRY_I1_CO[11] budget 0.000000 ns (14,17) -> (14,17)
+Info:                Sink processor.alu_main.Branch_Enable_SB_LUT4_O_I0_SB_LUT4_O_I0_SB_LUT4_O_I3_SB_CARRY_CO_I1_SB_CARRY_I1_CO_SB_CARRY_CO_27_I1_SB_CARRY_I1$CARRY.CIN
+Info:  0.3 33.8  Source processor.alu_main.Branch_Enable_SB_LUT4_O_I0_SB_LUT4_O_I0_SB_LUT4_O_I3_SB_CARRY_CO_I1_SB_CARRY_I1_CO_SB_CARRY_CO_27_I1_SB_CARRY_I1$CARRY.COUT
+Info:  0.0 33.8    Net processor.alu_main.Branch_Enable_SB_LUT4_O_I0_SB_LUT4_O_I0_SB_LUT4_O_I3_SB_CARRY_CO_I1_SB_CARRY_I1_CO_SB_CARRY_CO_I1_SB_CARRY_I1_CO[12] budget 0.000000 ns (14,17) -> (14,17)
+Info:                Sink processor.alu_main.Branch_Enable_SB_LUT4_O_I0_SB_LUT4_O_I0_SB_LUT4_O_I3_SB_CARRY_CO_I1_SB_CARRY_I1_CO_SB_CARRY_CO_26_I1_SB_CARRY_I1$CARRY.CIN
+Info:  0.3 34.1  Source processor.alu_main.Branch_Enable_SB_LUT4_O_I0_SB_LUT4_O_I0_SB_LUT4_O_I3_SB_CARRY_CO_I1_SB_CARRY_I1_CO_SB_CARRY_CO_26_I1_SB_CARRY_I1$CARRY.COUT
+Info:  0.0 34.1    Net processor.alu_main.Branch_Enable_SB_LUT4_O_I0_SB_LUT4_O_I0_SB_LUT4_O_I3_SB_CARRY_CO_I1_SB_CARRY_I1_CO_SB_CARRY_CO_I1_SB_CARRY_I1_CO[13] budget 0.000000 ns (14,17) -> (14,17)
+Info:                Sink processor.alu_main.Branch_Enable_SB_LUT4_O_I0_SB_LUT4_O_I0_SB_LUT4_O_I3_SB_CARRY_CO_I1_SB_CARRY_I1_CO_SB_CARRY_CO_25_I1_SB_CARRY_I1$CARRY.CIN
+Info:  0.3 34.4  Source processor.alu_main.Branch_Enable_SB_LUT4_O_I0_SB_LUT4_O_I0_SB_LUT4_O_I3_SB_CARRY_CO_I1_SB_CARRY_I1_CO_SB_CARRY_CO_25_I1_SB_CARRY_I1$CARRY.COUT
+Info:  0.0 34.4    Net processor.alu_main.Branch_Enable_SB_LUT4_O_I0_SB_LUT4_O_I0_SB_LUT4_O_I3_SB_CARRY_CO_I1_SB_CARRY_I1_CO_SB_CARRY_CO_I1_SB_CARRY_I1_CO[14] budget 0.000000 ns (14,17) -> (14,17)
+Info:                Sink processor.alu_main.Branch_Enable_SB_LUT4_O_I0_SB_LUT4_O_I0_SB_LUT4_O_I3_SB_CARRY_CO_I1_SB_CARRY_I1_CO_SB_CARRY_CO_24_I1_SB_CARRY_I1$CARRY.CIN
+Info:  0.3 34.6  Source processor.alu_main.Branch_Enable_SB_LUT4_O_I0_SB_LUT4_O_I0_SB_LUT4_O_I3_SB_CARRY_CO_I1_SB_CARRY_I1_CO_SB_CARRY_CO_24_I1_SB_CARRY_I1$CARRY.COUT
+Info:  0.0 34.6    Net processor.alu_main.Branch_Enable_SB_LUT4_O_I0_SB_LUT4_O_I0_SB_LUT4_O_I3_SB_CARRY_CO_I1_SB_CARRY_I1_CO_SB_CARRY_CO_I1_SB_CARRY_I1_CO[15] budget 0.000000 ns (14,17) -> (14,17)
+Info:                Sink processor.alu_main.Branch_Enable_SB_LUT4_O_I0_SB_LUT4_O_I0_SB_LUT4_O_I3_SB_CARRY_CO_I1_SB_CARRY_I1_CO_SB_CARRY_CO_23_I1_SB_CARRY_I1$CARRY.CIN
+Info:  0.3 34.9  Source processor.alu_main.Branch_Enable_SB_LUT4_O_I0_SB_LUT4_O_I0_SB_LUT4_O_I3_SB_CARRY_CO_I1_SB_CARRY_I1_CO_SB_CARRY_CO_23_I1_SB_CARRY_I1$CARRY.COUT
+Info:  0.6 35.5    Net processor.alu_main.Branch_Enable_SB_LUT4_O_I0_SB_LUT4_O_I0_SB_LUT4_O_I3_SB_CARRY_CO_I1_SB_CARRY_I1_CO_SB_CARRY_CO_I1_SB_CARRY_I1_CO[16] budget 0.560000 ns (14,17) -> (14,18)
+Info:                Sink processor.alu_main.Branch_Enable_SB_LUT4_O_I0_SB_LUT4_O_I0_SB_LUT4_O_I3_SB_CARRY_CO_I1_SB_CARRY_I1_CO_SB_CARRY_CO_22_I1_SB_CARRY_I1$CARRY.CIN
+Info:  0.3 35.7  Source processor.alu_main.Branch_Enable_SB_LUT4_O_I0_SB_LUT4_O_I0_SB_LUT4_O_I3_SB_CARRY_CO_I1_SB_CARRY_I1_CO_SB_CARRY_CO_22_I1_SB_CARRY_I1$CARRY.COUT
+Info:  0.0 35.7    Net processor.alu_main.Branch_Enable_SB_LUT4_O_I0_SB_LUT4_O_I0_SB_LUT4_O_I3_SB_CARRY_CO_I1_SB_CARRY_I1_CO_SB_CARRY_CO_I1_SB_CARRY_I1_CO[17] budget 0.000000 ns (14,18) -> (14,18)
+Info:                Sink processor.alu_main.Branch_Enable_SB_LUT4_O_I0_SB_LUT4_O_I0_SB_LUT4_O_I3_SB_CARRY_CO_I1_SB_CARRY_I1_CO_SB_CARRY_CO_21_I1_SB_CARRY_I1$CARRY.CIN
+Info:  0.3 36.0  Source processor.alu_main.Branch_Enable_SB_LUT4_O_I0_SB_LUT4_O_I0_SB_LUT4_O_I3_SB_CARRY_CO_I1_SB_CARRY_I1_CO_SB_CARRY_CO_21_I1_SB_CARRY_I1$CARRY.COUT
+Info:  0.0 36.0    Net processor.alu_main.Branch_Enable_SB_LUT4_O_I0_SB_LUT4_O_I0_SB_LUT4_O_I3_SB_CARRY_CO_I1_SB_CARRY_I1_CO_SB_CARRY_CO_I1_SB_CARRY_I1_CO[18] budget 0.000000 ns (14,18) -> (14,18)
+Info:                Sink processor.alu_main.Branch_Enable_SB_LUT4_O_I0_SB_LUT4_O_I0_SB_LUT4_O_I3_SB_CARRY_CO_I1_SB_CARRY_I1_CO_SB_CARRY_CO_20_I1_SB_CARRY_I1$CARRY.CIN
+Info:  0.3 36.3  Source processor.alu_main.Branch_Enable_SB_LUT4_O_I0_SB_LUT4_O_I0_SB_LUT4_O_I3_SB_CARRY_CO_I1_SB_CARRY_I1_CO_SB_CARRY_CO_20_I1_SB_CARRY_I1$CARRY.COUT
+Info:  0.0 36.3    Net processor.alu_main.Branch_Enable_SB_LUT4_O_I0_SB_LUT4_O_I0_SB_LUT4_O_I3_SB_CARRY_CO_I1_SB_CARRY_I1_CO_SB_CARRY_CO_I1_SB_CARRY_I1_CO[19] budget 0.000000 ns (14,18) -> (14,18)
+Info:                Sink processor.alu_main.Branch_Enable_SB_LUT4_O_I0_SB_LUT4_O_I0_SB_LUT4_O_I3_SB_CARRY_CO_I1_SB_CARRY_I1_CO_SB_CARRY_CO_19_I1_SB_CARRY_I1$CARRY.CIN
+Info:  0.3 36.6  Source processor.alu_main.Branch_Enable_SB_LUT4_O_I0_SB_LUT4_O_I0_SB_LUT4_O_I3_SB_CARRY_CO_I1_SB_CARRY_I1_CO_SB_CARRY_CO_19_I1_SB_CARRY_I1$CARRY.COUT
+Info:  0.0 36.6    Net processor.alu_main.Branch_Enable_SB_LUT4_O_I0_SB_LUT4_O_I0_SB_LUT4_O_I3_SB_CARRY_CO_I1_SB_CARRY_I1_CO_SB_CARRY_CO_I1_SB_CARRY_I1_CO[20] budget 0.000000 ns (14,18) -> (14,18)
+Info:                Sink processor.alu_main.Branch_Enable_SB_LUT4_O_I0_SB_LUT4_O_I0_SB_LUT4_O_I3_SB_CARRY_CO_I1_SB_CARRY_I1_CO_SB_CARRY_CO_17_I1_SB_CARRY_I1$CARRY.CIN
+Info:  0.3 36.9  Source processor.alu_main.Branch_Enable_SB_LUT4_O_I0_SB_LUT4_O_I0_SB_LUT4_O_I3_SB_CARRY_CO_I1_SB_CARRY_I1_CO_SB_CARRY_CO_17_I1_SB_CARRY_I1$CARRY.COUT
+Info:  0.0 36.9    Net processor.alu_main.Branch_Enable_SB_LUT4_O_I0_SB_LUT4_O_I0_SB_LUT4_O_I3_SB_CARRY_CO_I1_SB_CARRY_I1_CO_SB_CARRY_CO_I1_SB_CARRY_I1_CO[21] budget 0.000000 ns (14,18) -> (14,18)
+Info:                Sink processor.alu_main.Branch_Enable_SB_LUT4_O_I0_SB_LUT4_O_I0_SB_LUT4_O_I3_SB_CARRY_CO_I1_SB_CARRY_I1_CO_SB_CARRY_CO_16_I1_SB_CARRY_I1$CARRY.CIN
+Info:  0.3 37.1  Source processor.alu_main.Branch_Enable_SB_LUT4_O_I0_SB_LUT4_O_I0_SB_LUT4_O_I3_SB_CARRY_CO_I1_SB_CARRY_I1_CO_SB_CARRY_CO_16_I1_SB_CARRY_I1$CARRY.COUT
+Info:  0.0 37.1    Net processor.alu_main.Branch_Enable_SB_LUT4_O_I0_SB_LUT4_O_I0_SB_LUT4_O_I3_SB_CARRY_CO_I1_SB_CARRY_I1_CO_SB_CARRY_CO_I1_SB_CARRY_I1_CO[22] budget 0.000000 ns (14,18) -> (14,18)
+Info:                Sink processor.alu_main.Branch_Enable_SB_LUT4_O_I0_SB_LUT4_O_I0_SB_LUT4_O_I3_SB_CARRY_CO_I1_SB_CARRY_I1_CO_SB_CARRY_CO_15_I1_SB_CARRY_I1$CARRY.CIN
+Info:  0.3 37.4  Source processor.alu_main.Branch_Enable_SB_LUT4_O_I0_SB_LUT4_O_I0_SB_LUT4_O_I3_SB_CARRY_CO_I1_SB_CARRY_I1_CO_SB_CARRY_CO_15_I1_SB_CARRY_I1$CARRY.COUT
+Info:  0.0 37.4    Net processor.alu_main.Branch_Enable_SB_LUT4_O_I0_SB_LUT4_O_I0_SB_LUT4_O_I3_SB_CARRY_CO_I1_SB_CARRY_I1_CO_SB_CARRY_CO_I1_SB_CARRY_I1_CO[23] budget 0.000000 ns (14,18) -> (14,18)
+Info:                Sink processor.alu_main.Branch_Enable_SB_LUT4_O_I0_SB_LUT4_O_I0_SB_LUT4_O_I3_SB_CARRY_CO_I1_SB_CARRY_I1_CO_SB_CARRY_CO_14_I1_SB_CARRY_I1$CARRY.CIN
+Info:  0.3 37.7  Source processor.alu_main.Branch_Enable_SB_LUT4_O_I0_SB_LUT4_O_I0_SB_LUT4_O_I3_SB_CARRY_CO_I1_SB_CARRY_I1_CO_SB_CARRY_CO_14_I1_SB_CARRY_I1$CARRY.COUT
+Info:  0.6 38.2    Net processor.alu_main.Branch_Enable_SB_LUT4_O_I0_SB_LUT4_O_I0_SB_LUT4_O_I3_SB_CARRY_CO_I1_SB_CARRY_I1_CO_SB_CARRY_CO_I1_SB_CARRY_I1_CO[24] budget 0.560000 ns (14,18) -> (14,19)
+Info:                Sink processor.alu_main.Branch_Enable_SB_LUT4_O_I0_SB_LUT4_O_I0_SB_LUT4_O_I3_SB_CARRY_CO_I1_SB_CARRY_I1_CO_SB_CARRY_CO_13_I1_SB_CARRY_I1$CARRY.CIN
+Info:  0.3 38.5  Source processor.alu_main.Branch_Enable_SB_LUT4_O_I0_SB_LUT4_O_I0_SB_LUT4_O_I3_SB_CARRY_CO_I1_SB_CARRY_I1_CO_SB_CARRY_CO_13_I1_SB_CARRY_I1$CARRY.COUT
+Info:  0.0 38.5    Net processor.alu_main.Branch_Enable_SB_LUT4_O_I0_SB_LUT4_O_I0_SB_LUT4_O_I3_SB_CARRY_CO_I1_SB_CARRY_I1_CO_SB_CARRY_CO_I1_SB_CARRY_I1_CO[25] budget 0.000000 ns (14,19) -> (14,19)
+Info:                Sink processor.alu_main.Branch_Enable_SB_LUT4_O_I0_SB_LUT4_O_I0_SB_LUT4_O_I3_SB_CARRY_CO_I1_SB_CARRY_I1_CO_SB_CARRY_CO_12_I1_SB_CARRY_I1$CARRY.CIN
+Info:  0.3 38.8  Source processor.alu_main.Branch_Enable_SB_LUT4_O_I0_SB_LUT4_O_I0_SB_LUT4_O_I3_SB_CARRY_CO_I1_SB_CARRY_I1_CO_SB_CARRY_CO_12_I1_SB_CARRY_I1$CARRY.COUT
+Info:  0.0 38.8    Net processor.alu_main.Branch_Enable_SB_LUT4_O_I0_SB_LUT4_O_I0_SB_LUT4_O_I3_SB_CARRY_CO_I1_SB_CARRY_I1_CO_SB_CARRY_CO_I1_SB_CARRY_I1_CO[26] budget 0.000000 ns (14,19) -> (14,19)
+Info:                Sink processor.alu_main.Branch_Enable_SB_LUT4_O_I0_SB_LUT4_O_I0_SB_LUT4_O_I3_SB_CARRY_CO_I1_SB_CARRY_I1_CO_SB_CARRY_CO_11_I1_SB_CARRY_I1$CARRY.CIN
+Info:  0.3 39.1  Source processor.alu_main.Branch_Enable_SB_LUT4_O_I0_SB_LUT4_O_I0_SB_LUT4_O_I3_SB_CARRY_CO_I1_SB_CARRY_I1_CO_SB_CARRY_CO_11_I1_SB_CARRY_I1$CARRY.COUT
+Info:  0.0 39.1    Net processor.alu_main.Branch_Enable_SB_LUT4_O_I0_SB_LUT4_O_I0_SB_LUT4_O_I3_SB_CARRY_CO_I1_SB_CARRY_I1_CO_SB_CARRY_CO_I1_SB_CARRY_I1_CO[27] budget 0.000000 ns (14,19) -> (14,19)
+Info:                Sink processor.alu_main.Branch_Enable_SB_LUT4_O_I0_SB_LUT4_O_I0_SB_LUT4_O_I3_SB_CARRY_CO_I1_SB_CARRY_I1_CO_SB_CARRY_CO_10_I1_SB_CARRY_I1$CARRY.CIN
+Info:  0.3 39.4  Source processor.alu_main.Branch_Enable_SB_LUT4_O_I0_SB_LUT4_O_I0_SB_LUT4_O_I3_SB_CARRY_CO_I1_SB_CARRY_I1_CO_SB_CARRY_CO_10_I1_SB_CARRY_I1$CARRY.COUT
+Info:  0.0 39.4    Net processor.alu_main.Branch_Enable_SB_LUT4_O_I0_SB_LUT4_O_I0_SB_LUT4_O_I3_SB_CARRY_CO_I1_SB_CARRY_I1_CO_SB_CARRY_CO_I1_SB_CARRY_I1_CO[28] budget 0.000000 ns (14,19) -> (14,19)
+Info:                Sink processor.alu_main.Branch_Enable_SB_LUT4_O_I0_SB_LUT4_O_I0_SB_LUT4_O_I3_SB_CARRY_CO_I1_SB_CARRY_I1_CO_SB_CARRY_CO_9_I1_SB_CARRY_I1$CARRY.CIN
+Info:  0.3 39.6  Source processor.alu_main.Branch_Enable_SB_LUT4_O_I0_SB_LUT4_O_I0_SB_LUT4_O_I3_SB_CARRY_CO_I1_SB_CARRY_I1_CO_SB_CARRY_CO_9_I1_SB_CARRY_I1$CARRY.COUT
+Info:  0.0 39.6    Net processor.alu_main.Branch_Enable_SB_LUT4_O_I0_SB_LUT4_O_I0_SB_LUT4_O_I3_SB_CARRY_CO_I1_SB_CARRY_I1_CO_SB_CARRY_CO_I1_SB_CARRY_I1_CO[29] budget 0.000000 ns (14,19) -> (14,19)
+Info:                Sink processor.alu_main.Branch_Enable_SB_LUT4_O_I0_SB_LUT4_O_I0_SB_LUT4_O_I3_SB_CARRY_CO_I1_SB_CARRY_I1_CO_SB_CARRY_CO_8_I1_SB_CARRY_I1$CARRY.CIN
+Info:  0.3 39.9  Source processor.alu_main.Branch_Enable_SB_LUT4_O_I0_SB_LUT4_O_I0_SB_LUT4_O_I3_SB_CARRY_CO_I1_SB_CARRY_I1_CO_SB_CARRY_CO_8_I1_SB_CARRY_I1$CARRY.COUT
+Info:  0.0 39.9    Net processor.alu_main.Branch_Enable_SB_LUT4_O_I0_SB_LUT4_O_I0_SB_LUT4_O_I3_SB_CARRY_CO_I1_SB_CARRY_I1_CO_SB_CARRY_CO_I1_SB_CARRY_I1_CO[30] budget 0.000000 ns (14,19) -> (14,19)
+Info:                Sink processor.alu_main.Branch_Enable_SB_LUT4_O_I0_SB_LUT4_O_I0_SB_LUT4_O_I3_SB_CARRY_CO$CARRY.CIN
+Info:  0.3 40.2  Source processor.alu_main.Branch_Enable_SB_LUT4_O_I0_SB_LUT4_O_I0_SB_LUT4_O_I3_SB_CARRY_CO$CARRY.COUT
+Info:  0.0 40.2    Net processor.alu_main.Branch_Enable_SB_LUT4_O_I0_SB_LUT4_O_I0_SB_LUT4_O_I3 budget 0.000000 ns (14,19) -> (14,19)
+Info:                Sink processor.alu_main.Branch_Enable_SB_LUT4_O_I0_SB_LUT4_O_I0_SB_LUT4_O_LC.CIN
+Info:  0.3 40.5  Source processor.alu_main.Branch_Enable_SB_LUT4_O_I0_SB_LUT4_O_I0_SB_LUT4_O_LC.COUT
+Info:  1.2 41.7    Net $nextpnr_ICESTORM_LC_0$I3 budget 1.220000 ns (14,19) -> (14,20)
+Info:                Sink $nextpnr_ICESTORM_LC_0.I3
+Info:  0.9 42.6  Source $nextpnr_ICESTORM_LC_0.O
+Info:  1.8 44.3    Net processor.alu_main.Branch_Enable_SB_LUT4_O_I0_SB_LUT4_O_I0_SB_LUT4_O_I0 budget -18.236000 ns (14,20) -> (14,19)
+Info:                Sink processor.alu_main.Branch_Enable_SB_LUT4_O_I0_SB_LUT4_O_I0_SB_LUT4_O_LC.I0
+Info:  1.3 45.6  Source processor.alu_main.Branch_Enable_SB_LUT4_O_I0_SB_LUT4_O_I0_SB_LUT4_O_LC.O
+Info:  3.7 49.3    Net processor.alu_main.Branch_Enable_SB_LUT4_O_I0_SB_LUT4_O_I0 budget 0.718000 ns (14,19) -> (13,12)
+Info:                Sink processor.alu_main.Branch_Enable_SB_LUT4_O_I0_SB_LUT4_O_I0_SB_LUT4_I1_LC.I1
+Info:  1.2 50.5  Source processor.alu_main.Branch_Enable_SB_LUT4_O_I0_SB_LUT4_O_I0_SB_LUT4_I1_LC.O
+Info:  1.8 52.3    Net processor.alu_main.ALUOut_SB_LUT4_O_15_I3_SB_LUT4_O_I3_SB_LUT4_O_I2 budget 0.381000 ns (13,12) -> (13,11)
+Info:                Sink processor.alu_main.ALUOut_SB_LUT4_O_15_I3_SB_LUT4_O_I3_SB_LUT4_O_LC.I2
+Info:  1.2 53.5  Source processor.alu_main.ALUOut_SB_LUT4_O_15_I3_SB_LUT4_O_I3_SB_LUT4_O_LC.O
+Info:  1.8 55.3    Net processor.alu_main.ALUOut_SB_LUT4_O_15_I3_SB_LUT4_O_I3 budget 0.429000 ns (13,11) -> (13,10)
+Info:                Sink processor.alu_main.ALUOut_SB_LUT4_O_15_I3_SB_LUT4_O_LC.I3
+Info:  0.9 56.1  Source processor.alu_main.ALUOut_SB_LUT4_O_15_I3_SB_LUT4_O_LC.O
+Info:  1.8 57.9    Net processor.alu_main.ALUOut_SB_LUT4_O_15_I3 budget 1.052000 ns (13,10) -> (13,9)
+Info:                Sink processor.alu_main.ALUOut_SB_LUT4_O_15_LC.I3
+Info:  0.9 58.8  Source processor.alu_main.ALUOut_SB_LUT4_O_15_LC.O
+Info:  1.8 60.5    Net processor.alu_result[0] budget 0.926000 ns (13,9) -> (13,10)
+Info:                Sink processor.lui_mux.out_SB_LUT4_O_31_LC.I2
+Info:  1.2 61.7  Source processor.lui_mux.out_SB_LUT4_O_31_LC.O
+Info:  1.8 63.5    Net data_addr[0] budget 4.331000 ns (13,10) -> (12,9)
+Info:                Sink data_mem_inst.memwrite_SB_LUT4_I3_O_SB_LUT4_I1_I0_SB_LUT4_O_LC.I0
+Info:  1.3 64.8  Source data_mem_inst.memwrite_SB_LUT4_I3_O_SB_LUT4_I1_I0_SB_LUT4_O_LC.O
+Info:  3.5 68.3    Net data_mem_inst.memwrite_SB_LUT4_I3_O_SB_LUT4_I1_I0 budget 4.185000 ns (12,9) -> (7,8)
+Info:                Sink data_mem_inst.memwrite_SB_LUT4_I3_O_SB_LUT4_I1_LC.I0
+Info:  1.3 69.6  Source data_mem_inst.memwrite_SB_LUT4_I3_O_SB_LUT4_I1_LC.O
+Info:  4.9 74.5    Net data_mem_inst.memwrite_SB_LUT4_I3_O_SB_LUT4_I1_O budget 5.386000 ns (7,8) -> (8,24)
+Info:                Sink data_mem_inst.led_reg_SB_DFFE_Q_3_DFFLC.CEN
+Info:  0.1 74.6  Setup data_mem_inst.led_reg_SB_DFFE_Q_3_DFFLC.CEN
+Info: 28.8 ns logic, 45.8 ns routing
+
+Info: Max frequency for clock               'clk': 14.91 MHz (PASS at 6.00 MHz)
+Info: Max frequency for clock 'clk_proc_$glb_clk': 15.45 MHz (PASS at 12.00 MHz)
+
+Info: Max delay posedge clk               -> <async>                  : 5.61 ns
+Info: Max delay posedge clk               -> posedge clk_proc_$glb_clk: 57.19 ns
+Info: Max delay posedge clk_proc_$glb_clk -> posedge clk              : 74.60 ns
+
+Info: Slack histogram:
+Info:  legend: * represents 7 endpoint(s)
+Info:          + represents [1,7) endpoint(s)
+Info: [ 18594,  25782) |*+
+Info: [ 25782,  32970) |***+
+Info: [ 32970,  40158) |***+
+Info: [ 40158,  47346) |*+
+Info: [ 47346,  54534) |***********+
+Info: [ 54534,  61722) |*****************+
+Info: [ 61722,  68910) |*****************************+
+Info: [ 68910,  76098) |**************************************************+
+Info: [ 76098,  83286) |************************************************************ 
+Info: [ 83286,  90474) | 
+Info: [ 90474,  97662) |*+
+Info: [ 97662, 104850) |*+
+Info: [104850, 112038) |+
+Info: [112038, 119226) |*+
+Info: [119226, 126414) |*+
+Info: [126414, 133602) | 
+Info: [133602, 140790) | 
+Info: [140790, 147978) |******************** 
+Info: [147978, 155166) |********************+
+Info: [155166, 162354) |*************************+
+icetime -p pcf/sail.pcf -P uwg30 -d up5k -t sail.asc
+// Reading input .pcf file..
+// Reading input .asc file..
+// Reading 5k chipdb file..
+// Creating timing netlist..
+Warning: timing analysis not supported for cell type HFOSC
+
+icetime topological timing analysis report
+==========================================
+
+Report for critical path:
+-------------------------
+
+        lc40_21_17_6 (LogicCell40) [clk] -> lcout: 1.491 ns
+     1.491 ns net_80938 (processor.id_ex_out[164])
+        t13648 (LocalMux) I -> O: 1.099 ns
+        inmux_22_16_88534_88545 (InMux) I -> O: 0.662 ns
+        lc40_22_16_0 (LogicCell40) in0 -> lcout: 1.285 ns
+     4.537 ns net_84640 (processor.forwarding_unit.WB_RegWrite_SB_LUT4_I2_I1)
+        t13873 (LocalMux) I -> O: 1.099 ns
+        inmux_22_15_88397_88464 (InMux) I -> O: 0.662 ns
+        lc40_22_15_7 (LogicCell40) in0 -> lcout: 1.285 ns
+     7.583 ns net_84524 (processor.forwarding_unit.WB_RegWrite_SB_LUT4_I2_O)
+        t13869 (LocalMux) I -> O: 1.099 ns
+        inmux_22_14_88273_88324 (InMux) I -> O: 0.662 ns
+        lc40_22_14_4 (LogicCell40) in1 -> lcout: 1.232 ns
+    10.576 ns net_84398 (processor.forwarding_unit.WB_fwd2_SB_LUT4_O_I3)
+        odrv_22_14_84398_58340 (Odrv12) I -> O: 1.232 ns
+        t13855 (LocalMux) I -> O: 1.099 ns
+        inmux_16_14_65915_65944 (InMux) I -> O: 0.662 ns
+        lc40_16_14_0 (LogicCell40) in0 -> lcout: 1.285 ns
+    14.854 ns net_62039 (processor.wfwd2)
+        t10816 (LocalMux) I -> O: 1.099 ns
+        inmux_15_13_61981_61998 (InMux) I -> O: 0.662 ns
+        t1511 (CascadeMux) I -> O: 0.000 ns
+        lc40_15_13_1 (LogicCell40) in2 -> lcout: 1.205 ns
+    17.821 ns net_58087 (data_WrData[0])
+        odrv_15_13_58087_54393 (Odrv4) I -> O: 0.649 ns
+        t9931 (Span4Mux_v4) I -> O: 0.649 ns
+        t9930 (Span4Mux_v4) I -> O: 0.649 ns
+        t9929 (Span4Mux_h4) I -> O: 0.543 ns
+        t9928 (LocalMux) I -> O: 1.099 ns
+        inmux_13_5_53328_53360 (InMux) I -> O: 0.662 ns
+        t1098 (CascadeMux) I -> O: 0.000 ns
+        lc40_13_5_2 (LogicCell40) in2 -> lcout: 1.205 ns
+    23.278 ns net_49443 (processor.alu_mux_out[0])
+        odrv_13_5_49443_53420 (Odrv4) I -> O: 0.649 ns
+        t7858 (Span4Mux_v4) I -> O: 0.649 ns
+        t7857 (Span4Mux_v3) I -> O: 0.583 ns
+        t7856 (LocalMux) I -> O: 1.099 ns
+        inmux_14_15_58379_58425 (InMux) I -> O: 0.662 ns
+        lc40_14_15_3 (LogicCell40) in1 -> lcout: 1.232 ns
+    28.152 ns net_54505 (processor.alu_main.Branch_Enable_SB_LUT4_O_I0_SB_LUT4_O_I0_SB_LUT4_O_I3_SB_CARRY_CO_I1_SB_CARRY_I1_CO_SB_CARRY_CO_29_I1)
+        t9109 (LocalMux) I -> O: 1.099 ns
+        inmux_14_16_58499_58530 (InMux) I -> O: 0.662 ns
+        lc40_14_16_0 (LogicCell40) in1 -> carryout: 0.675 ns
+    30.589 ns t1169
+        lc40_14_16_1 (LogicCell40) carryin -> carryout: 0.278 ns
+    30.867 ns t1170
+        lc40_14_16_2 (LogicCell40) carryin -> carryout: 0.278 ns
+    31.145 ns t1171
+        lc40_14_16_3 (LogicCell40) carryin -> carryout: 0.278 ns
+    31.423 ns t1172
+        lc40_14_16_4 (LogicCell40) carryin -> carryout: 0.278 ns
+    31.701 ns t1173
+        lc40_14_16_5 (LogicCell40) carryin -> carryout: 0.278 ns
+    31.980 ns t1174
+        lc40_14_16_6 (LogicCell40) carryin -> carryout: 0.278 ns
+    32.258 ns t1175
+        lc40_14_16_7 (LogicCell40) carryin -> carryout: 0.278 ns
+    32.536 ns net_58570 (processor.alu_main.Branch_Enable_SB_LUT4_O_I0_SB_LUT4_O_I0_SB_LUT4_O_I3_SB_CARRY_CO_I1_SB_CARRY_I1_CO_SB_CARRY_CO_I1_SB_CARRY_I1_CO[8])
+        t1176 (ICE_CARRY_IN_MUX) carryinitin -> carryinitout: 0.556 ns
+        lc40_14_17_0 (LogicCell40) carryin -> carryout: 0.278 ns
+    33.370 ns t1177
+        lc40_14_17_1 (LogicCell40) carryin -> carryout: 0.278 ns
+    33.648 ns t1178
+        lc40_14_17_2 (LogicCell40) carryin -> carryout: 0.278 ns
+    33.927 ns t1179
+        lc40_14_17_3 (LogicCell40) carryin -> carryout: 0.278 ns
+    34.205 ns t1180
+        lc40_14_17_4 (LogicCell40) carryin -> carryout: 0.278 ns
+    34.483 ns t1181
+        lc40_14_17_5 (LogicCell40) carryin -> carryout: 0.278 ns
+    34.761 ns t1182
+        lc40_14_17_6 (LogicCell40) carryin -> carryout: 0.278 ns
+    35.039 ns t1183
+        lc40_14_17_7 (LogicCell40) carryin -> carryout: 0.278 ns
+    35.317 ns net_58693 (processor.alu_main.Branch_Enable_SB_LUT4_O_I0_SB_LUT4_O_I0_SB_LUT4_O_I3_SB_CARRY_CO_I1_SB_CARRY_I1_CO_SB_CARRY_CO_I1_SB_CARRY_I1_CO[16])
+        t1184 (ICE_CARRY_IN_MUX) carryinitin -> carryinitout: 0.556 ns
+        lc40_14_18_0 (LogicCell40) carryin -> carryout: 0.278 ns
+    36.152 ns t1185
+        lc40_14_18_1 (LogicCell40) carryin -> carryout: 0.278 ns
+    36.430 ns t1186
+        lc40_14_18_2 (LogicCell40) carryin -> carryout: 0.278 ns
+    36.708 ns t1187
+        lc40_14_18_3 (LogicCell40) carryin -> carryout: 0.278 ns
+    36.986 ns t1188
+        lc40_14_18_4 (LogicCell40) carryin -> carryout: 0.278 ns
+    37.264 ns t1189
+        lc40_14_18_5 (LogicCell40) carryin -> carryout: 0.278 ns
+    37.542 ns t1190
+        lc40_14_18_6 (LogicCell40) carryin -> carryout: 0.278 ns
+    37.820 ns t1191
+        lc40_14_18_7 (LogicCell40) carryin -> carryout: 0.278 ns
+    38.098 ns net_58816 (processor.alu_main.Branch_Enable_SB_LUT4_O_I0_SB_LUT4_O_I0_SB_LUT4_O_I3_SB_CARRY_CO_I1_SB_CARRY_I1_CO_SB_CARRY_CO_I1_SB_CARRY_I1_CO[24])
+        t1192 (ICE_CARRY_IN_MUX) carryinitin -> carryinitout: 0.556 ns
+        lc40_14_19_0 (LogicCell40) carryin -> carryout: 0.278 ns
+    38.933 ns t1193
+        lc40_14_19_1 (LogicCell40) carryin -> carryout: 0.278 ns
+    39.211 ns t1194
+        lc40_14_19_2 (LogicCell40) carryin -> carryout: 0.278 ns
+    39.489 ns t1195
+        lc40_14_19_3 (LogicCell40) carryin -> carryout: 0.278 ns
+    39.767 ns t1196
+        lc40_14_19_4 (LogicCell40) carryin -> carryout: 0.278 ns
+    40.045 ns t1197
+        lc40_14_19_5 (LogicCell40) carryin -> carryout: 0.278 ns
+    40.324 ns t1198
+        lc40_14_19_6 (LogicCell40) carryin -> carryout: 0.278 ns
+    40.602 ns net_58933 (processor.alu_main.Branch_Enable_SB_LUT4_O_I0_SB_LUT4_O_I0_SB_LUT4_O_I3)
+        lc40_14_19_7 (LogicCell40) carryin -> carryout: 0.278 ns
+    40.880 ns net_58939 ($nextpnr_ICESTORM_LC_0$I3)
+        t1202 (ICE_CARRY_IN_MUX) carryinitin -> carryinitout: 0.556 ns
+        inmux_14_20_58983_59024 (InMux) I -> O: 0.662 ns
+        lc40_14_20_0 (LogicCell40) in3 -> lcout: 0.874 ns
+    42.972 ns net_55117 (processor.alu_main.Branch_Enable_SB_LUT4_O_I0_SB_LUT4_O_I0_SB_LUT4_O_I0)
+        t9138 (LocalMux) I -> O: 1.099 ns
+        inmux_14_19_58873_58940 (InMux) I -> O: 0.662 ns
+        lc40_14_19_7 (LogicCell40) in0 -> lcout: 1.285 ns
+    46.019 ns net_55001 (processor.alu_main.Branch_Enable_SB_LUT4_O_I0_SB_LUT4_O_I0)
+        odrv_14_19_55001_55025 (Odrv4) I -> O: 0.649 ns
+        t9137 (Span4Mux_v4) I -> O: 0.649 ns
+        t9136 (Span4Mux_v1) I -> O: 0.344 ns
+        t9135 (LocalMux) I -> O: 1.099 ns
+        inmux_13_12_54198_54215 (InMux) I -> O: 0.662 ns
+        t1137 (CascadeMux) I -> O: 0.000 ns
+        lc40_13_12_1 (LogicCell40) in2 -> lcout: 1.205 ns
+    50.628 ns net_50303 (processor.alu_main.ALUOut_SB_LUT4_O_15_I3_SB_LUT4_O_I3_SB_LUT4_O_I2)
+        t8042 (LocalMux) I -> O: 1.099 ns
+        inmux_13_11_54060_54108 (InMux) I -> O: 0.662 ns
+        lc40_13_11_4 (LogicCell40) in0 -> lcout: 1.285 ns
+    53.674 ns net_50183 (processor.alu_main.ALUOut_SB_LUT4_O_15_I3_SB_LUT4_O_I3)
+        t8026 (LocalMux) I -> O: 1.099 ns
+        inmux_13_10_53932_54004 (InMux) I -> O: 0.662 ns
+        lc40_13_10_7 (LogicCell40) in1 -> lcout: 1.232 ns
+    56.667 ns net_50063 (processor.alu_main.ALUOut_SB_LUT4_O_15_I3)
+        t8002 (LocalMux) I -> O: 1.099 ns
+        inmux_13_9_53820_53850 (InMux) I -> O: 0.662 ns
+        lc40_13_9_2 (LogicCell40) in0 -> lcout: 1.285 ns
+    59.714 ns net_49935 (processor.alu_result[0])
+        t7968 (LocalMux) I -> O: 1.099 ns
+        inmux_13_10_53938_53991 (InMux) I -> O: 0.662 ns
+        lc40_13_10_5 (LogicCell40) in0 -> lcout: 1.285 ns
+    62.760 ns net_50061 (data_addr[0])
+        t7999 (LocalMux) I -> O: 1.099 ns
+        inmux_12_9_50003_50052 (InMux) I -> O: 0.662 ns
+        lc40_12_9_7 (LogicCell40) in3 -> lcout: 0.874 ns
+    65.395 ns net_46109 (data_mem_inst.memwrite_SB_LUT4_I3_O_SB_LUT4_I1_I0)
+        odrv_12_9_46109_46242 (Odrv4) I -> O: 0.649 ns
+        t6518 (Span4Mux_h4) I -> O: 0.543 ns
+        t6517 (Span4Mux_v1) I -> O: 0.344 ns
+        t6516 (LocalMux) I -> O: 1.099 ns
+        inmux_7_8_30702_30741 (InMux) I -> O: 0.662 ns
+        lc40_7_8_2 (LogicCell40) in0 -> lcout: 1.285 ns
+    69.978 ns net_27279 (data_mem_inst.memwrite_SB_LUT4_I3_O_SB_LUT4_I1_O)
+        odrv_7_8_27279_27432 (Odrv4) I -> O: 0.649 ns
+        t3235 (Span4Mux_v4) I -> O: 0.649 ns
+        t3234 (Span4Mux_v4) I -> O: 0.649 ns
+        t3233 (Span4Mux_v4) I -> O: 0.649 ns
+        t3232 (Span4Mux_v4) I -> O: 0.649 ns
+        t3231 (LocalMux) I -> O: 1.099 ns
+        inmux_5_24_25644_25712 (CEMux) I -> O: 0.702 ns
+    75.024 ns net_25712 (data_mem_inst.memwrite_SB_LUT4_I3_O_SB_LUT4_I1_O)
+        lc40_5_24_2 (LogicCell40) ce [setup]: 0.000 ns
+    75.024 ns net_21763 (led[3]$SB_IO_OUT)
+
+Resolvable net names on path:
+     1.491 ns ..  3.252 ns processor.id_ex_out[164]
+     4.537 ns ..  6.298 ns processor.forwarding_unit.WB_RegWrite_SB_LUT4_I2_I1
+     7.583 ns ..  9.345 ns processor.forwarding_unit.WB_RegWrite_SB_LUT4_I2_O
+    10.576 ns .. 13.570 ns processor.forwarding_unit.WB_fwd2_SB_LUT4_O_I3
+    14.854 ns .. 16.616 ns processor.wfwd2
+    17.821 ns .. 22.073 ns data_WrData[0]
+    23.278 ns .. 26.920 ns processor.alu_mux_out[0]
+    28.152 ns .. 29.913 ns processor.alu_main.Branch_Enable_SB_LUT4_O_I0_SB_LUT4_O_I0_SB_LUT4_O_I3_SB_CARRY_CO_I1_SB_CARRY_I1_CO_SB_CARRY_CO_29_I1
+    32.536 ns .. 33.092 ns processor.alu_main.Branch_Enable_SB_LUT4_O_I0_SB_LUT4_O_I0_SB_LUT4_O_I3_SB_CARRY_CO_I1_SB_CARRY_I1_CO_SB_CARRY_CO_I1_SB_CARRY_I1_CO[8]
+    35.317 ns .. 35.873 ns processor.alu_main.Branch_Enable_SB_LUT4_O_I0_SB_LUT4_O_I0_SB_LUT4_O_I3_SB_CARRY_CO_I1_SB_CARRY_I1_CO_SB_CARRY_CO_I1_SB_CARRY_I1_CO[16]
+    38.098 ns .. 38.655 ns processor.alu_main.Branch_Enable_SB_LUT4_O_I0_SB_LUT4_O_I0_SB_LUT4_O_I3_SB_CARRY_CO_I1_SB_CARRY_I1_CO_SB_CARRY_CO_I1_SB_CARRY_I1_CO[24]
+    40.602 ns .. 40.602 ns processor.alu_main.Branch_Enable_SB_LUT4_O_I0_SB_LUT4_O_I0_SB_LUT4_O_I3
+    40.880 ns .. 42.098 ns $nextpnr_ICESTORM_LC_0$I3
+    42.972 ns .. 44.734 ns processor.alu_main.Branch_Enable_SB_LUT4_O_I0_SB_LUT4_O_I0_SB_LUT4_O_I0
+    46.019 ns .. 49.423 ns processor.alu_main.Branch_Enable_SB_LUT4_O_I0_SB_LUT4_O_I0
+    50.628 ns .. 52.389 ns processor.alu_main.ALUOut_SB_LUT4_O_15_I3_SB_LUT4_O_I3_SB_LUT4_O_I2
+    53.674 ns .. 55.436 ns processor.alu_main.ALUOut_SB_LUT4_O_15_I3_SB_LUT4_O_I3
+    56.667 ns .. 58.429 ns processor.alu_main.ALUOut_SB_LUT4_O_15_I3
+    59.714 ns .. 61.475 ns processor.alu_result[0]
+    62.760 ns .. 64.521 ns data_addr[0]
+    65.395 ns .. 68.693 ns data_mem_inst.memwrite_SB_LUT4_I3_O_SB_LUT4_I1_I0
+    69.978 ns .. 75.024 ns data_mem_inst.memwrite_SB_LUT4_I3_O_SB_LUT4_I1_O
+                  lcout -> led[3]$SB_IO_OUT
+
+Total number of logic levels: 49
+Total path delay: 75.02 ns (13.33 MHz)
+
+icepack sail.asc design.bin
+cp design.bin /gb3-resources/build/

@@ -115,7 +115,7 @@ module cpu(
 	/*
 	 *	Decode stage
 	 */
-	wire [31:0]		cont_mux_out; //control signal mux
+	wire [10:0]		cont_mux_out; //control signal mux (Shortened)
 	wire [31:0]		regA_out;
 	wire [31:0]		regB_out;
 	wire [31:0]		imm_out;
@@ -129,7 +129,7 @@ module cpu(
 	/*
 	 *	Execute stage
 	 */
-	wire [31:0]		ex_cont_mux_out;
+	wire [10:0]		ex_cont_mux_out;
 	wire [31:0]		addr_adder_mux_out;
 	wire [31:0]		alu_mux_out;
 	wire [31:0]		addr_adder_sum;
@@ -242,9 +242,9 @@ module cpu(
 			.CSRR(CSRR_dummy)
 		);
 
-	mux2to1 cont_mux(
-			.input0({21'b0, Jalr1, ALUSrc1, Lui1, Auipc1, Branch1, MemRead1, MemWrite1, CSRR_signal, RegWrite1, MemtoReg1, Jump1}),
-			.input1(32'b0),
+	mux2to1_11bit cont_mux(
+			.input0({Jalr1, ALUSrc1, Lui1, Auipc1, Branch1, MemRead1, MemWrite1, CSRR_signal, RegWrite1, MemtoReg1, Jump1}),
+			.input1(11'b0),
 			.select(decode_ctrl_mux_sel),
 			.out(cont_mux_out)
 		);
