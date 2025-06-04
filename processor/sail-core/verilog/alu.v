@@ -61,6 +61,8 @@ module alu(ALUctl, A, B, ALUOut, Branch_Enable);
 	output reg [31:0]	ALUOut;
 	output reg		Branch_Enable;
 
+	// DSP-based 32-bit adder output
+	wire [31:0] add_result;
 	/*
 	 *	This uses Yosys's support for nonzero initial values:
 	 *
@@ -70,6 +72,16 @@ module alu(ALUctl, A, B, ALUOut, Branch_Enable);
 	 *	the design should instead use a reset signal going to
 	 *	modules in the design.
 	 */
+
+
+
+	// Shared adder instance (SB_MAC16-backed or simple for now)
+	adder i_adder (
+		.input1(A),
+		.input2(B),
+		.out(add_result)
+	);
+
 	initial begin
 		ALUOut = 32'b0;
 		Branch_Enable = 1'b0;
@@ -90,7 +102,7 @@ module alu(ALUctl, A, B, ALUOut, Branch_Enable);
 			/*
 			 *	ADD (the fields also match AUIPC, all loads, all stores, and ADDI)
 			 */
-			`kSAIL_MICROARCHITECTURE_ALUCTL_3to0_ADD:	ALUOut = A + B;
+			`kSAIL_MICROARCHITECTURE_ALUCTL_3to0_ADD:	ALUOut = add_result;
 
 			/*
 			 *	SUBTRACT (the fields also matches all branches)
