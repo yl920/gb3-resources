@@ -45,9 +45,10 @@
 
 
 
-module adder(input1, input2, out);
+module adder(input1, input2, is_sub, out);
     input  [31:0] input1;
     input  [31:0] input2;
+    input         is_sub;
     output [31:0] out;
 
     wire [31:0] result;
@@ -73,8 +74,8 @@ module adder(input1, input2, out);
         .OHOLDBOT(1'b0),
         .OLOADTOP(1'b0), 
         .OLOADBOT(1'b0),
-        .ADDSUBTOP(1'b0), 
-        .ADDSUBBOT(1'b0),
+        .ADDSUBTOP(is_sub), 
+        .ADDSUBBOT(is_sub),
         .CO(carry_out),
         .CI(1'b0), 
         .ACCUMCI(1'b0),

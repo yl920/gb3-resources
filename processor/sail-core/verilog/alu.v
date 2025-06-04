@@ -63,6 +63,8 @@ module alu(ALUctl, A, B, ALUOut, Branch_Enable);
 
 	// DSP-based 32-bit adder output
 	wire [31:0] add_result;
+	reg         do_sub;
+
 	/*
 	 *	This uses Yosys's support for nonzero initial values:
 	 *
@@ -74,11 +76,10 @@ module alu(ALUctl, A, B, ALUOut, Branch_Enable);
 	 */
 
 
-
-	// Shared adder instance (SB_MAC16-backed or simple for now)
 	adder i_adder (
 		.input1(A),
 		.input2(B),
+		.is_sub(do_sub),
 		.out(add_result)
 	);
 
@@ -88,6 +89,8 @@ module alu(ALUctl, A, B, ALUOut, Branch_Enable);
 	end
 
 	always @(ALUctl, A, B) begin
+		do_sub = 1'b0;
+
 		case (ALUctl[3:0])
 			/*
 			 *	AND (the fields also match ANDI and LUI)
@@ -102,13 +105,17 @@ module alu(ALUctl, A, B, ALUOut, Branch_Enable);
 			/*
 			 *	ADD (the fields also match AUIPC, all loads, all stores, and ADDI)
 			 */
-			`kSAIL_MICROARCHITECTURE_ALUCTL_3to0_ADD:	ALUOut = add_result;
-
+			`kSAIL_MICROARCHITECTURE_ALUCTL_3to0_ADD:	begin
+				do_sub = 1'b0;
+				ALUOut = add_result;
+			end
 			/*
 			 *	SUBTRACT (the fields also matches all branches)
 			 */
-			`kSAIL_MICROARCHITECTURE_ALUCTL_3to0_SUB:	ALUOut = A - B;
-
+			`kSAIL_MICROARCHITECTURE_ALUCTL_3to0_SUB:	begin
+				do_sub = 1'b1;
+				ALUOut = add_result;
+			end
 			/*
 			 *	SLT (the fields also matches all the other SLT variants)
 			 */
