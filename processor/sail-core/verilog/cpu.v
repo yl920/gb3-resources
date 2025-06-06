@@ -259,9 +259,9 @@ assign RegB_AddrFwdFlush_mux_out = {27'b0,if_id_out[56:52]};
     );
 
 	//Execute stage
-    mux2to1 ex_cont_mux(
-        .input0({23'b0, id_ex_out[8:0]}),
-        .input1(32'b0),
+    mux2to1_11bit ex_cont_mux(
+        .input0({2'b0, id_ex_out[8:0]}),
+        .input1(11'b0),
         .select(pcsrc),
         .out(ex_cont_mux_out)
     );
