@@ -42,18 +42,13 @@
 
 
 
-module mux2to1(input0, input1, select, out);
-	input [31:0]	input0, input1;
-	input		select;
-	output [31:0]	out;
-
-	assign out = (select) ? input1 : input0;
-endmodule
-
-module mux2to1_11bit(input0, input1, select, out); // grep -rn "cont_mux_out" ../processor/verilog shows no usages over 11 bits
-	input [10:0]	input0, input1;
-	input		select;
-	output [10:0]	out;
-
-	assign out = (select) ? input1 : input0;
+module mux2to1_param #(
+    parameter WIDTH = 32
+)(
+    input  [WIDTH-1:0] input0,
+    input  [WIDTH-1:0] input1,
+    input              select,
+    output [WIDTH-1:0] out
+);
+    assign out = (select) ? input1 : input0;
 endmodule

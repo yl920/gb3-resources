@@ -108,7 +108,7 @@ module cpu(
 	/*
 	 *	Instruction Fetch Stage
 	 */
-    mux2to1 pc_mux(
+    mux2to1_param #(.WIDTH(32)) pc_mux(
         .input0(pc_mux0),
         .input1(ex_mem_out[72:41]),
         .select(pcsrc),
@@ -129,14 +129,14 @@ module cpu(
         .write_enable(pc_write_enable)
     );
 
-    mux2to1 inst_mux(
+    mux2to1_param #(.WIDTH(32)) inst_mux(
         .input0(inst_mem_out),
         .input1(32'b0),
         .select(inst_mux_sel),
         .out(inst_mux_out)
     );
 
-    mux2to1 fence_mux(
+    mux2to1_param #(.WIDTH(32)) fence_mux(
         .input0(pc_adder_out),
         .input1(pc_out),
         .select(Fence_signal),
@@ -171,7 +171,7 @@ module cpu(
         .Fence(Fence_signal)
     );
 
-    mux2to1_11bit cont_mux(
+    mux2to1_param #(.WIDTH(11)) cont_mux(
         .input0({Jalr1, ALUSrc1, Lui1, Auipc1, Branch1, MemRead1, MemWrite1, 1'b0, RegWrite1, MemtoReg1, Jump1}),
         .input1(11'b0),
         .select(decode_ctrl_mux_sel),
@@ -259,14 +259,14 @@ assign RegB_AddrFwdFlush_mux_out = {27'b0,if_id_out[56:52]};
     );
 
 	//Execute stage
-    mux2to1_11bit ex_cont_mux(
+    mux2to1_param #(.WIDTH(11)) ex_cont_mux(
         .input0({2'b0, id_ex_out[8:0]}),
         .input1(11'b0),
         .select(pcsrc),
         .out(ex_cont_mux_out)
     );
 
-    mux2to1 addr_adder_mux(
+    mux2to1_param #(.WIDTH(32)) addr_adder_mux(
         .input0(id_ex_out[43:12]),
         .input1(wb_fwd1_mux_out),
         .select(id_ex_out[11]),
@@ -279,7 +279,7 @@ assign RegB_AddrFwdFlush_mux_out = {27'b0,if_id_out[56:52]};
         .out(addr_adder_sum)
     );
 
-    mux2to1 alu_mux(
+    mux2to1_param #(.WIDTH(32)) alu_mux(
         .input0(wb_fwd2_mux_out),
         .input1(id_ex_out[139:108]),
         .select(id_ex_out[10]),
@@ -294,7 +294,7 @@ assign RegB_AddrFwdFlush_mux_out = {27'b0,if_id_out[56:52]};
         .Branch_Enable(alu_branch_enable)
     );
 
-    mux2to1 lui_mux(
+    mux2to1_param #(.WIDTH(32)) lui_mux(
         .input0(alu_result),
         .input1(id_ex_out[139:108]),
         .select(id_ex_out[9]),
@@ -319,7 +319,7 @@ assign RegB_AddrFwdFlush_mux_out = {27'b0,if_id_out[56:52]};
         .Branch_Jump_Trigger(pcsrc)
     );
 
-    mux2to1 auipc_mux(
+    mux2to1_param #(.WIDTH(32)) auipc_mux(
         .input0(ex_mem_out[105:74]),
         .input1(ex_mem_out[72:41]),
         .select(ex_mem_out[8]),
@@ -341,14 +341,14 @@ assign RegB_AddrFwdFlush_mux_out = {27'b0,if_id_out[56:52]};
     );
 
 	//Writeback to Register Stage
-    mux2to1 wb_mux(
+    mux2to1_param #(.WIDTH(32)) wb_mux(
         .input0(mem_wb_out[67:36]),
         .input1(mem_wb_out[99:68]),
         .select(mem_wb_out[1]),
         .out(wb_mux_out)
     );
 
-	mux2to1 reg_dat_mux( //TODO cleanup
+	mux2to1_param #(.WIDTH(32)) reg_dat_mux( //TODO cleanup
         .input0(mem_regwb_mux_out),
         .input1(id_ex_out[43:12]),
         .select(ex_mem_out[0]),
@@ -369,35 +369,35 @@ assign RegB_AddrFwdFlush_mux_out = {27'b0,if_id_out[56:52]};
         .WB_fwd2(wfwd2)
     );
 
-    mux2to1 mem_fwd1_mux(
+    mux2to1_param #(.WIDTH(32)) mem_fwd1_mux(
         .input0(id_ex_out[75:44]),
         .input1(dataMemOut_fwd_mux_out),
         .select(mfwd1),
         .out(mem_fwd1_mux_out)
     );
 
-    mux2to1 mem_fwd2_mux(
+    mux2to1_param #(.WIDTH(32)) mem_fwd2_mux(
         .input0(id_ex_out[107:76]),
         .input1(dataMemOut_fwd_mux_out),
         .select(mfwd2),
         .out(mem_fwd2_mux_out)
     );
 
-    mux2to1 wb_fwd1_mux(
+    mux2to1_param #(.WIDTH(32)) wb_fwd1_mux(
         .input0(mem_fwd1_mux_out),
         .input1(wb_mux_out),
         .select(wfwd1),
         .out(wb_fwd1_mux_out)
     );
 
-    mux2to1 wb_fwd2_mux(
+    mux2to1_param #(.WIDTH(32)) wb_fwd2_mux(
         .input0(mem_fwd2_mux_out),
         .input1(wb_mux_out),
         .select(wfwd2),
         .out(wb_fwd2_mux_out)
     );
 
-    mux2to1 dataMemOut_fwd_mux(
+    mux2to1_param #(.WIDTH(32)) dataMemOut_fwd_mux(
         .input0(ex_mem_out[105:74]),
         .input1(data_mem_out),
         .select(ex_mem_out[1]),
@@ -416,14 +416,14 @@ assign RegB_AddrFwdFlush_mux_out = {27'b0,if_id_out[56:52]};
         .prediction(predict)
     );
 
-    mux2to1 branch_predictor_mux(
+    mux2to1_param #(.WIDTH(32)) branch_predictor_mux(
         .input0(fence_mux_out),
         .input1(branch_predictor_addr),
         .select(predict),
         .out(branch_predictor_mux_out)
     );
 
-    mux2to1 mistaken_branch_mux(
+    mux2to1_param #(.WIDTH(32)) mistaken_branch_mux(
         .input0(branch_predictor_mux_out),
         .input1(id_ex_out[43:12]),
         .select(mistake_trigger),
@@ -432,7 +432,7 @@ assign RegB_AddrFwdFlush_mux_out = {27'b0,if_id_out[56:52]};
 
 	wire[31:0] mem_regwb_mux_out; //TODO copy of wb_mux but in mem stage, move back and cleanup
 	//A copy of the writeback mux, but in MEM stage //TODO move back and cleanup
-    mux2to1 mem_regwb_mux(
+    mux2to1_param #(.WIDTH(32)) mem_regwb_mux(
         .input0(auipc_mux_out),
         .input1(data_mem_out),
         .select(ex_mem_out[1]),
